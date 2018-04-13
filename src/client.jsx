@@ -21,9 +21,12 @@ import App from './component/views/App';
 
 render(
     (
-      <BrowserRouter>
-        <App userAgent={global.navigator.userAgent} initialState={global.window.preloadedState} />
-      </BrowserRouter>
+        <BrowserRouter>
+            <App
+                userAgent={global.navigator.userAgent}
+                initialState={global.window.preloadedState}
+            />
+        </BrowserRouter>
     ),
     global.document.getElementById('root'),
-    );
+);

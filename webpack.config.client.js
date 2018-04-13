@@ -3,12 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx']
     },
     devtool: 'source-map',
     entry: './src/client.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist/assets'),
+        path: path.resolve(__dirname, 'dist/assets')
     },
     mode: 'production',
     module: {
@@ -17,8 +17,8 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/,
-            },
-        ],
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
