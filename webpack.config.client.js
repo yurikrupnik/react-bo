@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     devtool: 'source-map',
     entry: './src/client.jsx',
     output: {
@@ -11,8 +14,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
-                use: 'babel-loader',
+                test: /\.(js|jsx)$/,
+                use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/,
             },
         ],

@@ -6,6 +6,9 @@ const json = require('./package');
 const filename = 'server.js';
 
 module.exports = {
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
     node: {
         __dirname: false,
@@ -13,7 +16,7 @@ module.exports = {
     },
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
     devtool: 'source-map',
-    entry: './src/index.jsx',
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: filename
@@ -22,14 +25,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
-                use: 'babel-loader',
+                test: /\.(js|jsx)$/,
+                use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/,
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['eslint-loader']
             }
         ]
     },
