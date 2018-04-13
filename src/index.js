@@ -5,6 +5,7 @@ import Router from 'koa-router';
 import statics from 'koa-static';
 import logger from 'koa-logger';
 import { port } from './config';
+// import middLogger from './middlewares';
 
 function render() {
     const route = new Router();
@@ -18,7 +19,7 @@ function render() {
 function sluts() {
     const route = new Router();
     route.get('/sluts', async (ctx) => {
-        ctx.type = 'json';
+        // ctx.type = 'json';
         ctx.body = ['1', 4, 6];
     });
     return route.routes();
@@ -30,16 +31,9 @@ function api() {
     return route.routes();
 }
 
-
 const app = new Koa();
+// app.use(middLogger());
 app.use(logger());
-app.use(async (ctx, next) => {
-    const start = Date.now();
-    await next();
-    const ms = Date.now() - start;
-    ctx.set('X-Response-Time', `${ms}ms`);
-});
-
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(api());
 app.use(render());

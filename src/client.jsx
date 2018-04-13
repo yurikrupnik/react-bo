@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './component/views/App';
+
+import './styles.scss';
 // import './services/node/socket/client'; // connect to socket client
 // import './styles/vars.scss';
 // import './styles/custom-styles.scss';
