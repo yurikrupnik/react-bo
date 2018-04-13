@@ -1,10 +1,11 @@
 const path = require('path');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { host } = require('./src/config');
 
+// const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.scss'],
@@ -24,22 +25,22 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [{
-                    loader: 'style-loader' // creates style nodes from JS strings
-                }, {
-                    loader: 'css-loader' // translates CSS into CommonJS
-                }, {
-                    loader: 'sass-loader', // compiles Sass to CSS
-                    options: {
-                        // includePaths: ["absolute/path/a", "absolute/path/b"]
-                    }
-                }]
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', 'sass-loader'
+                ]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '[name].css',
+            chunkFilename: '[id].css'
         })
     ]
 };
