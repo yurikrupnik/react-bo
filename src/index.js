@@ -3,6 +3,7 @@ import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import statics from 'koa-static';
+import logger from 'koa-logger';
 import { port } from './config';
 
 function render() {
@@ -31,6 +32,7 @@ function api() {
 
 
 const app = new Koa();
+app.use(logger());
 app.use(async (ctx, next) => {
     const start = Date.now();
     await next();
