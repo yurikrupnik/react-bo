@@ -1,12 +1,15 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { host } = require('./src/config');
+
 module.exports = {
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     devtool: 'eval-cheap-module-source-map',
-    entry: './src/client.js',
+    entry: './src/client.jsx',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
     },
@@ -14,8 +17,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
-                use: 'babel-loader',
+                test: /\.(js|jsx)$/,
+                use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/,
             }
         ]
@@ -26,7 +29,6 @@ module.exports = {
         })
     ]
 };
-
 
 
 module.exports.serve = {

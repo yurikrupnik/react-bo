@@ -1,27 +1,15 @@
-// let fs = require('fs');
 import fs from 'fs';
+import path from 'path';
+import Koa from 'koa';
+import Router from 'koa-router';
+import statics from 'koa-static';
 import { port } from './config';
-// import path from 'path';
-// import Koa from 'koa';
-let path = require('path');
-let Koa = require('koa');
-let Router = require('koa-router');
-let statics = require('koa-static');
 
 function render() {
     let route = new Router();
     route.get('/*', (ctx, next) => {
-
         ctx.type = 'html';
-        // console.log('path', path.resolve(__dirname, 'assets/index.html'));
-        // console.log('__dirname', --host);
-        // console.log('cwd', process.cwd());
-
-        // const pat = path.relative(__dirname, 'assets/index.html')
-        // console.log('pat', pat);
-
         ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
-        // ctx.body = 'fas';
     });
     return route.routes();
 }
@@ -44,6 +32,13 @@ function api() {
 
 
 let app = new Koa();
+app.use(async (ctx, next) => {
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    ctx.set('X-Response-Time', `${ms}ms`);
+});
+
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(api());
 app.use(render());

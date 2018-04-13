@@ -13,7 +13,7 @@ module.exports = {
     },
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
     devtool: 'source-map',
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: filename
@@ -26,6 +26,11 @@ module.exports = {
                 use: 'babel-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['eslint-loader']
+            }
         ]
     },
     plugins: [

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'source-map',
-    entry: './src/client.js',
+    entry: './src/client.jsx',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
     },
@@ -14,12 +14,12 @@ module.exports = {
                 test: /\.(js)$/,
                 use: 'babel-loader',
                 exclude: /node_modules/,
-            }
-        ]
+            },
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.html',
         })
     ]
 };
