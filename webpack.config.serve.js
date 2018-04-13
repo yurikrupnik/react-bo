@@ -35,7 +35,6 @@ module.exports.serve = {
     content: [__dirname],
     open: true,
     port: 5001,
-    add: (app, middleware, options) => {
-        app.use(convert(proxy('/api', { target: host })));
-    }
+    // app, middleware, options
+    add: app => app.use(convert(proxy('/api', { target: host })))
 };

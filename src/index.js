@@ -6,8 +6,8 @@ import statics from 'koa-static';
 import { port } from './config';
 
 function render() {
-    let route = new Router();
-    route.get('/*', (ctx, next) => {
+    const route = new Router();
+    route.get('/*', (ctx) => {
         ctx.type = 'html';
         ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
     });
@@ -15,23 +15,22 @@ function render() {
 }
 
 function sluts() {
-    let route = new Router();
-    route.get('/sluts', async (ctx, next) => {
-
+    const route = new Router();
+    route.get('/sluts', async (ctx) => {
         ctx.type = 'json';
-        ctx.body = ['1', 4, 6]
+        ctx.body = ['1', 4, 6];
     });
     return route.routes();
 }
 
 function api() {
-    let route = new Router();
+    const route = new Router();
     route.use('/api', sluts());
     return route.routes();
 }
 
 
-let app = new Koa();
+const app = new Koa();
 app.use(async (ctx, next) => {
     const start = Date.now();
     await next();
@@ -42,11 +41,4 @@ app.use(async (ctx, next) => {
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(api());
 app.use(render());
-app.listen(port, (err) => {
-    if (err) {
-        console.log('err', err);
-    } else {
-        console.log('lisenning');
-
-    }
-});
+app.listen(port);
