@@ -17,9 +17,9 @@ function render() {
     return route.routes();
 }
 
-function sluts() {
+function nums() {
     const route = new Router();
-    route.get('/sluts', async (ctx) => {
+    route.get('/nums', async (ctx) => {
         // ctx.type = 'json';
         ctx.body = ['1', 4, 6, 2343, 5454];
     });
@@ -28,7 +28,7 @@ function sluts() {
 
 function api() {
     const route = new Router();
-    route.use('/api', sluts());
+    route.use('/api', nums());
     return route.routes();
 }
 
