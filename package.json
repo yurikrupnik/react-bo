@@ -14,6 +14,8 @@
     "lint": "npm run lint:server && npm run lint:client",
     "lint:server": "eslint src/index.js",
     "lint:client": "eslint src/client.js",
+    "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
+    "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

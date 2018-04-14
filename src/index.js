@@ -1,4 +1,4 @@
-// import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
@@ -10,9 +10,9 @@ import { port } from './config';
 function render() {
     const route = new Router();
     route.get('/*', (ctx) => {
-        // ctx.type = 'html';
-        // ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
-        ctx.body = 'hello my big app';
+        ctx.type = 'html';
+        ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
+        // ctx.body = 'hello my big app';
     });
     return route.routes();
 }
@@ -21,7 +21,7 @@ function sluts() {
     const route = new Router();
     route.get('/sluts', async (ctx) => {
         // ctx.type = 'json';
-        ctx.body = ['1', 4, 6];
+        ctx.body = ['1', 4, 6, 2343, 5454];
     });
     return route.routes();
 }
