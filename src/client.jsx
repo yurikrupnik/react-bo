@@ -21,9 +21,6 @@ import './styles.scss';
 //   }
 // }
 
-console.log('preloadState', global.window.__PRELOADED_STATE__);
-console.log('preloadState', global.window);
-
 render(
     (
         <BrowserRouter>

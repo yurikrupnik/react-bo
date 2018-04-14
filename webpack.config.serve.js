@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { host } = require('./src/config');
 
-// const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.scss'],
