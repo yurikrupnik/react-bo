@@ -1,0 +1,7 @@
+const RESET_SESSION = 'RESET_SESSION';
+const SET_SESSION = 'SET_SESSION';
+
+export {
+    RESET_SESSION,
+    SET_SESSION
+};

@@ -13,7 +13,7 @@ export default () => {
         ctx.set('X-Response-Time', `${ms}ms`);
     });
     route.use(logger());
-    route.use(render());
+    route.get(render());
     route.allowedMethods();
     return route.routes();
 };

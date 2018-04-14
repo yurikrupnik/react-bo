@@ -12,8 +12,8 @@
     "build:server": "webpack --config webpack.config.server.js",
     "build:client": "webpack --config webpack.config.client.js",
     "lint": "npm run lint:server && npm run lint:client",
-    "lint:server": "eslint src/index.js",
-    "lint:client": "eslint src/client.js",
+    "lint:server": "eslint src/config.js src/index.js src/middlewares/**",
+    "lint:client": "eslint src/client.jsx src/store/** src/component/**",
     "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
     "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/yurikrupnik/react-bo#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "koa": "^2.5.0",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
@@ -37,7 +38,10 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "react-router-dom": "^4.2.2"
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

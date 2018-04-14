@@ -5,14 +5,12 @@ import Router from 'koa-router';
 import statics from 'koa-static';
 import logger from 'koa-logger';
 import { port } from './config';
-// import middLogger from './middlewares';
 
 function render() {
     const route = new Router();
     route.get('/*', (ctx) => {
         ctx.type = 'html';
         ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
-        // ctx.body = 'hello my big app';
     });
     return route.routes();
 }
@@ -33,9 +31,8 @@ function api() {
 }
 
 const app = new Koa();
-// app.use(middLogger());
-app.use(logger());
 app.use(statics(path.resolve(__dirname, 'assets')));
+app.use(logger());
 app.use(api());
 app.use(render());
 app.listen(port, (err) => {
