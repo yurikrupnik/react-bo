@@ -1,4 +1,4 @@
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
@@ -10,8 +10,9 @@ import { port } from './config';
 function render() {
     const route = new Router();
     route.get('/*', (ctx) => {
-        ctx.type = 'html';
-        ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
+        // ctx.type = 'html';
+        // ctx.body = fs.createReadStream(path.resolve(__dirname, 'assets', 'index.html'));
+        ctx.body = 'hello my big app';
     });
     return route.routes();
 }
@@ -37,4 +38,10 @@ app.use(logger());
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(api());
 app.use(render());
-app.listen(port);
+app.listen(port, (err) => {
+    if (err) {
+        console.log('err', err);
+    } else {
+        console.log(`running at port: ${port}`);
+    }
+});
