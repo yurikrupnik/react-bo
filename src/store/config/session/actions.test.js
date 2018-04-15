@@ -4,7 +4,7 @@ import { setSession, SET_SESSION } from './actions';
 
 const { describe, it, expect } = global;
 
-describe('session actions', () => {
+describe('sekssion actions', () => {
     it('should set session', () => {
         const session = 'ry';
         const expected = {
