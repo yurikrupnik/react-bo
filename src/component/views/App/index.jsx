@@ -19,5 +19,3 @@ export default class App extends Component {
 App.propTypes = {
     userAgent: PropTypes.string.isRequired,
 };
-
-// export default App;
