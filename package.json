@@ -30,10 +30,12 @@
   "homepage": "https://github.com/yurikrupnik/react-bo#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "flexboxgrid": "^6.3.1",
     "koa": "^2.5.0",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
+    "lodash": "^4.17.5",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
