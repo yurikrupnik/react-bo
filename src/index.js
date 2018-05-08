@@ -3,8 +3,10 @@ import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import statics from 'koa-static';
-import logger from 'koa-logger';
-import { port } from './config';
+import { port, databaseUrl } from './config';
+import api from './api';
+import initDB, { setDb } from './db';
+
 
 function render() {
     const route = new Router();
@@ -15,25 +17,10 @@ function render() {
     return route.routes();
 }
 
-function nums() {
-    const route = new Router();
-    route.get('/nums', async (ctx) => {
-        // ctx.type = 'json';
-        ctx.body = ['1', 4, 6, 2343, 5454];
-    });
-    return route.routes();
-}
-
-function api() {
-    const route = new Router();
-    route.use('/api', nums());
-    return route.routes();
-}
-
 const app = new Koa();
 app.use(statics(path.resolve(__dirname, 'assets')));
-app.use(logger());
-app.use(api());
+app.use(api);
+app.use(setDb(initDB(databaseUrl)));
 app.use(render());
 app.listen(port, (err) => {
     if (err) {

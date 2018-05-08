@@ -13,6 +13,7 @@ module.exports = {
     entry: './src/client.jsx',
     output: {
         path: path.resolve(__dirname, 'dist/assets'),
+        // crossOriginLoading: 'anonymous'
     },
     mode: 'development',
     module: {
