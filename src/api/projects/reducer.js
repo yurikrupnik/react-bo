@@ -39,7 +39,7 @@ export default (state = initState, action) => {
             data: {
                 result: state.data.result.concat(action.payload._id),
                 entities: {
-                    // ...state.data.entities,
+                    ...state.data.entities,
                     [action.payload._id]: action.payload
                 }
             }
@@ -67,3 +67,4 @@ export default (state = initState, action) => {
         return state;
     }
 };
+export { initState };
