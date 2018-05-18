@@ -12,8 +12,7 @@ module.exports = {
     devtool: 'eval-cheap-module-source-map',
     entry: './src/client.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist/assets'),
-        // crossOriginLoading: 'anonymous'
+        path: path.resolve(__dirname, 'dist/assets')
     },
     mode: 'development',
     module: {
@@ -34,7 +33,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.ejs',
+            filename: 'index.ejs',
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -50,6 +50,7 @@ module.exports.serve = {
     content: [__dirname],
     open: true,
     port: 5001,
+    dev: { index: 'index.ejs' },
     // app, middleware, options
     add: app => app.use(convert(proxy('/api', { target: host })))
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Container from '../../../api/projects/container';
+// import Container from '../../../api/projects/container';
 
 export default class App extends Component {
     constructor(props) {
@@ -13,8 +13,8 @@ export default class App extends Component {
     render() {
         const { userAgent } = this.props;
         const { log } = this.state;
-        return <Container />;
-        // return (<div>hello from reacr <span>{userAgent}: {log}</span></div>);
+        // return <Container />;
+        return (<div>hello from reacr <span>{userAgent}: {log}</span></div>);
     }
 }
 
