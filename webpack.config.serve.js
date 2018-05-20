@@ -9,11 +9,12 @@ const proxy = require('http-proxy-middleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const history = require('connect-history-api-fallback');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { host, port } = require('./src/config');
-const html = require('./src/middlewares/html');
-const state = require('./src/middlewares/state');
-// const App = require('./src/components/App');
+const serverConfig = require('./webpack.config.server');
+// const html = require('./src/middlewares/html');
+// const state = require('./src/middlewares/state');
+// const App = require('./src/components/App/index.jsx');
 
 
 module.exports = {
@@ -44,6 +45,7 @@ module.exports = {
         ]
     },
     plugins: [
+        // new BundleAnalyzerPlugin({}),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -55,14 +57,22 @@ module.exports = {
 
 module.exports.serve = {
     content: [__dirname],
-    open: true,
+    open: false,
     port: port + 1,
-    // dev: { index: null, historyApiFallback: true, proxy: '/api' },
     // app, middleware, options
-    add: (app) => {
+    add: (app, middleware, options) => {
+        // middleware.webpack();
+        // middleware.content();
+        // console.log('middleware', middleware);
+        // console.log('options', options);
         app.use(statics(path.resolve(__dirname, 'dist/assets')));
+        app.use(convert(proxy('/', { target: host })));
         app.use(convert(proxy('/api', { target: host })));
-        app.use(state());
-        app.use(html());
+        // app.use(async (ctx, next) => {
+        //     console.log('ctx.url', ctx.url);
+        //     await next();
+        // });
+        // app.use(state());
+        // app.use(html());
     }
 };

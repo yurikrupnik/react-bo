@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import React, { Component } from 'react';
+const React = require('react');
+// import PropTypes from 'prop-types';
 // import withReduxStore from '../HOC/withReduxStore';
 // import withSubRoutes from '../HOC/withSubRoutes';
 // import Material from '../Material';
@@ -15,7 +16,7 @@ import PropTypes from 'prop-types';
 //     </Material>
 // );
 
-class App extends Component {
+class App extends React.Component {
     // static propTypes = {
     //     initialState: PropTypes.shape({}).isRequired,
     //     userAgent: PropTypes.string.isRequired
@@ -33,9 +34,11 @@ class App extends Component {
         // const store = configureStore(initialState);
         // const Root = withReduxStore(withSubRoutes(Header, routes), store);
         return (
-            <div>hello from app</div>
+            <div>this is main app</div>
         );
     }
 }
 
-export default App;
+module.exports = App;
+
+// export default App;

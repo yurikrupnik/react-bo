@@ -1,8 +1,9 @@
 // import { renderToString } from 'react-dom/server';
 // import App from '../components/App';
 const { renderToString } = require('react-dom/server');
+const App = require('../components/App');
 
-const html = App => (ctx) => {
+const html = (state = {}) => (ctx) => {
     ctx.type = 'html';
     ctx.html = `
     <!doctype html>
@@ -14,8 +15,9 @@ const html = App => (ctx) => {
         <link rel="stylesheet" href="main.css">
       </head>
       <body>
-        <div>shalom</div>
+        <div>Assassa</div>
         <div id="root">${renderToString(App)}</div>
+        <script>window.state = ${JSON.stringify(state)};</script>
         <script src="main.bundle.js"></script>
       </body>
     </html>
