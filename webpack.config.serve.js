@@ -59,24 +59,10 @@ module.exports.serve = {
     port: port + 1,
     // dev: { index: null, historyApiFallback: true, proxy: '/api' },
     // app, middleware, options
-    add: (app, middleware) => {
-        // middleware.webpack();
-        // middleware.content({
-        //     index: null,
-        //     // see: https://github.com/koajs/static#options
-        // });
-        // console.log('app pre', app);
+    add: (app) => {
         app.use(statics(path.resolve(__dirname, 'dist/assets')));
         app.use(convert(proxy('/api', { target: host })));
         app.use(state());
         app.use(html());
-        // app.use(async (ctx, next) => {
-        //     ctx.body = 'yebal';
-        //     await next();
-        // });
-        // console.log('app after', app);
-        // app.use(convert(history({
-        //     index: '/'
-        // })));
     }
 };
