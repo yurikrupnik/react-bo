@@ -1,13 +1,20 @@
+// const { renderToString } = require('react-dom/server');
+
+const statics = require('koa-static');
 const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const webpack = require('webpack');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const history = require('connect-history-api-fallback');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const history = require('connect-history-api-fallback');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { host, port } = require('./src/config');
+const html = require('./src/middlewares/html');
+const state = require('./src/middlewares/state');
+// const App = require('./src/components/App');
+
 
 module.exports = {
     resolve: {
@@ -33,58 +40,10 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader', 'sass-loader'
                 ]
-            },
-            {
-                test: /\.ejs$/,
-                loader: 'ejs-loader',
-                query: {
-                    variable: 'data',
-                    interpolate: /\{\{(.+?)\}\}/g,
-                    evaluate: /\[\[(.+?)\]\]/g
-                }
-            },
-            {
-                test: /\.marko/,
-                loader: 'marko-loader'
             }
         ]
     },
     plugins: [
-        // new webpack.ProvidePlugin({
-        //     _: 'underscore'
-        // }),
-        // new HtmlWebpackPlugin({
-        //     template: 'src/index.ejs',
-        //     filename: 'index.ejs',
-        //     title: 'omg',
-        //     meta: {
-        //         charset: 'UTF-8',
-        //         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-        //     },
-        //     // minify: {
-        //     //     removeComments: true,
-        //     //     collapseWhitespace: true,
-        //     //     conservativeCollapse: true
-        //     // }
-        // }),
-        // new CopyWebpackPlugin([
-        //     { from: 'src/index.marko' },
-        // ]),
-        new BundleAnalyzerPlugin(),
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            // filename: 'index.html',
-            title: 'omg',
-            meta: {
-                charset: 'UTF-8',
-                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-            },
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     conservativeCollapse: true
-            // }
-        }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -98,12 +57,26 @@ module.exports.serve = {
     content: [__dirname],
     open: true,
     port: port + 1,
-    dev: { index: 'index.marko' },
+    // dev: { index: null, historyApiFallback: true, proxy: '/api' },
     // app, middleware, options
-    add: (app) => {
+    add: (app, middleware) => {
+        // middleware.webpack();
+        // middleware.content({
+        //     index: null,
+        //     // see: https://github.com/koajs/static#options
+        // });
+        // console.log('app pre', app);
+        app.use(statics(path.resolve(__dirname, 'dist/assets')));
         app.use(convert(proxy('/api', { target: host })));
-        app.use(convert(history({
-            // index: '/index.marko'
-        })));
+        app.use(state());
+        app.use(html());
+        // app.use(async (ctx, next) => {
+        //     ctx.body = 'yebal';
+        //     await next();
+        // });
+        // console.log('app after', app);
+        // app.use(convert(history({
+        //     index: '/'
+        // })));
     }
 };

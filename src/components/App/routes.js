@@ -1,6 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+// import NoMatch from '../components/noMatch';
 
 const Home = () => (
     <div>
@@ -44,6 +45,7 @@ const Topics = ({ match }) => {
                 component={Topic}
             />
             <Route
+                exact
                 path={match.url}
                 render={() => <h3>Please select a topic.</h3>}
             />
@@ -52,63 +54,72 @@ const Topics = ({ match }) => {
 };
 
 
-function Loading() {
-    return <div>Loading...</div>;
+function Loading(props) {
+    if (props.error) {
+        return <div>Error! <button onClick={ props.retry }>Retry</button></div>;
+    } else if (props.timedOut) {
+        return <div>Taking a long time... <button onClick={ props.retry }>Retry</button></div>;
+    } else if (props.pastDelay) {
+        return <div>Loading...</div>;
+    } else {
+        return null;
+    }
 }
 
-const LoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "app" */ '../component/App'),
-    loading: Loading,
-});
+// const LoadableComponent = Loadable({
+//     loader: () => import(/* webpackChunkName: "app" */ '../component/App'),
+//     loading: Loading,
+// });
 const ProjectsLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "projects" */ '../api/projects/container'),
+    loader: () => import(/* webpackChunkName: "projects" */ '../../api/projects/container'),
     loading: Loading,
 });
 const UsersLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "users" */ '../api/users/container'),
+    loader: () => import(/* webpackChunkName: "users" */ '../../api/users/container'),
     loading: Loading,
 });
 
 const routes = [
     {
         path: '/',
-        component: () => <LoadableComponent />,
+        component: () => {
+            const LoadableComponent = Loadable({
+                loader: () => import(/* webpackChunkName: "app" */ '../../components/App'),
+                loading: Loading
+            });
+            return <LoadableComponent />;
+        },
         exact: true,
         key: 'main'
     },
     {
         path: '/about',
         component: About,
-        exact: true,
         key: 'about'
     },
-    // {
-    //     path: '/topics',
-    //     component: Topics,
-    //     exact: true,
-    //     key: 'topics',
-    //     // routes: [
-    //     //     {
-    //     //         path: '/topics/:topicId',
-    //     //         component: About
-    //     //     }
-    //     // ]
-    // },
+    {
+        path: '/topics',
+        component: Topics,
+        key: 'topics',
+    },
     {
         path: '/projects',
         component: (props) => {
             console.log('props', props);
             return <ProjectsLoadableComponent />;
         },
-        exact: true,
         key: 'projects'
     },
     {
         path: '/users',
         component: () => <UsersLoadableComponent />,
-        exact: true,
         key: 'users'
     },
+    // {
+    //     path: '/*',
+    //     exact: false,
+    //     component: NoMatch
+    // }
 ];
 
 export default routes;
