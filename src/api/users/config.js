@@ -1,6 +1,6 @@
 const url = '/users';
 const dbModel = 'User';
-const selector = 'USERS';
+const selector = 'users';
 
 export {
     url,

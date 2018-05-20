@@ -7,7 +7,7 @@ const filename = 'server.js';
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.marko'],
     },
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
     node: {
@@ -28,6 +28,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.marko/,
+                loader: 'marko-loader',
             }
         ]
     },

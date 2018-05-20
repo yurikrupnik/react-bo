@@ -7,5 +7,5 @@
     }],
     "react"
   ],
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": ["transform-object-rest-spread", "syntax-dynamic-import"]
 }

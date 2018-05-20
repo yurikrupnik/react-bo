@@ -1,9 +1,13 @@
 const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { host } = require('./src/config');
+const history = require('connect-history-api-fallback');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { host, port } = require('./src/config');
 
 module.exports = {
     resolve: {
@@ -12,7 +16,8 @@ module.exports = {
     devtool: 'eval-cheap-module-source-map',
     entry: './src/client.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist/assets')
+        path: path.resolve(__dirname, 'dist/assets'),
+        publicPath: '/'
     },
     mode: 'development',
     module: {
@@ -23,18 +28,62 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.scss$/,
+                test: /\.(scss|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader', 'sass-loader'
                 ]
+            },
+            {
+                test: /\.ejs$/,
+                loader: 'ejs-loader',
+                query: {
+                    variable: 'data',
+                    interpolate: /\{\{(.+?)\}\}/g,
+                    evaluate: /\[\[(.+?)\]\]/g
+                }
+            },
+            {
+                test: /\.marko/,
+                loader: 'marko-loader'
             }
         ]
     },
     plugins: [
+        // new webpack.ProvidePlugin({
+        //     _: 'underscore'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: 'src/index.ejs',
+        //     filename: 'index.ejs',
+        //     title: 'omg',
+        //     meta: {
+        //         charset: 'UTF-8',
+        //         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+        //     },
+        //     // minify: {
+        //     //     removeComments: true,
+        //     //     collapseWhitespace: true,
+        //     //     conservativeCollapse: true
+        //     // }
+        // }),
+        // new CopyWebpackPlugin([
+        //     { from: 'src/index.marko' },
+        // ]),
+        new BundleAnalyzerPlugin(),
         new HtmlWebpackPlugin({
-            template: 'src/index.ejs',
-            filename: 'index.ejs',
+            template: 'src/index.html',
+            // filename: 'index.html',
+            title: 'omg',
+            meta: {
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            },
+            // minify: {
+            //     removeComments: true,
+            //     collapseWhitespace: true,
+            //     conservativeCollapse: true
+            // }
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -45,12 +94,16 @@ module.exports = {
     ]
 };
 
-
 module.exports.serve = {
     content: [__dirname],
     open: true,
-    port: 5001,
-    dev: { index: 'index.ejs' },
+    port: port + 1,
+    dev: { index: 'index.marko' },
     // app, middleware, options
-    add: app => app.use(convert(proxy('/api', { target: host })))
+    add: (app) => {
+        app.use(convert(proxy('/api', { target: host })));
+        app.use(convert(history({
+            // index: '/index.marko'
+        })));
+    }
 };
