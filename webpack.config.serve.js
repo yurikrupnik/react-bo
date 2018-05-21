@@ -1,17 +1,17 @@
 // const { renderToString } = require('react-dom/server');
 
-const statics = require('koa-static');
+// const statics = require('koa-static');
 const path = require('path');
 // const webpack = require('webpack');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const history = require('connect-history-api-fallback');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const history = require('connect-history-api-fallback');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { host, port } = require('./src/config');
-const serverConfig = require('./webpack.config.server');
+// const serverConfig = require('./webpack.config.server');
 // const html = require('./src/middlewares/html');
 // const state = require('./src/middlewares/state');
 // const App = require('./src/components/App/index.jsx');
@@ -19,7 +19,7 @@ const serverConfig = require('./webpack.config.server');
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.jsx', '.scss'],
+        extensions: ['.js', '.jsx', '.scss', '.marko'],
     },
     devtool: 'eval-cheap-module-source-map',
     entry: './src/client.jsx',
@@ -41,11 +41,30 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader', 'sass-loader'
                 ]
+            },
+            {
+                test: /\.marko/,
+                loader: 'marko-loader'
             }
         ]
     },
     plugins: [
+        // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
         // new BundleAnalyzerPlugin({}),
+        new HtmlWebpackPlugin({
+            template: 'src/index.ejs',
+            filename: 'index.ejs',
+            title: 'omg',
+            meta: {
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            },
+            // minify: {
+            //     removeComments: true,
+            //     collapseWhitespace: true,
+            //     conservativeCollapse: true
+            // }
+        }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -57,22 +76,14 @@ module.exports = {
 
 module.exports.serve = {
     content: [__dirname],
-    open: false,
+    open: true,
     port: port + 1,
+    dev: { index: 'index.ejs' },
     // app, middleware, options
-    add: (app, middleware, options) => {
-        // middleware.webpack();
-        // middleware.content();
-        // console.log('middleware', middleware);
-        // console.log('options', options);
-        app.use(statics(path.resolve(__dirname, 'dist/assets')));
-        app.use(convert(proxy('/', { target: host })));
+    add: (app) => {
         app.use(convert(proxy('/api', { target: host })));
-        // app.use(async (ctx, next) => {
-        //     console.log('ctx.url', ctx.url);
-        //     await next();
-        // });
-        // app.use(state());
-        // app.use(html());
+        // app.use(convert(history({
+        //     index: '/'
+        // })));
     }
 };

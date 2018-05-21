@@ -1,11 +1,12 @@
 const path = require('path');
 // const webpack = require('webpack');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     optimization: {
@@ -15,7 +16,11 @@ module.exports = {
                 parallel: true,
                 sourceMap: true // set to true if you want JS source maps
             }),
-            new OptimizeCSSAssetsPlugin({})
+            // new OptimizeCSSAssetsPlugin({
+            //     analyzerMode: 'disabled',
+            //     statsFilename: 'stats.json',
+            //     generateStatsFile: true
+            // })
         ],
         // splitChunks: {
         //     cacheGroups: {
@@ -29,7 +34,7 @@ module.exports = {
     },
     target: 'web',
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.scss', '.marko', '.ejs']
     },
     devtool: 'source-map',
     entry: './src/client.jsx',
@@ -53,11 +58,62 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader', 'sass-loader'
                 ]
+            },
+            {
+                test: /\.ejs/,
+                loader: 'ejs-loader'
+            },
+            {
+                test: /\.marko/,
+                loader: 'raw-loader'
             }
         ]
     },
     plugins: [
-        // new BundleAnalyzerPlugin(),
+        // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
+        new HtmlWebpackPlugin({
+            template: 'src/index.ejs',
+            filename: 'index.ejs',
+            title: 'omg',
+            meta: {
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            },
+            // minify: {
+            //     removeComments: true,
+            //     collapseWhitespace: true,
+            //     conservativeCollapse: true
+            // }
+        }),
+        // new BundleAnalyzerPlugin({}),
+        // new HtmlWebpackPlugin({
+        //     template: 'src/index.ejs',
+        //     filename: 'index.ejs',
+        //     // title: 'omg',
+        //     // meta: {
+        //     //     charset: 'UTF-8',
+        //     //     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+        //     // },
+        //     // minify: {
+        //     //     removeComments: true,
+        //     //     collapseWhitespace: true,
+        //     //     conservativeCollapse: true
+        //     // }
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: 'src/assets/index.marko',
+        //     filename: './index.marko',
+        //     // title: 'omg',
+        //     // meta: {
+        //     //     charset: 'UTF-8',
+        //     //     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+        //     // },
+        //     // minify: {
+        //     //     removeComments: true,
+        //     //     collapseWhitespace: true,
+        //     //     conservativeCollapse: true
+        //     // }
+        // }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional

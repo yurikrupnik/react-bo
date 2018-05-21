@@ -124,6 +124,7 @@ import './_styles.scss';
 //         </div>
 //     </Router>
 // );
+console.log('window.state', global.window.state);
 
 render(
     <App userAgent={global.navigator.userAgent} initialState={global.window.state} />,

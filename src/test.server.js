@@ -9,7 +9,7 @@ const Koa = require('koa');
 
 const app = new Koa();
 
-const template = require('./index.marko');
+const template = require('./assets/index.marko');
 
 function state() {
     return async function (ctx, next) {
