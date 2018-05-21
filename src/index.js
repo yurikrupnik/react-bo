@@ -19,6 +19,7 @@ import { renderToString } from 'react-dom/server';
 import { port, databaseUrl } from './config';
 import api from './api';
 import db from './db';
+
 const app = new Koa();
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(db(databaseUrl));
