@@ -124,13 +124,9 @@ import './_styles.scss';
 //         </div>
 //     </Router>
 // );
-console.log('window.state', global.window.state);
 
-// function calls() {
-//     render(
-//         <App userAgent={global.navigator.userAgent} initialState={global.window.state} />,
-//         global.document.getElementById('root'),
-//     );
-// };
+render(
+    <App userAgent={global.navigator.userAgent} initialState={global.window.state} />,
+    global.document.getElementById('root'),
+);
 
-// calls();

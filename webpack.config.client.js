@@ -59,22 +59,14 @@ module.exports = {
                     'css-loader', 'sass-loader'
                 ]
             },
-            // {
-            //     test: /\.ejs$/,
-            //     loader: 'ejs-loader?variable=data'
-            // },
             {
                 test: /\.ejs$/,
                 loader: 'ejs-loader'
-            },
-            {
-                test: /\.marko/,
-                loader: 'raw-loader'
             }
         ]
     },
     plugins: [
-        // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
+        // new CopyWebpackPlugin([{ from: 'src/index.marko' }]),
         // new CopyWebpackPlugin([{ from: 'src/index.ejs' }]),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',

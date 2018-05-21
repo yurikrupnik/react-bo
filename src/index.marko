@@ -1,18 +1,18 @@
+<lasso-page/>
+
 <!doctype html>
 <html lang="en">
-<head>
-    <base href="/" />
-    <meta charset="UTF-8">
-    <title>Engine</title>
-</head>
-<body>
-<div>markok</div>
-<div>age ${input.count} </div>
-<div>name ${input.name} </div>
-<div>colors ${input.colors} </div>
-<div id="root"></div>
-<div id="container">
-    <div>asd</div>
-</div>
-</body>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>marko-koa</title>
+        <lasso-head/>
+    </head>
+    <body>
+        <p>You have ${input.count} messages</p>
+        <ul if(input.colors.length)>
+            <li style="color: ${color}" for(color in data.colors)>${color}</li>
+        </ul>
+        <lasso-body/>
+        <browser-refresh/>
+    </body>
 </html>

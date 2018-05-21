@@ -44,20 +44,16 @@ module.exports = {
             },
             {
                 test: /\.ejs$/,
-                loader: 'ejs-loader?variable=data'
+                loader: 'ejs-loader'
             },
-            {
-                test: /\.marko/,
-                loader: 'marko-loader'
-            }
         ]
     },
     plugins: [
-        // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
+        // new CopyWebpackPlugin([{ from: 'src/index.marko' }]),
         // new BundleAnalyzerPlugin({}),
-        new webpack.ProvidePlugin({
-            _: 'underscore'
-        }),
+        // new webpack.ProvidePlugin({
+        //     _: 'underscore'
+        // }),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',
             filename: 'index.ejs',
@@ -85,7 +81,7 @@ module.exports.serve = {
     content: [__dirname],
     open: true,
     port: port + 1,
-    dev: { index: 'index.ejs' },
+    // dev: { index: 'index.marko' },
     // app, middleware, options
     add: (app) => {
         app.use(convert(proxy('/api', { target: host })));
