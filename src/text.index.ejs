@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>title jhe</title>
+</head>
+<body>
+<div>test ejs</div>
+<div id="root"></div>
+<% var test = 101; %>
+<script>
+    var getTest = '<%= name  %>';  //var test is now assigned to getTest which will only work on browsers
+    console.log(getTest);  // successfully prints 101 on browser
+    window.colors = '<%= JSON.stringify(colors)  %>';
+    window.count = '<%= count  %>';
+    console.log('typeof window.state', typeof window.state);
+    console.log('typeof window.count', typeof window.count);
+    console.log('typeof window.colors', typeof window.colors);
+
+</script>
+<script>
+    console.log('window.state', window.state);
+
+</script>
+</body>
+</html>

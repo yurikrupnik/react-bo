@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import 'marko/node-require';
+// import 'marko/node-require';
 // import React from 'react';
 import path from 'path';
 import Koa from 'koa';
@@ -14,29 +14,20 @@ import views from 'koa-render-view';
 // import ReactDOMServer from 'react-dom/server';
 // import { renderToString } from 'react-dom/server';
 // import template from './assets/index.marko';
+// import { port } from './config';
 import { port, databaseUrl } from './config';
 import api from './api';
 import db from './db';
 
 const app = new Koa();
-// app.use(compress({
-//     filter: contentType => /text/i.test(contentType),
-//     threshold: 2048,
-//     flush: zlib.Z_SYNC_FLUSH
-// }));
-
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(db(databaseUrl));
+// app.use((ctx, next) => {
+//     // console.log('ctx.db', ctx.db);
+//     return next();
+// });
 app.use(api);
-// console.log('path.join(__dirname, \'/assets\')', path.join(__dirname, 'assets'));
-app.use(views(path.join(__dirname, 'assets')), {
-    recursive: true,
-    extension: 'ejs',
-    map: {
-        html: 'ejs',
-        ejs: 'ejs'
-    }
-});
+app.use(views(path.resolve(__dirname, 'assets')));
 // app.use(views('/assets', { extension: 'ejs' }));
 // app.use(ctx => ctx.render('index', { state: { user: 'aris' } }));
 // app.use((ctx) => {
@@ -49,15 +40,22 @@ app.use(views(path.join(__dirname, 'assets')), {
 // });
 // function render() {
 //     const route = new Router();
-//     route.get('/*', ctx => ctx.render('index', { age: 10, name: 'as' }));
+//     route.get('/*', (ctx, next) => {
+//         ctx.body = 'shit body';
+//         return next();
+//     });
 //     return route.allowedMethods();
 // }
-
+app.use(async (ctx, next) => {
+    console.log('ctx.error', ctx.error);
+    await next();
+});
 // app.use(render());
-app.use((ctx) => {
-    // ctx.body = 'lol';
+app.use(async (ctx) => {
+    ctx.state = { data: { name: 'asd' } };
     ctx.type = 'html';
-    return ctx.render('index.ejs');
+    await ctx.render('index.ejs', { data: { name: 'yuei' } });
+// ctx.body = 'helo';
 });
 // Loadable.preloadAll().then(() => {
 app.listen(port, (err) => {

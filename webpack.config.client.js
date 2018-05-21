@@ -60,8 +60,12 @@ module.exports = {
                 ]
             },
             {
-                test: /\.ejs/,
-                loader: 'ejs-loader'
+                test: /\.ejs$/,
+                loader: 'ejs-loader?variable=data'
+            },
+            {
+                test: /\.ejs$/,
+                loader: 'file-loader'
             },
             {
                 test: /\.marko/,
@@ -71,20 +75,16 @@ module.exports = {
     },
     plugins: [
         // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
-        new HtmlWebpackPlugin({
-            template: 'src/index.ejs',
-            filename: 'index.ejs',
-            title: 'omg',
-            meta: {
-                charset: 'UTF-8',
-                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-            },
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     conservativeCollapse: true
-            // }
-        }),
+        new CopyWebpackPlugin([{ from: 'src/index.ejs' }]),
+        // new HtmlWebpackPlugin({
+        //     template: 'src/index.ejs',
+        //     filename: 'index.ejs',
+        //     title: 'omg',
+        //     meta: {
+        //         charset: 'UTF-8',
+        //         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+        //     }
+        // }),
         // new BundleAnalyzerPlugin({}),
         // new HtmlWebpackPlugin({
         //     template: 'src/index.ejs',

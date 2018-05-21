@@ -2,7 +2,7 @@
 
 // const statics = require('koa-static');
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
@@ -43,6 +43,10 @@ module.exports = {
                 ]
             },
             {
+                test: /\.ejs$/,
+                loader: 'ejs-loader?variable=data'
+            },
+            {
                 test: /\.marko/,
                 loader: 'marko-loader'
             }
@@ -51,6 +55,9 @@ module.exports = {
     plugins: [
         // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
         // new BundleAnalyzerPlugin({}),
+        new webpack.ProvidePlugin({
+            _: 'underscore'
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',
             filename: 'index.ejs',
@@ -59,6 +66,10 @@ module.exports = {
                 charset: 'UTF-8',
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             },
+            // templateParameters: (a) => {
+            //     console.log('a', a);
+            //     return { data: '<%= data %>' };
+            // }
             // minify: {
             //     removeComments: true,
             //     collapseWhitespace: true,
@@ -82,8 +93,8 @@ module.exports.serve = {
     // app, middleware, options
     add: (app) => {
         app.use(convert(proxy('/api', { target: host })));
-        // app.use(convert(history({
-        //     index: '/'
-        // })));
+        app.use(convert(history({
+            index: '/index.ejs'
+        })));
     }
 };

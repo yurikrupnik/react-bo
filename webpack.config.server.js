@@ -30,10 +30,10 @@ module.exports = {
                 use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.marko/,
-            //     loader: 'marko-loader'
-            // }
+            {
+                test: /\.ejs/,
+                loader: 'ejs-loader'
+            }
         ]
     },
     plugins: [
