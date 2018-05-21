@@ -66,10 +66,6 @@ module.exports = {
                 charset: 'UTF-8',
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             },
-            // templateParameters: (a) => {
-            //     console.log('a', a);
-            //     return { data: '<%= data %>' };
-            // }
             // minify: {
             //     removeComments: true,
             //     collapseWhitespace: true,

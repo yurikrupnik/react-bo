@@ -11,6 +11,8 @@ const statics = require('koa-static');
 const bodyparser = require('koa-bodyparser');
 const views = require('koa-views');
 const render = require('koa-ejs');
+const marko = require('marko');
+console.log('marko', marko);
 
 const app = new Koa();
 
@@ -24,9 +26,9 @@ const app = new Koa();
 // });
 
 
-app.use(bodyparser());
-app.use(statics(path.resolve(__dirname)));
-app.use(views(path.resolve(__dirname)), { extension: 'ejs' });
+// app.use(bodyparser());
+// app.use(statics(path.resolve(__dirname)));
+// app.use(views(path.resolve(__dirname)), { extension: 'ejs' });
 
 function state() {
     return async function (ctx, next) {
@@ -42,7 +44,9 @@ function state() {
 app.use(state());
 
 app.use(async (ctx) => {
-    await ctx.render('text.index.ejs');
+    ctx.type = 'html';
+    ctx.body = marko.load('./src/assets/index.marko').stream(ctx.state);
+    // await ctx.render('text.index.ejs');
 });
 // app.use((ctx) => {
 //     ctx.type = 'html';

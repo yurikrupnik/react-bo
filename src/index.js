@@ -15,10 +15,10 @@ import views from 'koa-render-view';
 // import { renderToString } from 'react-dom/server';
 // import template from './assets/index.marko';
 // import { port } from './config';
+import { renderToString } from 'react-dom/server';
 import { port, databaseUrl } from './config';
 import api from './api';
 import db from './db';
-
 const app = new Koa();
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(db(databaseUrl));
@@ -52,9 +52,9 @@ app.use(async (ctx, next) => {
 });
 // app.use(render());
 app.use(async (ctx) => {
-    ctx.state = { data: { name: 'asd' } };
+    ctx.state = { data: { name: 'asd', html: renderToString('<div>app html from server</div>') } };
     ctx.type = 'html';
-    await ctx.render('index.ejs', { data: { name: 'yuei' } });
+    await ctx.render('index.ejs', ctx.state);
 // ctx.body = 'helo';
 });
 // Loadable.preloadAll().then(() => {

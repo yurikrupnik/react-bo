@@ -126,7 +126,11 @@ import './_styles.scss';
 // );
 console.log('window.state', global.window.state);
 
-render(
-    <App userAgent={global.navigator.userAgent} initialState={global.window.state} />,
-    global.document.getElementById('root'),
-);
+// function calls() {
+//     render(
+//         <App userAgent={global.navigator.userAgent} initialState={global.window.state} />,
+//         global.document.getElementById('root'),
+//     );
+// };
+
+// calls();

@@ -59,13 +59,13 @@ module.exports = {
                     'css-loader', 'sass-loader'
                 ]
             },
+            // {
+            //     test: /\.ejs$/,
+            //     loader: 'ejs-loader?variable=data'
+            // },
             {
                 test: /\.ejs$/,
-                loader: 'ejs-loader?variable=data'
-            },
-            {
-                test: /\.ejs$/,
-                loader: 'file-loader'
+                loader: 'ejs-loader'
             },
             {
                 test: /\.marko/,
@@ -75,16 +75,16 @@ module.exports = {
     },
     plugins: [
         // new CopyWebpackPlugin([{ from: 'src/assets/index.marko' }]),
-        new CopyWebpackPlugin([{ from: 'src/index.ejs' }]),
-        // new HtmlWebpackPlugin({
-        //     template: 'src/index.ejs',
-        //     filename: 'index.ejs',
-        //     title: 'omg',
-        //     meta: {
-        //         charset: 'UTF-8',
-        //         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
-        //     }
-        // }),
+        // new CopyWebpackPlugin([{ from: 'src/index.ejs' }]),
+        new HtmlWebpackPlugin({
+            template: 'src/index.ejs',
+            filename: 'index.ejs',
+            title: 'omg',
+            meta: {
+                charset: 'UTF-8',
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+            }
+        }),
         // new BundleAnalyzerPlugin({}),
         // new HtmlWebpackPlugin({
         //     template: 'src/index.ejs',
