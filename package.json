@@ -17,7 +17,8 @@
     "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
     "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
     "test": "npm run lint && jest",
-    "anal": "webpack-bundle-analyzer webpack.config.server "
+    "anal": "webpack-bundle-analyzer webpack.config.server",
+    "dev": "browser-refresh src/index.js"
   },
   "repository": {
     "type": "git",

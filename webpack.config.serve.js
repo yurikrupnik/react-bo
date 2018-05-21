@@ -1,21 +1,11 @@
-// const { renderToString } = require('react-dom/server');
-
-// const statics = require('koa-static');
 const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const convert = require('koa-connect');
 const proxy = require('http-proxy-middleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const history = require('connect-history-api-fallback');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { host, port } = require('./src/config');
-// const serverConfig = require('./webpack.config.server');
-// const html = require('./src/middlewares/html');
-// const state = require('./src/middlewares/state');
-// const App = require('./src/components/App/index.jsx');
-
 
 module.exports = {
     resolve: {
@@ -49,11 +39,7 @@ module.exports = {
         ]
     },
     plugins: [
-        // new CopyWebpackPlugin([{ from: 'src/index.marko' }]),
-        // new BundleAnalyzerPlugin({}),
-        // new webpack.ProvidePlugin({
-        //     _: 'underscore'
-        // }),
+        new BundleAnalyzerPlugin({}),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',
             filename: 'index.ejs',
@@ -62,11 +48,11 @@ module.exports = {
                 charset: 'UTF-8',
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             },
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     conservativeCollapse: true
-            // }
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                conservativeCollapse: true
+            }
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
