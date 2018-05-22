@@ -1,54 +1,63 @@
+import path from 'path';
+import Koa from 'koa';
+import statics from 'koa-static';
+import views from 'koa-render-view';
 
-require('marko/node-require');
-require('lasso-marko');
-const createGzip = require('zlib').createGzip;
+import http from 'http';
+import sockets from 'socket.io';
 
-const Koa = require('koa');
-
-
-const mount = require('koa-mount');
+import { port, databaseUrl } from './config';
+import api from './api';
+import db from './db';
 
 const app = new Koa();
-const port = 8080;
-const template = require('./index.marko');
-const serve = require('koa-static');
-const marko = require('marko');
 
-var isProduction = process.env.NODE_ENV === 'production';
-
-// Configure lasso to control how JS/CSS/etc. is delivered to the browser
-require('lasso').configure({
-    plugins: [
-        'lasso-jsx',
-        'lasso-marko' // Allow Marko templates to be compiled and transported to the browser
-    ],
-    outputDir: __dirname + '/static', // Place all generated JS/CSS/etc. files into the "static" dir
-    bundlingEnabled: true, // Only enable bundling in production
-    minify: false, // Only minify JS and CSS code in production
-    fingerprintsEnabled: true, // Only add fingerprints to URLs in production
+app.use(statics(path.resolve(__dirname, 'assets')));
+app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' }));
+// for debug remove assets and run
+app.use(db(databaseUrl));
+app.use(api);
+app.use(async (ctx) => {
+    ctx.state = { data: { name: 'asd' } };
+    ctx.type = 'html';
+    await ctx.render('index', ctx.state);
 });
 
-app.use(mount('/static', serve(__dirname + '/static')));
 
-app.use((ctx, next) => {
-    ctx.type = 'html';
-    ctx.body = template.stream({
-        name: 'Frank',
-        count: 30,
-        colors: ['red', 'green', 'blue'],
+const server = http.Server(app.callback());
+const io = sockets(server);
+const users = {}; // list of messages locally saved in the server
+io.on('connection', (socket) => {
+    socket.on('newMessage', (message, next) => {
+        const { nickname, avatar } = socket;
+        // send nickname and avatar with the message taken from socket to all messages
+        io.emit('receiveMessage', { message, nickname, avatar });
+        next();
     });
 
-    ctx.vary('Accept-Encoding');
-    if (ctx.acceptsEncodings('gzip')) {
-        ctx.set('Content-Encoding', 'gzip');
-        ctx.body = ctx.body.pipe(createGzip());
-    }
+    socket.on('newUser', (user, next) => {
+        if (Object.keys(users).includes(user.nickname)) {
+            next('Name already in use');
+        } else {
+            // set nickname and avatar on socket object to retrieve later
+            socket.nickname = user.nickname; // eslint-disable-line no-param-reassign
+            socket.avatar = user.avatar; // eslint-disable-line no-param-reassign
+            users[user.nickname] = user;
+            next(null);
+        }
+    });
+
+    socket.on('disconnect', (reason) => { // eslint-disable-line no-unused-vars
+        delete users[socket.nickname];
+    });
 });
 
-app.listen(port, function() {
-    console.log('Server started! Try it out:\nhttp://localhost:' + port + '/');
-
-    if (process.send) {
-        process.send('online');
+// Loadable.preloadAll().then(() => {
+server.listen(port, (err) => {
+    if (err) {
+        console.log('err', err);
+    } else {
+        console.log(`running at port: ${port}`);
     }
 });
+// });

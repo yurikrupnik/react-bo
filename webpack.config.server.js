@@ -8,7 +8,7 @@ const filename = 'server.js';
 
 module.exports = {
     resolve: {
-        extensions: ['.js', '.jsx', './marko'],
+        extensions: ['.js', '.jsx'],
     },
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
     node: {
@@ -17,22 +17,18 @@ module.exports = {
     },
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
     devtool: 'source-map',
-    entry: './src/index.js',
+    entry: './src/server.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename
     },
-    mode: 'production',
+    mode: process.env.NODE_ENV,
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/
-            },
-            {
-                test: /\.ejs/,
-                loader: 'ejs-loader'
             }
         ]
     },

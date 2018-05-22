@@ -4,9 +4,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import configStore from './index';
 
 function Provider(props) {
-    const { children, initState } = props;
+    const { children, initialState } = props;
     return (
-        <ReduxProvider store={configStore(initState || {})}>
+        <ReduxProvider store={configStore(initialState)}>
             {children}
         </ReduxProvider>
     );
@@ -14,7 +14,7 @@ function Provider(props) {
 
 Provider.propTypes = {
     children: PropTypes.element.isRequired,
-    initState: PropTypes.shape({}).isRequired
+    initialState: PropTypes.shape({}).isRequired
 };
 
 export default Provider;
