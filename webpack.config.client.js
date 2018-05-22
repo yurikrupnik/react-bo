@@ -30,7 +30,7 @@ module.exports = {
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist/assets'),
-        publicPath: ''
+        publicPath: '/'
     },
     mode: process.env.NODE_ENV,
     module: {

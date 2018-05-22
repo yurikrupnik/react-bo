@@ -1,6 +1,5 @@
 // const root = path.join(__dirname + '/..');
 // const env = process.env.NODE_ENV || 'development';
-console.log('process.env src config', process.env.NODE_ENV);
 
 const port = process.env.PORT || 5000;
 const ip = process.env.IP || '0.0.0.0' || 'localhost';
