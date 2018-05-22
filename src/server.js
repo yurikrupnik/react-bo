@@ -2,6 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import statics from 'koa-static';
 import views from 'koa-render-view';
+import Logger from 'socket.io-logger';
 
 import http from 'http';
 import sockets from 'socket.io';
@@ -27,6 +28,7 @@ app.use(async (ctx) => {
 const server = http.Server(app.callback());
 const io = sockets(server);
 const users = {}; // list of messages locally saved in the server
+io.use(Logger());
 io.on('connection', (socket) => {
     socket.on('newMessage', (message, next) => {
         const { nickname, avatar } = socket;

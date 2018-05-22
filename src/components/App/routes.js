@@ -1,30 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-const BasicExample = () => (
-    <Router>
-        <div>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/about">About</Link>
-                </li>
-                <li>
-                    <Link to="/topics">Topics</Link>
-                </li>
-            </ul>
-
-            <hr />
-
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
-        </div>
-    </Router>
-);
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const Home = () => (
     <div>
@@ -68,7 +45,14 @@ const Topic = ({ match }) => (
     </div>
 );
 
-
+const Header = (props) => {
+    console.log('props', props);
+    return (<div>header</div>);
+};
+// const LoadableComponent = Loadable({
+//     loader: () => import(/* webpackChunkName: "app" */ '../component/App'),
+//     loading: Loading,
+// });
 function Loading(props) {
     if (props.error) {
         return <div>Error! <button onClick={ props.retry }>Retry</button></div>;
@@ -80,11 +64,6 @@ function Loading(props) {
         return null;
     }
 }
-
-// const LoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "app" */ '../component/App'),
-//     loading: Loading,
-// });
 const ProjectsLoadableComponent = Loadable({
     loader: () => import(/* webpackChunkName: "projects" */ '../../api/projects/container'),
     loading: Loading,
@@ -97,14 +76,16 @@ const UsersLoadableComponent = Loadable({
 const routes = [
     {
         path: '/',
-        component: () => {
-            const LoadableComponent = Loadable({
-                loader: () => import(/* webpackChunkName: "app" */ '../../components/App'),
-                loading: Loading
-            });
-            return <LoadableComponent />;
-        },
-        exact: true,
+        component: Header,
+        // component: () => {
+        // const LoadableComponent = Loadable({
+        //     loader: () => import(/* webpackChunkName: "app" */ './components/App'),
+        //     loading: Loading
+        // });
+        // return <LoadableComponent />;
+        // // return (<div>helo</div>);
+        // },
+        // exact: true,
         key: 'main'
     },
     {
@@ -129,12 +110,40 @@ const routes = [
         path: '/users',
         component: () => <UsersLoadableComponent />,
         key: 'users'
-    },
-    // {
-    //     path: '/*',
-    //     exact: false,
-    //     component: NoMatch
-    // }
+    }
 ];
 
+const BasicExample = props => (
+    <Router>
+        <div>
+            <span>as</span>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/about">About</Link>
+                </li>
+                <li>
+                    <Link to="/topics">Topics</Link>
+                </li>
+                <li>
+                    <Link to="/users">Users</Link>
+                </li>
+                <li>
+                    <Link to="/projects">Pojects</Link>
+                </li>
+            </ul>
+
+            <hr />
+
+        </div>
+    </Router>
+);
+BasicExample.propTypes = {
+    // routes: PropTypes.shape([]).isRequired
+};
+
 export default BasicExample;
+
+export { routes };
