@@ -6,19 +6,19 @@ export default (url) => {
     mongoose.Promise = global.Promise;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.on('connected', () => {
-        console.log('connected:');
+        // console.log('connected:');
     });
     db.on('open', () => {
         // we're connected!
-        console.log('connected to a');
+        // console.log('connected to a');
     });
     db.once('open', () => {
         // we're connected!
-        console.log('connected to b');
+        // console.log('connected to b');
     });
     db.once('disconnected', () => {
         // we're connected!
-        console.log('disconnected');
+        // console.log('disconnected');
     });
     return (ctx, next) => {
         ctx.db = db;
