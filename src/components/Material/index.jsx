@@ -25,4 +25,3 @@ Material.propTypes = {
 };
 
 export default Material;
-// export default Material;
