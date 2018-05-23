@@ -9,9 +9,7 @@ module.exports.serve = {
     content: [__dirname],
     open: true,
     port: port + 1,
-    // dev: { index: 'index.ejs' },
-    // app, middleware, options
-    add: (app) => {
+    add: (app) => { // app, middleware, options
         app.use(convert(proxy('/api', { target: host })));
         app.use(convert(history({ index: '/index.ejs' })));
     }

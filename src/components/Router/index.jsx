@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
 const Routes = (props) => {
     const { children, routes } = props;
@@ -10,10 +11,15 @@ const Routes = (props) => {
         </div>
     );
 };
+Routes.defaultProps = {
+    children: null
+};
 
 Routes.propTypes = {
-    children: PropTypes.element.isRequired,
-    routes: PropTypes.shape()
+    children: PropTypes.element,
+    routes: PropTypes.arrayOf(PropTypes.shape({
+        path: PropTypes.string.isRequired
+    })).isRequired
 };
 
 export default Routes;

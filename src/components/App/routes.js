@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
 import { Route, Link, Redirect } from 'react-router-dom';
-// import Topics from './Topics';
-
+import Topics from './components/Topics';
+import Router from '../Router';
 
 const About = () => (
     <div>
@@ -11,15 +11,14 @@ const About = () => (
     </div>
 );
 
-
 class MainNav extends Component {
     constructor(props) {
         super(props);
-        this.state = { session: 's' };
+        this.state = { session: '' };
     }
 
     render() {
-        if (!this.state.session) {
+        if (this.state.session) {
             return (<Redirect to="/register" />);
         }
         return (
@@ -71,82 +70,6 @@ const UsersLoadableComponent = Loadable({
     loading: Loading,
 });
 
-const Topic = ({ match }) => (
-    <div>
-        <h3>{match.params.topicId}</h3>
-    </div>
-);
-const topicsRoutes = [
-    {
-        path: '/topics',
-        component: () => (<h3>Please select a topic.</h3>),
-        exact: true,
-        key: '/topics/topics'
-    },
-    {
-        path: '/topics/:topicId',
-        component: Topic,
-        exact: true,
-        key: '/topics/:topics'
-    }
-];
-
-const Routes = (props) => {
-    const { children, routes } = props;
-    return (
-        <div>
-            {children}
-            <div>{routes.map(route => <Route key={route.key} {...route} />)}</div>
-        </div>
-    );
-};
-Routes.defaultProps = {
-    children: null
-};
-
-Routes.propTypes = {
-    children: PropTypes.element,
-    routes: PropTypes.arrayOf(PropTypes.shape({
-        path: PropTypes.string.isRequired
-    })).isRequired
-};
-
-const Topics = (props) => {
-    const { match } = props;
-    const data = [
-        {
-            value: 'props-v-state',
-            title: 'Props v. State'
-        },
-        {
-            value: 'components',
-            title: 'Components'
-        },
-        {
-            value: 'rendering',
-            title: 'Rendering with React'
-        }
-    ];
-    console.log('match.url', match.url);
-
-    if (true) {
-        // return <Redirect from={match.url} to={`${match.url}/components`} />;
-    }
-    return (
-        <div>
-            <h2>Topics</h2>
-            <Routes routes={topicsRoutes}>
-                <ul>
-                    {data.map(val => (
-                        <li key={val.value}>
-                            <Link to={`${match.url}/${val.value}`}>{val.title}</Link>
-                        </li>
-                    ))}
-                </ul>
-            </Routes>
-        </div>
-    );
-};
 
 const routes = [
     {
