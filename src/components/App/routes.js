@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-import Topics from './Topics';
+import { Route, Link, Redirect } from 'react-router-dom';
+// import Topics from './Topics';
 
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
-);
 
 const About = () => (
     <div>
@@ -20,12 +15,13 @@ const About = () => (
 class MainNav extends Component {
     constructor(props) {
         super(props);
-        console.log('props', props);
-
-        this.state = {};
+        this.state = { session: 's' };
     }
 
     render() {
+        if (!this.state.session) {
+            return (<Redirect to="/register" />);
+        }
         return (
             <header>
                 <ul>
@@ -82,16 +78,16 @@ const Topic = ({ match }) => (
 );
 const topicsRoutes = [
     {
-        path: '/Topics',
+        path: '/topics',
         component: () => (<h3>Please select a topic.</h3>),
         exact: true,
-        key: '/Topics/Topics'
+        key: '/topics/topics'
     },
     {
-        path: '/Topics/:topicId',
+        path: '/topics/:topicId',
         component: Topic,
         exact: true,
-        key: '/Topics/:Topics'
+        key: '/topics/:topics'
     }
 ];
 
@@ -104,17 +100,64 @@ const Routes = (props) => {
         </div>
     );
 };
+Routes.defaultProps = {
+    children: null
+};
 
+Routes.propTypes = {
+    children: PropTypes.element,
+    routes: PropTypes.arrayOf(PropTypes.shape({
+        path: PropTypes.string.isRequired
+    })).isRequired
+};
+
+const Topics = (props) => {
+    const { match } = props;
+    const data = [
+        {
+            value: 'props-v-state',
+            title: 'Props v. State'
+        },
+        {
+            value: 'components',
+            title: 'Components'
+        },
+        {
+            value: 'rendering',
+            title: 'Rendering with React'
+        }
+    ];
+    console.log('match.url', match.url);
+
+    if (true) {
+        // return <Redirect from={match.url} to={`${match.url}/components`} />;
+    }
+    return (
+        <div>
+            <h2>Topics</h2>
+            <Routes routes={topicsRoutes}>
+                <ul>
+                    {data.map(val => (
+                        <li key={val.value}>
+                            <Link to={`${match.url}/${val.value}`}>{val.title}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </Routes>
+        </div>
+    );
+};
 
 const routes = [
     {
         path: '/',
         component: MainNav,
-        // render: (props) => {
-        //     console.log('props', props);
-        //     return props.match.url === '/' ? (<Redirect to="/users" />) : (<MainNav />);
-        // },
-        key: 'nav',
+        key: 'nav'
+    },
+    {
+        path: '/register',
+        component: () => (<div>register</div>),
+        key: '/register',
         // exact: true
     },
     {
@@ -129,51 +172,17 @@ const routes = [
     },
     {
         path: '/topics',
-        component: (props) => {
-            console.log('props', props);
-            const { match } = props;
-            const data = [
-                {
-                    value: 'props-v-state',
-                    title: 'Props v. State'
-                },
-                {
-                    value: 'components',
-                    title: 'Components'
-                },
-                {
-                    value: 'rendering',
-                    title: 'Rendering with React'
-                }
-            ];
-            return (
-                <div>
-                    <h2>Topics</h2>
-                    <Routes routes={topicsRoutes}>
-                        <ul>
-                            {data.map(val => (
-                                <li key={val.value}>
-                                    <Link to={`${match.url}/${val.value}`}>{val.title}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </Routes>
-                </div>
-            );
-        },
-        key: 'Topics',
+        component: Topics,
+        key: 'topics',
     },
     {
         path: '/projects',
-        component: (props) => {
-            console.log('props', props);
-            return <ProjectsLoadableComponent/>;
-        },
+        component: ProjectsLoadableComponent,
         key: 'projects'
     },
     {
         path: '/users',
-        component: () => <UsersLoadableComponent/>,
+        component: UsersLoadableComponent,
         key: 'users'
     }
 ];
