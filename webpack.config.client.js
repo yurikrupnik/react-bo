@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 module.exports = {
     optimization: {
         minimizer: [
@@ -24,7 +26,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.scss']
     },
-    devtool: process.env.NODE_ENV === 'development' ? 'eval-cheap-module-source-map' : 'source-map',
+    devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
     entry: './src/client.jsx',
     output: {
         filename: '[name].bundle.js',
@@ -70,7 +72,7 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css'
         }),
-        process.env.NODE_ENV === 'development' ? new BundleAnalyzerPlugin({
+        isDev ? new BundleAnalyzerPlugin({
             // openAnalyzer: false,
             // analyzerMode: 'static',
             // generateStatsFile: true,

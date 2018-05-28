@@ -9,16 +9,14 @@
     "start:server": "NODE_ENV=development babel-watch src/server.js",
     "clean": "rimraf dist/",
     "build": "npm run clean && npm run build:server & npm run build:client",
-    "build:server": "webpack --config webpack.config.server.js",
-    "build:client": "webpack --config webpack.config.client.js",
+    "build:server": "NODE_ENV=production webpack --config webpack.config.server.js",
+    "build:client": "NODE_ENV=production webpack --config webpack.config.client.js",
     "lint": "npm run lint:server && npm run lint:client",
-    "lint:server": "eslint src/config.js src/index.js src/middlewares/**",
+    "lint:server": "eslint src/config.js src/server.js src/middlewares/**",
     "lint:client": "eslint src/client.jsx src/store/** src/component/**",
     "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
     "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
-    "test": "npm run lint && jest",
-    "anal": "webpack-bundle-analyzer webpack.config.server",
-    "dev": "browser-refresh src/index.js"
+    "test": "npm run lint && jest"
   },
   "repository": {
     "type": "git",
@@ -44,7 +42,6 @@
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "koa-views": "^6.1.4",
-    "lasso": "^3.1.5",
     "lodash": "^4.17.10",
     "mongodb": "^3.0.6",
     "mongoose": "^5.0.14",

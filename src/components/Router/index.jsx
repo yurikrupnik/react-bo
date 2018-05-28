@@ -7,10 +7,11 @@ const Routes = (props) => {
     return (
         <div>
             {children}
-            <div>{routes.map(route => <Route key={route.key} {...route} />)}</div>
+            {routes.map(route => <Route key={route.key} {...route} />)}
         </div>
     );
 };
+
 Routes.defaultProps = {
     children: null
 };

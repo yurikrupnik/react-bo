@@ -1,4 +1,6 @@
-import { filter, reduce, clone } from 'lodash';
+import reduce from 'lodash/reduce';
+import clone from 'lodash/clone';
+import filter from 'lodash/filter';
 import { types } from './actions';
 
 function pureDelete(collection, id) {

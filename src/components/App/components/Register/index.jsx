@@ -85,6 +85,7 @@ class Register extends Component {
                 <div className="col-xs-6">
                     <div className="box">
                         <div className="title margin-top-10">Register</div>
+                        <div className="title margin-top-10">as</div>
                         {/*htmlFor warning is from the input*/}
                         {form.map((field, index) => {
                             // const errorText = field.validate();

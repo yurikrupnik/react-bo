@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 
 const Topic = ({ match }) => (
     <div>
@@ -7,11 +8,15 @@ const Topic = ({ match }) => (
     </div>
 );
 
+Topic.propTypes = {
+    match: PropTypes.shape({}).isRequired
+};
+
 const routes = [
     {
         path: '/topics',
-        // component: () => (<h3>Please select a topic.</h3>),
-        component: () => (<Redirect to="/topics/components" />),
+        component: () => (<h3>Please select a topic.</h3>),
+        // component: () => (<Redirect to="/topics/components" />),
         exact: true,
         key: '/topics/topics'
     },

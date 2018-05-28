@@ -57,9 +57,9 @@ io.on('connection', (socket) => {
 // Loadable.preloadAll().then(() => {
 server.listen(port, (err) => {
     if (err) {
-        console.log('err', err);
+        console.log('err', err); // eslint-disable-line no-console
     } else {
-        console.log(`running at port: ${port}`);
+        console.log(`running at port: ${port}`); // eslint-disable-line no-console
     }
 });
 // });

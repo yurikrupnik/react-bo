@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
 import { Route, Link, Redirect } from 'react-router-dom';
 import Topics from './components/Topics';
-import Router from '../Router';
+// import Router from '../Router';
 
 const About = () => (
     <div>
@@ -23,23 +23,23 @@ class MainNav extends Component {
         }
         return (
             <header>
-                <ul>
-                    <li>
-                        <Link to="/dashboard">Dashboard</Link>
-                    </li>
-                    <li>
+                <div>
+                    <div>
+                        <Link to="/">Dashboard</Link>
+                    </div>
+                    <div>
                         <Link to="/about">About</Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <Link to="/topics">Topics</Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <Link to="/users">Users</Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <Link to="/projects">Pojects</Link>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </header>
         );
     }
@@ -78,15 +78,15 @@ const routes = [
         key: 'nav'
     },
     {
-        path: '/register',
-        component: () => (<div>register</div>),
-        key: '/register',
-        // exact: true
+        path: '/',
+        component: () => (<div>dasboaard here</div>),
+        key: 'dashboard',
+        exact: true
     },
     {
-        path: '/dashboard',
-        component: () => (<div>dasboaard here</div>),
-        key: 'dashboard'
+        path: '/register',
+        component: () => (<div>register</div>),
+        key: '/register'
     },
     {
         path: '/about',
@@ -107,6 +107,12 @@ const routes = [
         path: '/users',
         component: UsersLoadableComponent,
         key: 'users'
+    },
+    {
+        path: '/*',
+        component: () => <div>bmo natch</div>,
+        key: 'nun',
+        exact: true
     }
 ];
 
