@@ -1,8 +1,0 @@
-{
-  "dependencies": [
-    "src/client.js",
-    "./client.jsx",
-    "client.jsx",
-    "require-run: ./src/client.jsx"
-  ]
-}

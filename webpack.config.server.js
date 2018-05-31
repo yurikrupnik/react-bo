@@ -34,7 +34,7 @@ module.exports = {
     },
     plugins: [
         new GenerateJsonPlugin('package.json', Object.assign({}, json, {
-            main: '',
+            main: filename,
             scripts: {
                 start: `node ${filename}`
             },

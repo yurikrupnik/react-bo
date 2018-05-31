@@ -8,7 +8,7 @@ render(
     <App
         userAgent={global.navigator.userAgent}
         initialState={{}}
-    />, // initialState={global.window.state} for redux
+    />,
     global.document.getElementById('root'),
 );
 

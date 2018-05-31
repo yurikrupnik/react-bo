@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 import { Route, Link, Redirect } from 'react-router-dom';
 import Topics from './components/Topics';
+import Dashboard from './components/Dashboard';
 // import Router from '../Router';
 
 const About = () => (
@@ -79,7 +80,8 @@ const routes = [
     },
     {
         path: '/',
-        component: () => (<div>dasboaard here</div>),
+        component: Dashboard,
+        // component: () => (<div>dasboaard here</div>),
         key: 'dashboard',
         exact: true
     },
@@ -108,12 +110,12 @@ const routes = [
         component: UsersLoadableComponent,
         key: 'users'
     },
-    {
-        path: '/*',
-        component: () => <div>bmo natch</div>,
-        key: 'nun',
-        exact: true
-    }
+    // {
+    //     path: '/*',
+    //     component: () => <div>bmo natch</div>,
+    //     key: 'nun',
+    //     exact: true
+    // }
 ];
 
 export default routes;

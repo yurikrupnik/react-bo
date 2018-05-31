@@ -24,13 +24,13 @@ module.exports = {
     },
     target: 'web',
     resolve: {
-        extensions: ['.js', '.jsx', '.scss']
+        extensions: ['.js', '.jsx', '.css', '.scss']
     },
     devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
     entry: './src/client.jsx',
     output: {
-        filename: '[name].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        filename: '[name].js',
+        chunkFilename: '[name].js',
         path: path.resolve(__dirname, 'dist/assets'),
         publicPath: '/'
     },
@@ -46,8 +46,8 @@ module.exports = {
                 test: /\.(css|scss)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader', 'sass-loader'
-                ]
+                    'css-loader?modules=true', 'sass-loader'
+                ],
             }
         ]
     },
@@ -70,7 +70,7 @@ module.exports = {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: '[name].css',
-            chunkFilename: '[id].css'
+            chunkFilename: '[name].css'
         }),
         isDev ? new BundleAnalyzerPlugin({
             // openAnalyzer: false,

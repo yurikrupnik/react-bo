@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Provider from '../../store/container';
 import Router from '../Router';
