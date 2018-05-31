@@ -1,0 +1,25 @@
+:global {
+
+  @import "~flexboxgrid";
+
+  .root {
+    color: red
+  }
+
+  .root:hover {
+    color: blue;
+  }
+
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+.root {
+  color: blue;
+}
+
+.root:hover {
+  color: purple;
+}
