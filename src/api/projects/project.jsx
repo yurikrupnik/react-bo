@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Text } from 'react-form';
-import { Button } from 'react-bootstrap';
 import styles from './projects.css';
 
 class FormWithArrays extends Component {
@@ -12,7 +11,6 @@ class FormWithArrays extends Component {
     render() {
         return (
             <div className="container">
-                <Button bsStyle="success">Success</Button>
                 <div className="row">
                     <div className="col-xs-7">
                         <div className={styles.root}>
