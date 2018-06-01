@@ -16,7 +16,10 @@
     "lint:client": "eslint src/client.jsx src/store/** src/component/**",
     "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
     "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "debug": "npm run clean && npm run debug:server & npm run debug:client",
+    "debug:server": "NODE_ENV=production webpack --config webpack.config.server.js -w",
+    "debug:client": "NODE_ENV=production webpack --config webpack.config.client.js -w"
   },
   "repository": {
     "type": "git",
@@ -56,10 +59,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1",
-    "socket.io-logger": "0.0.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

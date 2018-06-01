@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
-import './services/socket/client';
 import './_styles.scss';
 
 render(
