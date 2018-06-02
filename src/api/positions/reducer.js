@@ -2,7 +2,6 @@ import { types } from './actions';
 
 const initState = {
     loading: false,
-    // selected: {},
     data: []
 };
 

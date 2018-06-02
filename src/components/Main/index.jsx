@@ -6,18 +6,23 @@ import { dispatchActions as positionsActions, mapToProps as positionsMapToProps 
 import { dispatchActions as currencyActions, mapToProps as currencyMapToProps } from '../../api/currency/selector';
 import Spinner from '../Spinner';
 import Table from '../Table';
+import CurrencyContainer from '../../api/currency/container';
 
 class Main extends Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
-        // this.load = this.load.bind(this);
+        this.state = { data: null };
+        this.load = this.load.bind(this);
     }
 
     componentDidMount() {
         this.load();
-        // this.interval = global.setInterval(this.load, 10000);
+        this.interval = global.setInterval(this.load, 10000);
     }
+
+    // shouldComponentUpdate(nextProps, nextState) { // todo
+    //     return !nextProps.fu.loading && !nextProps.positions.loading;
+    // }
 
     componentWillUnmount() {
         global.clearInterval(this.interval);
@@ -33,50 +38,51 @@ class Main extends Component {
                 const [fu, positions] = res;
                 const positionsData = positions.payload;
                 const fuData = fu.payload;
-                const rates = positions.payload.map(val => val.data.currency.ccy);
-                // console.log('rates', rates);
-
                 const tableData = positionsData.reduce((acc, next) => {
                     const { fuOriginId, data, id } = next;
                     const { currency } = data;
                     const currentFu = fuData.find(v => v.id === fuOriginId);
                     const { name } = currentFu;
-                    if (!name) {
-                        return acc;
-                    }
-                    return acc.concat(Object.assign({}, currency, { name, id }));
+                    return !name ? acc : acc.concat(Object.assign({}, currency, { name, id }));
                 }, []);
 
-
-                // return {
-                //     tableData,
-                //     rates,
-                // };
-                // return {
-                //     tableData,
-                //     currencies
-                // };
-                actions.currency.read(rates);
-                this.setState(() => ({ data: tableData }));
+                return Promise.all(tableData.map(val => actions.currency.readConvert({
+                    to: 'USD',
+                    from: val.ccy,
+                    amount: val.notionalValue
+                })))
+                    .then((arr) => {
+                        const responses = arr.map(v => v.payload);
+                        const data = tableData.map((val) => {
+                            const selected = responses.find(v => v.query.from === val.ccy);
+                            val.rate = selected.info.rate;
+                            val.calculated = selected.result;
+                            return val;
+                        });
+                        this.setState(() => ({ data }));
+                    });
             });
     }
 
     render() {
         const { data } = this.state;
-        return data ? <Table data={data} /> : <Spinner />;
+        return (
+            <div className="container">
+                <div className="row center-xs">
+                    <CurrencyContainer />
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        {data ? <Table data={data} /> : <Spinner />}
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 
-Main.propTypes = {
-    // actions: PropTypes.shape({}).isRequired,
-    // fu: PropTypes.shape({
-    //     data: PropTypes.shape({
-    //         entities: PropTypes.shape({
-    //             // name: PropTypes.string.isRequired
-    //         }).isRequired,
-    //         result: PropTypes.arrayOf([]).isRequired
-    //     })
-    // }).isRequired
+Main.propTypes = { // todo finish validation
+    actions: PropTypes.shape({}).isRequired
 };
 
 const combinedMapTpProps = state => (

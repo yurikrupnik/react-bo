@@ -1,42 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import { CSVLink } from 'react-csv';
 
-const styles = theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing.unit * 3,
-        overflowX: 'auto',
-    },
-    table: {
-        minWidth: 700,
-    },
-});
-
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-    id += 1;
-    return { id, name, calories, fat, carbs, protein };
-}
-
-// const data = [
-//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//     createData('Eclair', 262, 16.0, 24, 6.0),
-//     createData('Cupcake', 305, 3.7, 67, 4.3),
-//     createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-
-function SimpleTable(props) {
+function FinancialTable(props) {
     const { data } = props;
-console.log('data', data);
-
     return (
         <Paper>
             <Table>
@@ -50,26 +24,42 @@ console.log('data', data);
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map(n => {
-                        return (
-                            <TableRow key={n.id}>
-                                <TableCell component="th" scope="row">
-                                    {n.name}
-                                </TableCell>
-                                <TableCell numeric>{n.notionalValue}</TableCell>
-                                <TableCell numeric>{n.carbs}</TableCell>
-                                <TableCell>{n.ccy}</TableCell>
-                            </TableRow>
-                        );
-                    })}
+                    {data.map(v => (
+                        <TableRow key={v.id}>
+                            <TableCell component="th" scope="row">
+                                {v.name}
+                            </TableCell>
+                            <TableCell numeric>{v.notionalValue}</TableCell>
+                            <TableCell numeric>{v.rate}</TableCell>
+                            <TableCell>{v.ccy}</TableCell>
+                            <TableCell>{v.calculated}</TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
+            <CSVLink
+                data={data}
+                filename="my-file.csv"
+            >
+                <Button color="primary" >
+                    Export to Excel
+                </Button>
+            </CSVLink>
         </Paper>
     );
 }
-
-SimpleTable.propTypes = {
-    // classes: PropTypes.object.isRequired,
+FinancialTable.defaultProps = {
+    data: []
 };
 
-export default withStyles(styles)(SimpleTable);
+FinancialTable.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        notionalValue: PropTypes.number.isRequired,
+        rate: PropTypes.number.isRequired,
+        ccy: PropTypes.string.isRequired,
+        calculated: PropTypes.number.isRequired,
+    }))
+};
+
+export default FinancialTable;

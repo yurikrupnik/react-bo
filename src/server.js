@@ -8,9 +8,7 @@ import api from './api';
 const app = new Koa();
 
 app.use(statics(path.resolve(__dirname, 'assets')));
-app.use(views(path.resolve(__dirname), { extension: 'ejs' })); // for debug remove assets and run - todo to fix
-// app.use(views(path.resolve(__dirname, 'assets'),
-// { extension: 'ejs' })); // for debug remove assets and run - todo to fix
+app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for debug remove assets and run - todo to fix
 app.use(api);
 app.use(async (ctx) => {
     ctx.state = { data: { name: 'asd' } };

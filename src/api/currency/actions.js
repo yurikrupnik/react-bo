@@ -1,24 +1,39 @@
 import request from 'axios';
-import { url } from './config';
+import { convertUrl, currenciesUrl } from './config';
 
 const types = {
-    READ_RATE_SUCCESS: 'READ_RATE_SUCCESS',
-    READ_RATE_PENDING: 'READ_RATE_PENDING',
-    READ_RATE_FAIL: 'READ_RATE_FAIL'
+    READ_CURRENCY_VALUE_SUCCESS: 'READ_CURRENCY_VALUE_SUCCESS',
+    READ_CURRENCY_VALUE_PENDING: 'READ_CURRENCY_VALUE_PENDING',
+    READ_CURRENCY_VALUE_FAIL: 'READ_CURRENCY_VALUE_FAIL',
+
+    READ_CURRENCIES_PENDING: 'READ_CURRENCIES_PENDING',
+    READ_CURRENCIES_SUCCESS: 'READ_CURRENCIES_SUCCESS',
+    READ_CURRENCIES_FAIL: 'READ_CURRENCIES_FAIL'
 };
 
-const readPending = payload => ({ type: types.READ_RATE_PENDING, payload }); // req params
-const readSuccess = payload => ({ type: types.READ_RATE_SUCCESS, payload }); // res data
-const read = params => (dispatch) => {
-    dispatch(readPending(params));
-    console.log('params', params);
-    return request.get(`${'/api'}${url}`, { params })
-        .then(res => dispatch(readSuccess(res.data)));
+const readConvertPending = payload => ({ type: types.READ_CURRENCY_VALUE_PENDING, payload });
+const readConvertSuccess = payload => ({ type: types.READ_CURRENCY_VALUE_SUCCESS, payload });
+const readConvert = params => (dispatch) => {
+    dispatch(readConvertPending(params));
+    return request.get(`${'/api'}${convertUrl}`, { params })
+        .then(res => dispatch(readConvertSuccess(res.data)));
 };
+
+const readCurrenciesPending = payload => ({ type: types.READ_CURRENCIES_PENDING, payload });
+const readCurrenciesSuccess = payload => ({ type: types.READ_CURRENCIES_SUCCESS, payload });
+const readCurrencies = () => (dispatch) => {
+    dispatch(readCurrenciesPending());
+    return request.get(`${'/api'}${currenciesUrl}`)
+        .then(res => dispatch(readCurrenciesSuccess(res.data)));
+};
+
 
 export {
     types,
-    read,
-    readPending,
-    readSuccess,
+    readConvert,
+    readConvertPending,
+    readConvertSuccess,
+    readCurrencies,
+    readCurrenciesPending,
+    readCurrenciesSuccess
 };

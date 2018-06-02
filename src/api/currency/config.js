@@ -1,9 +1,11 @@
-const url = '/currency/rate';
+const currenciesUrl = '/currency/currencies';
+const convertUrl = '/currency/convert';
 const dbModel = 'Project';
 const selector = 'currency';
 
 export {
-    url,
+    currenciesUrl,
+    convertUrl,
     dbModel,
     selector
 };
