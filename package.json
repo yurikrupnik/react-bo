@@ -15,7 +15,7 @@
     "lint:server": "eslint src/config.js src/server.js src/middlewares/**",
     "lint:client": "eslint src/client.jsx src/store/** src/component/**",
     "deploy:build": "npm run build && docker build -t yuri/react-bo . ",
-    "deploy:run": "docker run -p 49160:5000 -d yuri/react-bo ",
+    "deploy:run": "docker run yuri/react-bo --hostname=yuri -p 49170:5000 -d ",
     "test": "npm run lint && jest"
   },
   "repository": {

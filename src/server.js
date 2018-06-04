@@ -5,15 +5,15 @@ import views from 'koa-render-view';
 import Logger from 'socket.io-logger';
 import http from 'http';
 import sockets from 'socket.io';
-import { port, databaseUrl } from './config';
+import { port } from './config'; // databaseUrl
 import api from './api';
-import db from './db';
+// import db from './db';
 
 const app = new Koa();
 
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for debug remove assets and run - todo to fix
-app.use(db(databaseUrl));
+// app.use(db(databaseUrl));
 app.use(api);
 app.use(async (ctx) => {
     ctx.state = { data: { name: 'asd' } };
