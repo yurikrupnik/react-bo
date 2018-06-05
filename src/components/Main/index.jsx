@@ -55,7 +55,7 @@ class Main extends Component {
                         const responses = arr.map(v => v.payload);
                         const data = tableData.map((val) => {
                             const selected = responses.find(v => v.query.from === val.ccy);
-                            val.rate = selected.info.rate;
+                            val.rate = selected.info.quote;
                             val.calculated = selected.result;
                             return val;
                         });

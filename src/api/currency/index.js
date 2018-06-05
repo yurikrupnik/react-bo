@@ -4,7 +4,7 @@ import { currenciesUrl, convertUrl } from './config';
 
 const router = new Router();
 const baseUrl = 'http://data.fixer.io/api/';
-const key = 'access_key=11059ba64784ad2bffd2f8de04b65b09';
+const key = 'access_key=a18379edacb33d0e896a9ef3567ba3e8';
 const format = 'format=1';
 
 router.get(convertUrl, (ctx) => {
