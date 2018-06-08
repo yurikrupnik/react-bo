@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Topics from './components/Topics';
 import Dashboard from './components/Dashboard';
 // import Router from '../Router';
@@ -26,7 +26,7 @@ class MainNav extends Component {
             <header>
                 <div>
                     <div>
-                        <Link to="/">Dashboard</Link>
+                        <Link to="/">Dashboard1</Link>
                     </div>
                     <div>
                         <Link to="/about">About</Link>

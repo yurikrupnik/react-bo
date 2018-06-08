@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import configStore from './index';
 
+const store = configStore();
+
 function Provider(props) {
     const { children, initialState } = props;
+    console.log('initialState', initialState);
+
     return (
-        <ReduxProvider store={configStore(initialState)}>
+        <ReduxProvider store={store}>
             {children}
         </ReduxProvider>
     );

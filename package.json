@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run start:client & npm run start:server",
     "start:client": "NODE_ENV=development webpack-serve --config webpack.config.serve.js",
-    "start:server": "NODE_ENV=development babel-watch src/server.jsx",
+    "start:server:serve": "NODE_ENV=development babel-watch src/server.jsx",
+    "start:server": "NODE_ENV=development webpack --config webpack.config.server.js -w & nodemon dist/server.js",
     "clean": "rimraf dist/",
     "build": "npm run clean && npm run build:server & npm run build:client",
     "build:server": "NODE_ENV=production webpack --config webpack.config.server.js",

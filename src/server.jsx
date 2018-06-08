@@ -2,7 +2,6 @@ import path from 'path';
 import Koa from 'koa';
 import statics from 'koa-static';
 import { renderToString } from 'react-dom/server';
-import Loadable from 'react-loadable';
 import { StaticRouter } from 'react-router';
 import views from 'koa-render-view';
 import Logger from 'socket.io-logger';
@@ -21,29 +20,18 @@ app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for 
 app.use(db(databaseUrl));
 app.use(api);
 
-app.use((ctx, next) => {
+app.use((ctx) => {
     const context = {};
-
-    const modules = [];
     const html = renderToString((
-        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-            <StaticRouter
-                location={ctx.url}
-                context={context}
-            >
-                <App initialState={{}} />
-            </StaticRouter>
-        </Loadable.Capture>
+        <StaticRouter
+            location={ctx.url}
+            context={context}
+        >
+            <App initialState={{}} />
+        </StaticRouter>
     ));
     ctx.state = { title: 'my title', html };
-    // ctx.type = 'html';
-    if (context.url) {
-        // Somewhere a `<Redirect>` was rendered
-        ctx.redirect(301, context.url);
-    } else {
-        return ctx.render('index');
-        // we're good, send the response
-    }
+    return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
 });
 
 
@@ -76,13 +64,11 @@ io.on('connection', (socket) => {
     });
 });
 
-Loadable.preloadAll().then(res => {
-    server.listen(port, (err) => {
-        if (err) {
-            console.log('err', err); // eslint-disable-line no-console
-        } else {
-            console.log(`running at port: ${port}`); // eslint-disable-line no-console
-        }
-    });
+server.listen(port, (err) => {
+    if (err) {
+        console.log('err', err); // eslint-disable-line no-console
+    } else {
+        console.log(`running at port: ${port}`); // eslint-disable-line no-console
+    }
 });
 

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const json = require('./package');
 
@@ -12,15 +12,15 @@ const filename = 'server.js';
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: "vendors",
-                    chunks: "all"
-                }
-            }
-        }
+        // splitChunks: {
+        //     cacheGroups: {
+        //         commons: {
+        //             test: /[\\/]node_modules[\\/]/,
+        //             name: "vendors",
+        //             chunks: "all"
+        //         }
+        //     }
+        // }
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -35,6 +35,7 @@ module.exports = {
     entry: './server.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        chunkFilename: '[name].js',
         filename
     },
     mode: process.env.NODE_ENV,
@@ -61,7 +62,13 @@ module.exports = {
             },
             devDependencies: {}
         })),
-        new BundleAnalyzerPlugin({})
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '[name].css',
+            chunkFilename: '[name].css'
+        }),
+        // new BundleAnalyzerPlugin({})
     ]
 };
 
