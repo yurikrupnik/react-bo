@@ -4,9 +4,12 @@
   "description": "react-bo",
   "main": "src/index.jsx",
   "scripts": {
+    "watch:server": "NODE_ENV=development webpack --config webpack.config.server.js -w",
+    "watch:client": "NODE_ENV=development webpack --config webpack.config.client.js -w",
+    "watch": "npm run watch:server & npm run watch:client",
     "start": "npm run start:client & npm run start:server",
     "start:client": "NODE_ENV=development webpack-serve --config webpack.config.serve.js",
-    "start:server": "NODE_ENV=development webpack --config webpack.config.server.js -w & nodemon dist/server.js",
+    "start:server": "npm run watch:server & nodemon dist/server.js",
     "clean": "rimraf dist/",
     "build": "npm run clean && npm run build:server & npm run build:client",
     "build:server": "NODE_ENV=production webpack --config webpack.config.server.js",
