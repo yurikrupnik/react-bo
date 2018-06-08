@@ -63,15 +63,15 @@ function Loading(props) {
 }
 
 const ProjectsLoadableComponent = Loadable({
-    loader: () => import('../../api/projects/container'),
+    loader: () => import(/* webpackChunkName: "projects" */ '../../api/projects/container'),
     loading: Loading,
     modules: ['../../api/projects/container'],
     webpack: () => [require.resolveWeak('../../api/projects/container')],
 });
-// const UsersLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "users" */ '../../api/users/container'),
-//     loading: Loading,
-// });
+const UsersLoadableComponent = Loadable({
+    loader: () => import(/* webpackChunkName: "users" */ '../../api/users/container'),
+    loading: Loading,
+});
 
 
 const routes = [
@@ -107,11 +107,11 @@ const routes = [
         component: ProjectsLoadableComponent,
         key: 'projects'
     },
-    // {
-    //     path: '/users',
-    //     component: UsersLoadableComponent,
-    //     key: 'users'
-    // },
+    {
+        path: '/users',
+        component: UsersLoadableComponent,
+        key: 'users'
+    },
     // {
     //     path: '/*',
     //     component: () => <div>bmo natch</div>,

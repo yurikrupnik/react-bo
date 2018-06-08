@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -17,15 +17,16 @@ module.exports = {
                 sourceMap: true // set to true if you want JS source maps
             }),
             new OptimizeCSSAssetsPlugin({
-                analyzerMode: 'disabled',
-                statsFilename: 'stats.json',
-                generateStatsFile: true
+                // assetNameRegExp: /\.optimize\.css$/g,
+                // cssProcessor: require('cssnano'),
+                // cssProcessorOptions: { discardComments: { removeAll: true } },
+                // canPrint: true
             })
         ]
     },
     target: 'web',
     resolve: {
-        extensions: ['.js', '.jsx', '.css', '.scss']
+        extensions: ['.json', '.js', '.jsx', '.css', '.scss']
     },
     devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
     entry: './client.jsx',
@@ -60,28 +61,22 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.ejs',
             filename: 'index.ejs',
-            title: 'omg',
             meta: {
                 charset: 'UTF-8',
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
             },
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     conservativeCollapse: true
-            // }
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                conservativeCollapse: true
+            },
+            hash: true
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: '[name].css',
             chunkFilename: '[name].css'
-        }),
-        // isDev ? new BundleAnalyzerPlugin({
-        //     // openAnalyzer: false,
-        //     // analyzerMode: 'static',
-        //     // generateStatsFile: true,
-        //     // statsFilename: 'some-stats.json'
-        // }) : () => {}
+        })
     ]
 };

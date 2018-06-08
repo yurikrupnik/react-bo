@@ -1,9 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const json = require('./package');
 
@@ -12,18 +10,16 @@ const filename = 'server.js';
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     optimization: {
-        // splitChunks: {
-        //     cacheGroups: {
-        //         commons: {
-        //             test: /[\\/]node_modules[\\/]/,
-        //             name: "vendors",
-        //             chunks: "all"
-        //         }
-        //     }
-        // }
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true // set to true if you want JS source maps
+            })
+        ]
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.json', '.js', '.jsx', '.css', '.scss']
     },
     target: 'node', // in order to ignore built-in modules like path, fs, etc.
     node: {
@@ -44,13 +40,12 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 use: ['babel-loader'], // 'eslint-loader'
-                // exclude: /node_modules/,
             },
             {
                 test: /\.(css|scss)$/,
                 use: [
                     'css-loader', 'sass-loader'
-                ],
+                ]
             }
         ]
     },
@@ -61,14 +56,7 @@ module.exports = {
                 start: `node ${filename}`
             },
             devDependencies: {}
-        })),
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: '[name].css',
-            chunkFilename: '[name].css'
-        }),
-        // new BundleAnalyzerPlugin({})
+        }))
     ]
 };
 

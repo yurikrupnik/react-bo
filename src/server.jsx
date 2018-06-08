@@ -20,6 +20,20 @@ app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for 
 app.use(db(databaseUrl));
 app.use(api);
 
+// async function html(ctx, next) {
+//     // const context = {};
+//     ctx.html = renderToString((
+//         <StaticRouter
+//             location={ctx.url}
+//             context={ctx}
+//         >
+//             <App initialState={{}} />
+//         </StaticRouter>
+//     ));
+//     await next();
+// }
+
+// app.use(html);
 app.use((ctx) => {
     const context = {};
     const html = renderToString((
