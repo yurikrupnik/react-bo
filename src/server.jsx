@@ -4,36 +4,21 @@ import statics from 'koa-static';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import views from 'koa-render-view';
-import Logger from 'socket.io-logger';
-import http from 'http';
 import React from 'react';
-import sockets from 'socket.io';
 import { port, databaseUrl } from './config';
 import api from './api';
-import db from './db';
+import db from './services/db';
+import socket from './services/socket/server';
 import App from './components/App';
 
 const app = new Koa();
+const assets = path.resolve(__dirname, 'assets');
 
-app.use(statics(path.resolve(__dirname, 'assets')));
-app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for debug remove assets and run - todo to fix
+app.use(statics(assets));
+app.use(views(assets, { extension: 'ejs' }));
 app.use(db(databaseUrl));
 app.use(api);
 
-// async function html(ctx, next) {
-//     // const context = {};
-//     ctx.html = renderToString((
-//         <StaticRouter
-//             location={ctx.url}
-//             context={ctx}
-//         >
-//             <App initialState={{}} />
-//         </StaticRouter>
-//     ));
-//     await next();
-// }
-
-// app.use(html);
 app.use((ctx) => {
     const context = {};
     const html = renderToString((
@@ -49,36 +34,7 @@ app.use((ctx) => {
 });
 
 
-const server = http.Server(app.callback());
-const io = sockets(server);
-const users = {}; // list of messages locally saved in the server
-io.use(Logger());
-io.on('connection', (socket) => {
-    socket.on('newMessage', (message, next) => {
-        const { nickname, avatar } = socket;
-        // send nickname and avatar with the message taken from socket to all messages
-        io.emit('receiveMessage', { message, nickname, avatar });
-        next();
-    });
-
-    socket.on('newUser', (user, next) => {
-        if (Object.keys(users).includes(user.nickname)) {
-            next('Name already in use');
-        } else {
-            // set nickname and avatar on socket object to retrieve later
-            socket.nickname = user.nickname; // eslint-disable-line no-param-reassign
-            socket.avatar = user.avatar; // eslint-disable-line no-param-reassign
-            users[user.nickname] = user;
-            next(null);
-        }
-    });
-
-    socket.on('disconnect', (reason) => { // eslint-disable-line no-unused-vars
-        delete users[socket.nickname];
-    });
-});
-
-server.listen(port, (err) => {
+socket(app).listen(port, (err) => {
     if (err) {
         console.log('err', err); // eslint-disable-line no-console
     } else {

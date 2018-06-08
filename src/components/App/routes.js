@@ -4,7 +4,6 @@ import Loadable from 'react-loadable';
 import { Link, Redirect } from 'react-router-dom';
 import Topics from './components/Topics';
 import Dashboard from './components/Dashboard';
-// import Router from '../Router';
 
 const About = () => (
     <div>
@@ -112,6 +111,13 @@ const routes = [
         component: UsersLoadableComponent,
         key: 'users'
     },
+    {
+        path: '/',
+        component: () => {
+            return (<div>footer</div>);
+        },
+        key: 'footer'
+    }
     // {
     //     path: '/*',
     //     component: () => <div>bmo natch</div>,
