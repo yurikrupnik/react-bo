@@ -1,12 +1,27 @@
 const path = require('path');
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const json = require('./package');
 
 const filename = 'server.js';
 
 module.exports = {
+    context: path.resolve(__dirname, 'src'),
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
+        }
+    },
     resolve: {
         extensions: ['.js', '.jsx'],
     },
@@ -17,7 +32,7 @@ module.exports = {
     },
     externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
     devtool: 'source-map',
-    entry: './src/server.js',
+    entry: './server.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename
@@ -27,8 +42,14 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                use: ['babel-loader', 'eslint-loader'],
-                exclude: /node_modules/
+                use: ['babel-loader'], // 'eslint-loader'
+                // exclude: /node_modules/,
+            },
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    'css-loader', 'sass-loader'
+                ],
             }
         ]
     },
@@ -39,7 +60,8 @@ module.exports = {
                 start: `node ${filename}`
             },
             devDependencies: {}
-        }))
+        })),
+        new BundleAnalyzerPlugin({})
     ]
 };
 

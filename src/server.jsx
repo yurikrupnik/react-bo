@@ -1,24 +1,49 @@
 import path from 'path';
 import Koa from 'koa';
 import statics from 'koa-static';
+import { renderToString } from 'react-dom/server';
+import Loadable from 'react-loadable';
+import { StaticRouter } from 'react-router';
 import views from 'koa-render-view';
 import Logger from 'socket.io-logger';
 import http from 'http';
+import React from 'react';
 import sockets from 'socket.io';
-import { port } from './config'; // databaseUrl
+import { port, databaseUrl } from './config';
 import api from './api';
-// import db from './db';
+import db from './db';
+import App from './components/App';
 
 const app = new Koa();
 
 app.use(statics(path.resolve(__dirname, 'assets')));
 app.use(views(path.resolve(__dirname, 'assets'), { extension: 'ejs' })); // for debug remove assets and run - todo to fix
-// app.use(db(databaseUrl));
+app.use(db(databaseUrl));
 app.use(api);
-app.use(async (ctx) => {
-    ctx.state = { data: { name: 'asd' } };
-    ctx.type = 'html';
-    await ctx.render('index', ctx.state);
+
+app.use((ctx, next) => {
+    const context = {};
+
+    const modules = [];
+    const html = renderToString((
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+            <StaticRouter
+                location={ctx.url}
+                context={context}
+            >
+                <App initialState={{}} />
+            </StaticRouter>
+        </Loadable.Capture>
+    ));
+    ctx.state = { title: 'my title', html };
+    // ctx.type = 'html';
+    if (context.url) {
+        // Somewhere a `<Redirect>` was rendered
+        ctx.redirect(301, context.url);
+    } else {
+        return ctx.render('index');
+        // we're good, send the response
+    }
 });
 
 
@@ -51,10 +76,13 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(port, (err) => {
-    if (err) {
-        console.log('err', err); // eslint-disable-line no-console
-    } else {
-        console.log(`running at port: ${port}`); // eslint-disable-line no-console
-    }
+Loadable.preloadAll().then(res => {
+    server.listen(port, (err) => {
+        if (err) {
+            console.log('err', err); // eslint-disable-line no-console
+        } else {
+            console.log(`running at port: ${port}`); // eslint-disable-line no-console
+        }
+    });
 });
+

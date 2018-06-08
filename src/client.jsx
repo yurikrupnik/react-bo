@@ -1,14 +1,17 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import './services/socket/client';
 import './_styles.scss';
 
-render(
-    <App
-        userAgent={global.navigator.userAgent}
-        initialState={{}}
-    />,
+hydrate(
+    <BrowserRouter>
+        <App
+            userAgent={global.navigator.userAgent}
+            initialState={{}}
+        />
+    </BrowserRouter>,
     global.document.getElementById('root'),
 );
 
