@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import Loadable from 'react-loadable';
+import request from 'axios';
 import { Link, Redirect } from 'react-router-dom';
+import Loadable from '../Loadable';
 import Topics from './components/Topics';
 import Dashboard from './components/Dashboard';
+// import { Consumer } from './index';
 
 const About = () => (
     <div>
@@ -45,79 +46,102 @@ class MainNav extends Component {
     }
 }
 
-// const LoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "app" */ '../component/App'),
-//     loading: Loading,
-// });
-function Loading(props) {
-    if (props.error) {
-        return <div>Error! <button onClick={props.retry}>Retry</button></div>;
-    } else if (props.timedOut) {
-        return <div>Taking a long time... <button onClick={props.retry}>Retry</button></div>;
-    } else if (props.pastDelay) {
-        return <div>Loading...</div>;
-    } else {
-        return null;
-    }
-}
-
 const ProjectsLoadableComponent = Loadable({
     loader: () => import(/* webpackChunkName: "projects" */ '../../api/projects/container'),
-    loading: Loading,
-    modules: ['../../api/projects/container'],
-    webpack: () => [require.resolveWeak('../../api/projects/container')],
 });
 const UsersLoadableComponent = Loadable({
     loader: () => import(/* webpackChunkName: "users" */ '../../api/users/container'),
-    loading: Loading,
 });
+//
+// class Api {
+//     constructor(url) {
+//         this.request = request.create({
+//             baseURL: 'http://localhost:5000/',
+//             url
+//         });
+//     }
+//
+//     read() {
+//         this.request.get();
+//     }
+// }
+//
+// const Ap = new Api('/api/users');
+const apiCall = request.create({
+    baseURL: 'http://localhost:5000/',
+});
+
+const usersApi = {
+    read: (params, cb) => apiCall.get('/api/users', { params })
+        .then((res) => {
+            const { data } = res;
+            if (typeof cb === 'function') {
+                return cb(data);
+            }
+            return data;
+        })
+};
+
+const projectsApi = {
+    read: (params, cb) => apiCall.get('/api/projects', { params })
+        .then((res) => {
+            const { data } = res;
+            if (typeof cb === 'function') {
+                return cb(data);
+            }
+            return data;
+        })
+};
 
 
 const routes = [
     {
         path: '/',
         component: MainNav,
-        key: 'nav'
+        key: 'nav',
+        getData: () => Promise.all([usersApi.read(), projectsApi.read()])
     },
-    {
-        path: '/',
-        component: Dashboard,
-        // component: () => (<div>dasboaard here</div>),
-        key: 'dashboard',
-        exact: true
-    },
-    {
-        path: '/register',
-        component: () => (<div>register</div>),
-        key: '/register'
-    },
-    {
-        path: '/about',
-        component: About,
-        key: 'about'
-    },
-    {
-        path: '/topics',
-        component: Topics,
-        key: 'topics',
-    },
-    {
-        path: '/projects',
-        component: ProjectsLoadableComponent,
-        key: 'projects'
-    },
-    {
-        path: '/users',
-        component: UsersLoadableComponent,
-        key: 'users'
-    },
-    {
-        path: '/',
-        component: () => {
-            return (<div>footer</div>);
-        },
-        key: 'footer'
-    }
+    // {
+    //     path: '/',
+    //     component: Dashboard,
+    //     key: 'dashboard',
+    //     exact: true,
+    //     getData: () => projectsApi.read()
+    // },
+    // {
+    //     path: '/register',
+    //     component: () => (<div>register</div>),
+    //     key: '/register'
+    // },
+    // {
+    //     path: '/about',
+    //     component: About,
+    //     key: 'about'
+    // },
+    // {
+    //     path: '/topics',
+    //     component: Topics,
+    //     key: 'topics',
+    // },
+    // {
+    //     path: '/projects',
+    //     component: ProjectsLoadableComponent,
+    //     key: 'projects',
+    //     getData: () => projectsApi.read()
+    // },
+    // {
+    //     path: '/users',
+    //     component: UsersLoadableComponent,
+    //     key: 'users',
+    //     getData: () => usersApi.read()
+    // },
+    // {
+    //     path: '/',
+    //     component: () => {
+    //         return (<div>footer</div>);
+    //     },
+    //     key: 'footer'
+    // }
     // {
     //     path: '/*',
     //     component: () => <div>bmo natch</div>,

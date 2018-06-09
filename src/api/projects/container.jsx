@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { mapToProps, dispatchActions } from './selector';
 import { selector } from './config';
 import FormWithArrays from './project';
 
@@ -12,7 +10,7 @@ class Container extends Component {
     }
 
     componentDidMount() {
-        this.props.actions[selector].read();
+        // this.props.actions[selector].read();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -30,7 +28,7 @@ class Container extends Component {
     render() {
         // console.log('this.props', this.props);
 
-        const data = this.props[selector].data;
+        // const data = this.props[selector].data;
         // console.log('data', data);
 
         return (
@@ -41,35 +39,20 @@ class Container extends Component {
     }
 }
 
-Container.propTypes = {
-    [selector]: PropTypes.shape({
-        loading: PropTypes.bool.isRequired,
-        selected: PropTypes.shape({}).isRequired,
-        data: PropTypes.shape({}).isRequired // { entities: {}, result: [] }
-    }).isRequired,
-    actions: PropTypes.shape({
-        [selector]: PropTypes.shape({
-            read: PropTypes.func.isRequired,
-            update: PropTypes.func.isRequired,
-            remove: PropTypes.func.isRequired,
-            create: PropTypes.func.isRequired,
-        })
-    }).isRequired
-};
+// Container.propTypes = {
+//     [selector]: PropTypes.shape({
+//         loading: PropTypes.bool.isRequired,
+//         selected: PropTypes.shape({}).isRequired,
+//         data: PropTypes.shape({}).isRequired // { entities: {}, result: [] }
+//     }).isRequired,
+//     actions: PropTypes.shape({
+//         [selector]: PropTypes.shape({
+//             read: PropTypes.func.isRequired,
+//             update: PropTypes.func.isRequired,
+//             remove: PropTypes.func.isRequired,
+//             create: PropTypes.func.isRequired,
+//         })
+//     }).isRequired
+// };
 
-
-function combinedMapToProps(state) {
-    return {
-        [selector]: mapToProps(state)
-    };
-}
-
-function combinedActions(dispatch) {
-    return {
-        actions: {
-            [selector]: dispatchActions(dispatch)
-        }
-    };
-}
-
-export default connect(combinedMapToProps, combinedActions)(Container);
+export default Container;

@@ -2,7 +2,6 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
 const json = require('./package');
 
 const filename = 'server.js';
@@ -59,4 +58,3 @@ module.exports = {
         }))
     ]
 };
-
