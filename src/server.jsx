@@ -10,7 +10,7 @@ import api from './api';
 import db from './services/db';
 import socket from './services/socket/server';
 import App from './components/App';
-import routes from './components/App/routes';
+import routes from './components/routes';
 import request from 'axios';
 
 const app = new Koa();
@@ -38,7 +38,7 @@ app.use( (ctx) => {
         const html = renderToString((
             <StaticRouter
                 location={ctx.url}
-                context={res}
+                context={{ data: res }}
             >
                 <App />
             </StaticRouter>

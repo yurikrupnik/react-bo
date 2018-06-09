@@ -9,10 +9,7 @@ const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
 renderMethod(
     <BrowserRouter>
-        <App
-            userAgent={global.navigator.userAgent}
-            initialState={{}}
-        />
+        <App />
     </BrowserRouter>,
     global.document.getElementById('root'),
 );

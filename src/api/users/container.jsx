@@ -29,6 +29,51 @@ const api = {
     update: (body, cb) => request.post(url, body).then(cb)
 };
 
+class ContainerProvider extends Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            theme: themes.light,
+            data: [],
+            loading: false
+        };
+        //
+        this.toggleTheme = () => {
+            this.setState(state => ({
+                theme:
+                    state.theme === themes.dark
+                        ? themes.light
+                        : themes.dark,
+            }));
+        };
+
+        this.fetch = (params, cb) => {
+            return usersApi.read(params).then((res) => {
+                console.log('res', res);
+                this.setState(() => {
+                    return {
+                        data: res
+                    };
+                }, cb);
+            });
+        };
+    }
+
+    render() {
+        const { theme, data } = this.state;
+        return (
+            <Provider value={{
+                data,
+                theme,
+                toggleTheme: this.toggleTheme
+            }} >
+                {this.props.children}
+            </Provider>
+        );
+    }
+}
+
 class Container extends Component {
     constructor(props) {
         super(props);
@@ -73,20 +118,5 @@ class Container extends Component {
     }
 }
 
-// Container.propTypes = {
-//     [selector]: PropTypes.shape({
-//         loading: PropTypes.bool.isRequired,
-//         selected: PropTypes.shape({}).isRequired,
-//         data: PropTypes.shape({}).isRequired // { entities: {}, result: [] }
-//     }).isRequired,
-//     actions: PropTypes.shape({
-//         [selector]: PropTypes.shape({
-//             read: PropTypes.func.isRequired,
-//             update: PropTypes.func.isRequired,
-//             remove: PropTypes.func.isRequired,
-//             create: PropTypes.func.isRequired,
-//         })
-//     }).isRequired
-// };
 
 export default Container;

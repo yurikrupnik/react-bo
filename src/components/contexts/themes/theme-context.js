@@ -95,5 +95,5 @@ class ThemesConsumer extends Component {
         );
     }
 }
-
+// export { ThemesProvider, ThemesConsumer };
 export { ThemesProvider, ThemesConsumer };

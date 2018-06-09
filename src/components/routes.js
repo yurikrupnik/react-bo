@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import request from 'axios';
 import { Link, Redirect } from 'react-router-dom';
-import Loadable from '../Loadable';
-import Topics from './components/Topics';
-import Dashboard from './components/Dashboard';
+import Loadable from './Loadable';
+import Topics from './Topics/index';
+import Dashboard from './Dashboard/index';
 // import { Consumer } from './index';
 
 const About = () => (
@@ -47,10 +47,10 @@ class MainNav extends Component {
 }
 
 const ProjectsLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "projects" */ '../../api/projects/container'),
+    loader: () => import(/* webpackChunkName: "projects" */ '../api/projects/container'),
 });
 const UsersLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "users" */ '../../api/users/container'),
+    loader: () => import(/* webpackChunkName: "users" */ '../api/users/container'),
 });
 //
 // class Api {
@@ -69,6 +69,7 @@ const UsersLoadableComponent = Loadable({
 // const Ap = new Api('/api/users');
 const apiCall = request.create({
     baseURL: 'http://localhost:5000/',
+
 });
 
 const usersApi = {
@@ -101,47 +102,47 @@ const routes = [
         key: 'nav',
         getData: () => Promise.all([usersApi.read(), projectsApi.read()])
     },
-    // {
-    //     path: '/',
-    //     component: Dashboard,
-    //     key: 'dashboard',
-    //     exact: true,
-    //     getData: () => projectsApi.read()
-    // },
-    // {
-    //     path: '/register',
-    //     component: () => (<div>register</div>),
-    //     key: '/register'
-    // },
-    // {
-    //     path: '/about',
-    //     component: About,
-    //     key: 'about'
-    // },
-    // {
-    //     path: '/topics',
-    //     component: Topics,
-    //     key: 'topics',
-    // },
-    // {
-    //     path: '/projects',
-    //     component: ProjectsLoadableComponent,
-    //     key: 'projects',
-    //     getData: () => projectsApi.read()
-    // },
-    // {
-    //     path: '/users',
-    //     component: UsersLoadableComponent,
-    //     key: 'users',
-    //     getData: () => usersApi.read()
-    // },
-    // {
-    //     path: '/',
-    //     component: () => {
-    //         return (<div>footer</div>);
-    //     },
-    //     key: 'footer'
-    // }
+    {
+        path: '/',
+        component: Dashboard,
+        key: 'dashboard',
+        exact: true,
+        getData: () => projectsApi.read()
+    },
+    {
+        path: '/register',
+        component: () => (<div>register</div>),
+        key: '/register'
+    },
+    {
+        path: '/about',
+        component: About,
+        key: 'about'
+    },
+    {
+        path: '/topics',
+        component: Topics,
+        key: 'topics',
+    },
+    {
+        path: '/projects',
+        component: ProjectsLoadableComponent,
+        key: 'projects',
+        getData: () => projectsApi.read()
+    },
+    {
+        path: '/users',
+        component: UsersLoadableComponent,
+        key: 'users',
+        getData: () => usersApi.read()
+    },
+    {
+        path: '/',
+        component: () => {
+            return (<div>footer</div>);
+        },
+        key: 'footer'
+    }
     // {
     //     path: '/*',
     //     component: () => <div>bmo natch</div>,
