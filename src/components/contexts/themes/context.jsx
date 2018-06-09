@@ -15,14 +15,7 @@ const themes = {
 
 const { Provider, Consumer } = createContext({
     theme: themes.dark,
-    toggleTheme: () => {},
-    data: [],
-    loading: false,
-    fetch: () => {}
+    toggleTheme: () => {}
 });
-export { Provider, Consumer };
 
-// export default createContext({
-//     theme: themes.dark,
-//     toggleTheme: () => {}
-// });
+export { Provider, Consumer, themes };

@@ -9,17 +9,6 @@ import { selector, url } from './config';
 // console.log('shit', shit);
 const {Provider, Consumer} = createContext({});
 
-const themes = {
-    light: {
-        foreground: '#000000',
-        background: '#eeeeee',
-    },
-    dark: {
-        foreground: '#ffffff',
-        background: '#222222',
-    },
-};
-
 export const ThemeContext = createContext(themes.dark);
 
 const api = {
@@ -34,7 +23,6 @@ class ContainerProvider extends Component {
         super(props, context);
 
         this.state = {
-            theme: themes.light,
             data: [],
             loading: false
         };
@@ -48,16 +36,16 @@ class ContainerProvider extends Component {
             }));
         };
 
-        this.fetch = (params, cb) => {
-            return usersApi.read(params).then((res) => {
-                console.log('res', res);
-                this.setState(() => {
-                    return {
-                        data: res
-                    };
-                }, cb);
-            });
-        };
+        // this.fetch = (params, cb) => {
+        //     return usersApi.read(params).then((res) => {
+        //         console.log('res', res);
+        //         this.setState(() => {
+        //             return {
+        //                 data: res
+        //             };
+        //         }, cb);
+        //     });
+        // };
     }
 
     render() {

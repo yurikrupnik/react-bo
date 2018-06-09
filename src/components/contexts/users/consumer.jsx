@@ -18,7 +18,7 @@ DefaultConsumer.propTypes = {
     toggleTheme: PropTypes.func.isRequired
 };
 
-class ThemesConsumer extends Component {
+class UsersConsumer extends Component {
     render() {
         const { render } = this.props;
         return (
@@ -36,12 +36,12 @@ class ThemesConsumer extends Component {
     }
 }
 
-ThemesConsumer.defaultProps = {
+UsersConsumer.defaultProps = {
     render: null
 };
 
-ThemesConsumer.propTypes = {
+UsersConsumer.propTypes = {
     render: PropTypes.func
 };
 
-export default ThemesConsumer;
+export default UsersConsumer;

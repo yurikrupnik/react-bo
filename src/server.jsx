@@ -11,7 +11,6 @@ import db from './services/db';
 import socket from './services/socket/server';
 import App from './components/App';
 import routes from './components/routes';
-import request from 'axios';
 
 const app = new Koa();
 const assets = path.resolve(__dirname, 'assets');
@@ -21,24 +20,32 @@ app.use(views(assets, { extension: 'ejs' }));
 app.use(db(databaseUrl));
 app.use(api);
 
-app.use( (ctx) => {
-    const activeRoute = routes.find(route => matchPath(ctx.url, route));
+app.use((ctx) => {
 
-    const promise = activeRoute.getData ?
-        activeRoute.getData() :
+    const activeRoute = routes.find(route => matchPath(ctx.url === '/favicon.ico' ? '/' : ctx.url, route));
+
+    console.log('ctx.url', ctx.url);
+    console.log('activeRoute', activeRoute);
+
+    const promise = activeRoute.fetch ?
+        activeRoute.fetch() :
         Promise.resolve();
     //
     // const Promises = Promise.all([
     //     promise,
     //     request.get('http://localhost:5000/api/projects')
     // ]);
-    promise.then(res => {
-        const context = {};
+    return promise.then(res => {
+        const context = {
+            // data: res
+        };
+        console.log('res', res);
+
         // const html = renderToString(<App />);
         const html = renderToString((
             <StaticRouter
                 location={ctx.url}
-                context={{ data: res }}
+                context={context}
             >
                 <App />
             </StaticRouter>
