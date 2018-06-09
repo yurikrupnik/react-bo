@@ -6,7 +6,7 @@ import request from 'axios';
 import Router from '../Router';
 // import routes from './routes';
 const apiCall = request.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: 'http://localhost:5001/',
 });
 
 const usersApi = {
@@ -30,25 +30,25 @@ const projectsApi = {
             return data;
         })
 };
-const { Provider, Consumer } = createContext({
-    session: '',
-    number: 10
-});
+// const { Provider, Consumer } = createContext({
+//     session: '',
+//     number: 10
+// });
 
 // const App = props => (
 //     <Router routes={routes} {...props} />
 // );
 
 class MainNav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { session: '' };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = { session: '' };
+    // }
 
     render() {
-        if (this.state.session) {
-            return (<Redirect to="/register" />);
-        }
+        // if (this.state.session) {
+        //     return (<Redirect to="/register" />);
+        // }
         return (
             <Consumer>
                 {shit => {
@@ -56,6 +56,8 @@ class MainNav extends Component {
 
                     return (
                         <header>
+                            <div>number is {shit.number}</div>
+                            <div>yebal is {shit.yebal}</div>
                             <div>
                                 <div>
                                     <Link to="/">Dashboard1</Link>
@@ -80,6 +82,7 @@ class MainNav extends Component {
         );
     }
 }
+
 const routes = [
     {
         path: '/',
@@ -151,13 +154,115 @@ class AppProvider extends Component {
 
     render() {
         return (
-            <Provider value="my vakye">
-                <Router routes={routes} />
+            <Provider value={this.state}>
+                <MainNav/>
             </Provider>
         );
     }
 }
 
-export default AppProvider;
+import { ThemesProvider, ThemesConsumer } from '../contexts/themes/theme-context';
+// import ThemedButton from '../contexts/themes/themed-button';
+
+// An intermediate component that uses the ThemedButton
+function Toolbar(props) {
+    return (
+        <ThemedButton onClick={props.changeTheme}>
+            Change Theme
+        </ThemedButton>
+    );
+}
+
+function Lol(props) {
+    return (
+        <div>
+            <h2>hgello</h2>
+            <div>
+                <ThemesConsumer />
+            </div>
+        </div>
+    )
+}
+
+class App extends React.Component {
+    constructor(props, context) {
+        console.log('context', context);
+
+        super(props, context);
+        // const r = {
+        //     light: {
+        //         foreground: '#000000',
+        //         background: '#eeeeee',
+        //     },
+        //     dark: {
+        //         foreground: '#ffffff',
+        //         background: '#222222',
+        //     }
+        // };
+
+        // const themes = {
+        //     light: {
+        //         foreground: '#000000',
+        //         background: '#eeeeee',
+        //         color: 'red'
+        //     },
+        //     dark: {
+        //         foreground: '#ffffff',
+        //         background: '#222222',
+        //         color: 'green'
+        //     },
+        // };
+        //
+        // this.state = {
+        //     theme: themes.light,
+        //     data: [],
+        //     loading: false
+        // };
+        // //
+        // this.toggleTheme = () => {
+        //     this.setState(state => ({
+        //         theme:
+        //             state.theme === themes.dark
+        //                 ? themes.light
+        //                 : themes.dark,
+        //     }));
+        // };
+        //
+        // this.fetch = (params, cb) => {
+        //     return usersApi.read(params).then((res) => {
+        //         console.log('res', res);
+        //         this.setState(() => {
+        //             return {
+        //                 data: res
+        //             };
+        //         }, cb);
+        //     });
+        // };
+    }
+
+    // componentDidMount() {
+    //     this.fetch();
+    // }
+
+    render() {
+        // The ThemedButton button inside the ThemeProvider
+        // uses the theme from state while the one outside uses
+        // the default dark theme
+        // const { theme, data, loading } = this.state;
+        return (
+            <div>
+               <ThemesProvider>
+                   <ThemesConsumer render={() => {
+                       return (
+                           <div>list here</div>
+                       );
+                   }} />
+               </ThemesProvider>
+            </div>
+        );
+    }
+}
+
+export default App;
 
 // export { Consumer };

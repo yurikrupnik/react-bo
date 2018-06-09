@@ -33,14 +33,14 @@ app.use( (ctx) => {
     //     request.get('http://localhost:5000/api/projects')
     // ]);
     promise.then(res => {
-        console.log('res', res);
         const context = {};
+        // const html = renderToString(<App />);
         const html = renderToString((
             <StaticRouter
                 location={ctx.url}
                 context={res}
             >
-                <App initialState={{}} />
+                <App />
             </StaticRouter>
         ));
         ctx.state = { title: 'my title', html };
