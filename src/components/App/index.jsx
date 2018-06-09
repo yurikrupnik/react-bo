@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import request from 'axios';
 import Router from '../Router';
 import routes from '../routes';
+
 const apiCall = request.create({
     baseURL: 'http://localhost:5001/',
 });
@@ -74,29 +75,29 @@ class MainNav extends Component {
 }
 
 
-class AppProvider extends Component {
-    // state = {
-    //     num: 12
-    // };
+// class AppProvider extends Component {
+//     // state = {
+//     //     num: 12
+//     // };
+//
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             number: 12,
+//             yebal: 1
+//         };
+//     }
+//
+//     render() {
+//         return (
+//             <Provider value={this.state}>
+//                 <MainNav/>
+//             </Provider>
+//         );
+//     }
+// }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            number: 12,
-            yebal: 1
-        };
-    }
-
-    render() {
-        return (
-            <Provider value={this.state}>
-                <MainNav/>
-            </Provider>
-        );
-    }
-}
-
-import { ThemesProvider, ThemesConsumer } from '../contexts/themes/theme-context';
+import { Consumer as ThemesConsumer, Provider as ThemesProvider } from '../contexts/themes';
 // import ThemedButton from '../contexts/themes/themed-button';
 
 // An intermediate component that uses the ThemedButton
@@ -187,6 +188,12 @@ class App extends React.Component {
         return (
             <div>
                <ThemesProvider>
+                   <ThemesConsumer />
+                   <ThemesConsumer render={() => {
+                       return (
+                           <div>as</div>
+                       )
+                   }} />
                    {this.children}
                    {routes.map(route => <Route key={route.key} {...route} />)}
                </ThemesProvider>

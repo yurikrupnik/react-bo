@@ -1,4 +1,5 @@
-import React, { Component, createContext } from 'react';
+import React, { Component } from 'react';
+import { Provider } from './context';
 
 const themes = {
     light: {
@@ -12,14 +13,6 @@ const themes = {
         color: 'green'
     },
 };
-
-const { Provider, Consumer } = createContext({
-    theme: themes.dark,
-    toggleTheme: () => {},
-    data: [],
-    loading: false,
-    fetch: () => {}
-});
 
 class ThemesProvider extends Component {
     constructor(props, context) {
@@ -66,32 +59,4 @@ class ThemesProvider extends Component {
     }
 }
 
-class ThemesConsumer extends Component {
-    render() {
-        if (typeof this.props.render === 'function') {
-            console.log('render props');
-            return this.props.render({});
-        }
-        return (
-            <Consumer>
-                {(props) => {
-                    // console.log('selectTheme', props.toggleTheme);
-                    // console.log('mam', props.mam);
-                    // console.log('theme', props.theme);
-
-                    console.log('props', props);
-                    const { data } = props;
-                    return (
-                        <div>
-                            <button style={{ background: props.theme.background }} onClick={props.toggleTheme}>
-                                clicks
-                            </button>
-                        </div>
-                    );
-                }}
-            </Consumer>
-        );
-    }
-}
-// export { ThemesProvider, ThemesConsumer };
-export { ThemesProvider, ThemesConsumer };
+export default ThemesProvider;
