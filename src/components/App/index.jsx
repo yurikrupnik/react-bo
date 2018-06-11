@@ -3,7 +3,7 @@ import { Link, Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from '../routes';
 import Nav from './Nav';
-// import UsersProvider from '../../api/users/provider';
+import UsersProvider from '../../api/users/provider';
 import { Consumer as ThemesConsumer, Provider as ThemesProvider } from '../contexts/themes';
 
 class App extends React.Component {

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './context';
-// import UsersProvider from "./provider";
 
 const DefaultConsumer = (props) => {
     const { loading, data } = props;
-    // console.log('props', props);
 
     return (
         <div>
