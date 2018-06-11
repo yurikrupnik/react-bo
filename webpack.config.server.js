@@ -2,6 +2,8 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
+
 const json = require('./package');
 
 const filename = 'server.js';
@@ -49,6 +51,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new ReactLoadablePlugin({
+            filename: './dist/react-loadable.json',
+        }),
         new GenerateJsonPlugin('package.json', Object.assign({}, json, {
             main: filename,
             scripts: {

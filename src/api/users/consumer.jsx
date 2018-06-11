@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './context';
+// import UsersProvider from "./provider";
 
 const DefaultConsumer = (props) => {
-    const { theme, toggleTheme } = props;
+    const { loading, data } = props;
+    // console.log('props', props);
+
     return (
         <div>
-            <button style={{ background: theme.background }} onClick={toggleTheme}>
-                clicks
-            </button>
+            {data.map(val => {
+                return (
+
+                    <div key={val._id}>
+                        sdas
+                        name: {val.name}
+                    </div>
+                );
+            })}
         </div>
     );
 };
 
 DefaultConsumer.propTypes = {
-    theme: PropTypes.shape({}).isRequired,
-    toggleTheme: PropTypes.func.isRequired
+    // theme: PropTypes.shape({}).isRequired,
+    // toggleTheme: PropTypes.func.isRequired
 };
 
 class UsersConsumer extends Component {
@@ -26,6 +35,9 @@ class UsersConsumer extends Component {
                 {(props) => {
                     if (typeof render === 'function') {
                         return render(props);
+                    }
+                    if (!props.data.length) {
+                        props.fetch();
                     }
                     return (
                         <DefaultConsumer {...props} />

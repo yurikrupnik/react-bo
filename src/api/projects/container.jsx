@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { selector } from './config';
 import FormWithArrays from './project';
+import UsersConsumer from '../users/consumer';
 
 class Container extends Component {
     constructor(props) {
@@ -33,6 +34,8 @@ class Container extends Component {
 
         return (
             <div>
+                <h2>users in projects</h2>
+                <UsersConsumer />
                 <FormWithArrays />
             </div>
         );

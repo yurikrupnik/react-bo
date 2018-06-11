@@ -1,5 +1,12 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 
-export const ThemeContext = React.createContext(
-    themes.dark // default value
-);
+const { Provider, Consumer } = createContext({
+    data: [],
+    loading: false,
+    toggleLoading: () => {},
+    getData: () => {}
+    // theme: themes.dark,
+    // toggleTheme: () => {}
+});
+
+export { Provider, Consumer };

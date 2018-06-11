@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Redirect, Route } from 'react-router-dom';
 import { Consumer as ThemesConsumer } from '../contexts/themes';
+import UserConsumer from '../../api/users/consumer';
+
 
 class MainNav extends Component {
     // constructor(props) {
@@ -14,8 +16,6 @@ class MainNav extends Component {
             <header>
                 <ThemesConsumer />
                 <ThemesConsumer render={(props) => {
-                    console.log('props', props);
-
                     return (
                         <div>as</div>
                     );
