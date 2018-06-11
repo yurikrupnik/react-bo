@@ -23,7 +23,7 @@ class MainNav extends Component {
                 />
                 <div>
                     <div>
-                        <Link to="/">Dashboard1</Link>
+                        <Link to="/">Dashboard</Link>
                     </div>
                     <div>
                         <Link to="/about">About</Link>

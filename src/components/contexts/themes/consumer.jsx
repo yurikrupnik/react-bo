@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './context';
-
-const DefaultConsumer = (props) => {
-    const { theme, toggleTheme } = props;
-    return (
-        <div>
-            <button style={{ background: theme.background }} onClick={toggleTheme}>
-                clicks
-            </button>
-        </div>
-    );
-};
-
-DefaultConsumer.propTypes = {
-    theme: PropTypes.shape({}).isRequired,
-    toggleTheme: PropTypes.func.isRequired
-};
+import DefaultConsumer from './defaultButton';
 
 class ThemesConsumer extends Component {
     render() {

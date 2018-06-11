@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import styles from './submit-button.css';
+import UserConsumer from '../contexts/themes/consumer';
 
 const cx = classNames.bind(styles);
 
@@ -40,6 +41,9 @@ function Dashboard(props) {
     return (
         <div>
             <h2>Dashboard</h2>
+            <UserConsumer render={()=> {
+                return <div>yebal</div>
+            }}/>
             <SubmitButton />
         </div>
     );
