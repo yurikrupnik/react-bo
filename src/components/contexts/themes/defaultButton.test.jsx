@@ -4,59 +4,36 @@ import ReactTestUtils from 'react-dom/test-utils';
 // import Enzyme, { mount } from 'enzyme';
 // import Adapter from 'enzyme-adapter-react-16';
 import jest from 'jest-mock';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import sinon from 'sinon';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import DefaultButton from './defaultButton';
+Enzyme.configure({ adapter: new Adapter() })
 
 
-// in your test:
-
-const props = {
-    theme: { background: 'red' },
-    toggleTheme: () => {}
-};
-
-const renderer = new ShallowRenderer();
-renderer.render(<DefaultButton {...props} />);
-const result = renderer.getRenderOutput();
 describe('default button', () => {
     it('should render', () => {
-        // console.log('result', result);
-        // console.log('result', result.props.children.type);
-        // console.log('result', result.props.children.props);
-        // console.log('result', result.props.toggleThem);
-        // console.log('result', result.props.props);
-
+        const props = {
+            theme: { background: 'red' },
+            toggleTheme: () => {}
+        };
+        const renderer = new ShallowRenderer();
+        renderer.render(<DefaultButton {...props} />);
+        const result = renderer.getRenderOutput();
         expect(result).toBeTruthy();
         expect(result.type).toBe('div');
         expect(result.props.children.type).toBe('button');
-
-        // const wrapper = shallow(<Component startLogout={mockLogout}/>);
-        // result.props.children.simulate('click');
-        // result.find('button').at(0).simulate('click');
-        // expect(my).toHaveBeenCalled();
-        // expect(result.style).toBe('div');
-        // expect(result.props.toggleThem).toBe(Function);
-        // expect(result).toBe(null);
-        // const { enzymeWrapper } = setup();
-        // expect(enzymeWrapper.length).toBeTruthy();
     });
 
     it('should simulate click', function () {
         const props = {
             theme: { background: 'red' },
         };
-        const mockToggle = jest.fn();
-        const renderer = new ShallowRenderer();
-        renderer.render(<DefaultButton toggleTheme={mockToggle} {...props} />);
-        const result = renderer.getRenderOutput();
-// console.log('result .props.children', result.props.children);
-// console.log('mockToggle', mockToggle);
-//         ReactTestUtils.Simulate.click(result.props.children);
-
-        // console.log('as', result.findRenderedDOMComponentWithTag('button'));
-
-        // result.find('button').at(0).simulate('click');
-        // expect(mockToggle).toBeCalled();
+        const onButtonClick = sinon.spy();
+        const wrapper = shallow(<DefaultButton {...props} toggleTheme={onButtonClick} />);
+        wrapper.find('button').simulate('click');
+        expect(onButtonClick).toBeCalled();
     });
 
 });

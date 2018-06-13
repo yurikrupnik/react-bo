@@ -4,6 +4,14 @@ import { Consumer as ThemesConsumer } from '../contexts/themes';
 import UserConsumer from '../../api/users/consumer';
 
 
+const Something = (props) => {
+    console.log('props', props);
+    return (
+        <div>hello</div>
+    )
+};
+
+
 class MainNav extends Component {
     // constructor(props) {
     //     super(props);
@@ -15,9 +23,10 @@ class MainNav extends Component {
         return (
             <header>
                 <ThemesConsumer />
+
                 <ThemesConsumer render={(props) => {
                     return (
-                        <div>as</div>
+                        <Something {...props} />
                     );
                 }}
                 />

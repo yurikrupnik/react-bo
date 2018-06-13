@@ -355,7 +355,7 @@
       "publicPath": "server.js.map"
     }
   ],
-  "./consumer": [
+  "../contexts/themes/consumer": [
     {
       "id": "./components/contexts/themes/consumer.jsx",
       "name": "./components/contexts/themes/consumer.jsx",

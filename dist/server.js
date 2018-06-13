@@ -826,6 +826,15 @@ var _consumer2 = _interopRequireDefault(_consumer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const Something = props => {
+    console.log('props', props);
+    return _react2.default.createElement(
+        'div',
+        null,
+        'hello'
+    );
+};
+
 class MainNav extends _react.Component {
     // constructor(props) {
     //     super(props);
@@ -839,11 +848,7 @@ class MainNav extends _react.Component {
             null,
             _react2.default.createElement(_themes.Consumer, null),
             _react2.default.createElement(_themes.Consumer, { render: props => {
-                    return _react2.default.createElement(
-                        'div',
-                        null,
-                        'as'
-                    );
+                    return _react2.default.createElement(Something, props);
                 }
             }),
             _react2.default.createElement(
@@ -1605,9 +1610,7 @@ class ThemesProvider extends _react.Component {
         super(props, context);
 
         this.state = {
-            theme: themes.light,
-            data: [],
-            loading: false
+            theme: themes.light
         };
         //
         this.toggleTheme = () => {
@@ -1622,7 +1625,6 @@ class ThemesProvider extends _react.Component {
         return _react2.default.createElement(
             _context.Provider,
             { value: {
-                    data,
                     theme,
                     toggleTheme: this.toggleTheme
                 } },
@@ -1823,7 +1825,7 @@ const assets = _path2.default.resolve(__dirname, 'assets');
 
 app.use((0, _koaStatic2.default)(assets));
 app.use((0, _koaRenderView2.default)(assets, { extension: 'ejs' }));
-app.use((0, _koaFavicon2.default)(_path2.default.resolve(assets, 'favicon.ico')));
+// app.use(favicon(path.resolve(assets, 'favicon.ico')));
 app.use((0, _db2.default)(_config.databaseUrl));
 app.use(_api2.default);
 
@@ -1839,7 +1841,7 @@ app.use((ctx, next) => {
             _reactRouter.StaticRouter,
             {
                 location: ctx.url,
-                context: context
+                context: {}
             },
             _react2.default.createElement(
                 _reactLoadable2.default.Capture,

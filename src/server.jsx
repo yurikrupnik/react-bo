@@ -20,7 +20,7 @@ const assets = path.resolve(__dirname, 'assets');
 
 app.use(statics(assets));
 app.use(views(assets, { extension: 'ejs' }));
-app.use(favicon(path.resolve(assets, 'favicon.ico')));
+// app.use(favicon(path.resolve(assets, 'favicon.ico')));
 app.use(db(databaseUrl));
 app.use(api);
 
@@ -37,7 +37,7 @@ app.use((ctx, next) => {
         const html = renderToString((
             <StaticRouter
                 location={ctx.url}
-                context={context}
+                context={{}}
             >
                 <Loadable.Capture report={moduleName => modules.push(moduleName)}>
                     <App />

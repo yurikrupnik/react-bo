@@ -20,8 +20,6 @@ class ThemesProvider extends Component {
 
         this.state = {
             theme: themes.light,
-            data: [],
-            loading: false
         };
         //
         this.toggleTheme = () => {
@@ -38,7 +36,6 @@ class ThemesProvider extends Component {
         const { theme, data } = this.state;
         return (
             <Provider value={{
-                data,
                 theme,
                 toggleTheme: this.toggleTheme
             }} >
