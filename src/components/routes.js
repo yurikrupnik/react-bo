@@ -24,39 +24,46 @@ const routes = [
     {
         path: '/',
         component: Dashboard,
-        key: 'dashboard',
         exact: true,
-        fetch: () => usersApi.fetch()
+        key: 'dashboard',
+        fetch: () => usersApi.fetch(),
+        providers: ['Users']
     },
     {
         path: '/register',
         component: RegisterLoadableComponent,
-        key: '/register',
-        fetch: () => projectsApi.fetch()
+        key: 'register',
+        fetch: () => projectsApi.fetch(),
+        providers: ['Projects']
     },
     {
         path: '/about',
         component: AboutLoadableComponent,
         key: 'about',
-        fetch: () => usersApi.fetch()
+        fetch: () => usersApi.fetch(),
+        providers: ['Users']
     },
     {
         path: '/topics',
         component: Topics,
         key: 'topics',
-        fetch: () => usersApi.fetch()
+        fetch: () => usersApi.fetch(),
+        providers: ['Users']
     },
     {
         path: '/projects',
         component: ProjectsLoadableComponent,
         key: 'projects',
-        fetch: () => projectsApi.fetch()
+        fetch: () => Promise.all([projectsApi.fetch(), usersApi.fetch()]),
+        // need inject to providers...
+        providers: ['Projects', 'Users']
     },
     {
         path: '/users',
         component: UsersLoadableComponent,
         key: 'users',
-        fetch: () => usersApi.fetch()
+        fetch: () => usersApi.fetch(),
+        providers: ['Users']
     }
 ];
 

@@ -9,10 +9,11 @@ const DefaultConsumer = (props) => {
         <div>
             {data.map(val => {
                 return (
-
                     <div key={val._id}>
-                        sdas
-                        name: {val.name}
+                        <h2>users defauly consumer</h2>
+                        <div >
+                            name: {val.name}
+                        </div>
                     </div>
                 );
             })}
@@ -31,11 +32,11 @@ class UsersConsumer extends Component {
         return (
             <Consumer>
                 {(props) => {
+                    // if (!props.data.length) {
+                    //     props.fetch();
+                    // }
                     if (typeof render === 'function') {
                         return render(props);
-                    }
-                    if (!props.data.length) {
-                        props.fetch();
                     }
                     return (
                         <DefaultConsumer {...props} />

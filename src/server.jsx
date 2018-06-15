@@ -1,12 +1,12 @@
 import path from 'path';
 import Koa from 'koa';
 import statics from 'koa-static';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter, matchPath } from 'react-router';
 import views from 'koa-render-view';
 import favicon from 'koa-favicon';
 import React from 'react';
 import Loadable, { getBundles } from 'react-loadable';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter, matchPath } from 'react-router';
 import { port, databaseUrl } from './config';
 import api from './api';
 import db from './services/db';
@@ -20,7 +20,7 @@ const assets = path.resolve(__dirname, 'assets');
 
 app.use(statics(assets));
 app.use(views(assets, { extension: 'ejs' }));
-// app.use(favicon(path.resolve(assets, 'favicon.ico')));
+app.use(favicon(path.resolve(assets, 'favicon.ico')));
 app.use(db(databaseUrl));
 app.use(api);
 
@@ -28,26 +28,41 @@ app.use((ctx, next) => {
     const activeRoute = routes.find(route => matchPath(ctx.url, route)) || {};
     const promise = activeRoute.fetch ?
         activeRoute.fetch() :
-        Promise.resolve();
+        Promise.resolve([]);
 
-    return promise.then((res) => {
-        const context = {};
-        const modules = {};
-        const appData = res;
-        const html = renderToString((
-            <StaticRouter
-                location={ctx.url}
-                context={{}}
-            >
-                <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-                    <App />
-                </Loadable.Capture>
-            </StaticRouter>
-        ));
-        ctx.state = { title: 'my title', html, appData };
-        return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
-    })
-        .catch(next);
+    return promise
+        .then((res) => {
+            let appData = {};
+            console.log('res', res);
+
+            if (res.length && Array.isArray(activeRoute.providers)) {
+                appData = activeRoute.providers.reduce((acc, nextProvider, i) => {
+                    acc[nextProvider] = Array.isArray(res[0]) ? res[i] : res;
+                    return acc;
+                }, appData);
+            }
+            console.log('appData', appData);
+
+            const context = {};
+            const modules = {};
+            const title = 'my title';
+            const html = renderToString((
+                <StaticRouter
+                    location={ctx.url}
+                    context={context}
+                >
+                    <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+                        <App />
+                    </Loadable.Capture>
+                </StaticRouter>
+            ));
+            ctx.state = { title, html, appData };
+            return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
+        })
+        .catch(err => {
+            console.log('err', err.stack);
+            return next(err);
+        });
 });
 
 Loadable.preloadAll().then(() => {

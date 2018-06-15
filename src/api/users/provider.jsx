@@ -7,15 +7,15 @@ class UsersProvider extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            data: (global.window && global.window.appData) || [],
+            data: [], // props.data ||
             loading: false
         };
 
-        this.load = (params, cb) => {
+        this.fetch = (params, cb) => {
             return usersApi.fetch(params).then((res) => {
                 this.setState(() => {
                     return {
-                        data: res
+                        data: res.data
                     };
                 }, cb);
             });
@@ -28,7 +28,7 @@ class UsersProvider extends Component {
             <Provider value={{
                 data,
                 loading,
-                fetch: this.load
+                fetch: this.fetch
             }}
             >
                 {this.props.children}
