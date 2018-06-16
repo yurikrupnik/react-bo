@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import routes from '../routes';
 import Nav from './Nav';
 import UsersProvider from '../../api/users/provider';
+import ProjectsProvider from '../../api/projects/provider';
 import { Provider as ThemesProvider } from '../contexts/themes';
 
 // const Providers = [ThemesProvider, UsersProvider];
@@ -32,13 +33,15 @@ class App extends React.Component {
         // });
 
         return (
-            <UsersProvider>
-                <ThemesProvider>
-                    <Nav />
-                    {routes.map(route => <Route key={route.key} {...route} />)}
-                    <div>default footer</div>
-                </ThemesProvider>
-            </UsersProvider>
+            <ProjectsProvider>
+                <UsersProvider>
+                    <ThemesProvider>
+                        <Nav />
+                        {routes.map(route => <Route key={route.key} {...route} />)}
+                        <div>default footer</div>
+                    </ThemesProvider>
+                </UsersProvider>
+            </ProjectsProvider>
         );
     }
 }

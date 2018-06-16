@@ -15,14 +15,14 @@ class Container extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('nextProps', nextProps);
-        console.log('this.props', this.props);
-        console.log('nextState', nextState);
+        // console.log('nextProps', nextProps);
+        // console.log('this.props', this.props);
+        // console.log('nextState', nextState);
         return true;
     }
 
     handleChange(event) {
-        console.log('this.props', this.props);
+        // console.log('this.props', this.props);
         console.log('vent', event.target.value);
     }
 

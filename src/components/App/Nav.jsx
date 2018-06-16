@@ -7,7 +7,7 @@ import UserConsumer from '../../api/users/consumer';
 const Something = (props) => {
     console.log('props', props);
     return (
-        <div>hello</div>
+        <div>hello theme is {props.theme.background}</div>
     )
 };
 
