@@ -8,7 +8,7 @@ import React, { Component } from 'react';
     // mapToProps as sessionMapToProps,
     // dispatchActions as sessionActions
 // } from '../store/config/session/selectors';
-import socket from '../../services/socket/client';
+// import socket from '../../services/socket/client';
 
 class Register extends Component {
     // TODO set propTypes and tests - break into smaller parts

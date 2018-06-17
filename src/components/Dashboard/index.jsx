@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import styles from './submit-button.css';
-import UserConsumer from '../contexts/themes/consumer';
+import ThemesConsumer from '../contexts/themes/consumer';
+import UsersConsumer from '../../api/users/consumer';
+import ProjectsConsumer from '../../api/projects/consumer';
 
 const cx = classNames.bind(styles);
 
@@ -37,13 +39,40 @@ class SubmitButton extends Component {
     }
 }
 
+class SemiContainer extends Component {
+    componentDidMount() {
+        this.props.fetch();
+    }
+    render() {
+        const { data, loading } = this.props;
+        return (
+            <div>
+                {loading ? <div style={{ background: 'red' }}>loading...</div> : data.map((v) => {
+                    return (
+                        <div key={v._id}>
+                            <div>name: {v.name}</div>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+}
+
 function Dashboard(props) {
     return (
         <div>
-            <h2>Dashboard</h2>
-            <UserConsumer render={()=> {
-                return <div>yebal</div>
+            <UsersConsumer render={(props) => {
+                return <SemiContainer {...props} />;
+            }} />
+            <ProjectsConsumer render={(props) => {
+                return <SemiContainer {...props} />;
             }}/>
+            <h2>Dashboard</h2>
+            <ThemesConsumer />
+            <ThemesConsumer render={()=> {
+                return <div>yebal</div>
+            }} />
             <SubmitButton />
         </div>
     );

@@ -14,7 +14,7 @@
     "build": "npm run clean && npm run build:server & npm run build:client",
     "build:server": "NODE_ENV=production webpack --config webpack.config.server.js",
     "build:client": "NODE_ENV=production webpack --config webpack.config.client.js",
-    "lint": "eslint src/store/** src/components/** src/components/**/** src/db/** src/api/** src/services/**",
+    "lint": "eslint eslint --ext js,jsx src",
     "test": "jest",
     "deploy:test": "npm run lint && npm run test",
     "deploy:build": "npm run deploy:test && npm run build && docker build -t yuri/react-bo . ",

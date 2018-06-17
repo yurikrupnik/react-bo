@@ -1,2 +1,2 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{140:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(1),u=s(r);s(t(59));function s(e){return e&&e.__esModule?e:{default:e}}n.default=class extends r.Component{render(){return u.default.createElement("div",null,"registers")}}}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{137:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var s,d=t(1),r=(s=d)&&s.__esModule?s:{default:s};n.default=class extends d.Component{render(){return r.default.createElement("div",null,"registers")}}}}]);
 //# sourceMappingURL=register.js.map

@@ -13,6 +13,13 @@ const Loading = (props) => {
     return null;
 };
 
+Loading.defaultProps = {
+    error: '',
+    pastDelay: '',
+    timedOut: '',
+    retry: () => {}
+};
+
 Loading.propTypes = {
     error: PropTypes.shape({}),
     pastDelay: PropTypes.bool,

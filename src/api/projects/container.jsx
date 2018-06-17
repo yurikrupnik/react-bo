@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { selector } from './config';
+// import { selector } from './config';
 import FormWithArrays from './project';
 import UsersConsumer from '../users/consumer';
 

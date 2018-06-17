@@ -12,29 +12,19 @@ import { Provider as ThemesProvider } from '../contexts/themes';
 class App extends React.Component {
     constructor(props, context) {
         super(props, context);
-        // this.state = {
-        //     appData: (global.window && global.window.appData) || {}
-        // };
-        // delete global.window.appData;
+        this.state = {
+            appData: (global.window && global.window.appData) || {}
+        };
+        if (global.window) {
+            delete global.window.appData;
+        }
     }
 
     render() {
-        // let data;
-        // if (global.window && global.window.appData) {
-        //     console.log('data', global.window.appData);
-        //
-        //     data = global.window.appData;
-        //     delete global.window.appData;
-        // } else {
-        //     data = [];
-        // }
-        // const providers = Providers.map(V => {
-        //     return <V />
-        // });
-
+        const { appData } = this.state;
         return (
-            <ProjectsProvider>
-                <UsersProvider>
+            <ProjectsProvider data={appData.Projects}>
+                <UsersProvider data={appData.Users}>
                     <ThemesProvider>
                         <Nav />
                         {routes.map(route => <Route key={route.key} {...route} />)}

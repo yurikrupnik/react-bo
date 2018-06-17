@@ -1,2 +1,2045 @@
-!function(e){var t={},r={3:0};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.e=function(t){if(0!==r[t]){var n=require("./"+({0:"about",1:"projects",2:"register"}[t]||t)+".js"),o=n.modules,u=n.ids;for(var a in o)e[a]=o[a];for(var l=0;l<u.length;l++)r[u[l]]=0}return Promise.all([])},n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n.oe=function(e){process.nextTick(function(){throw e})},n(n.s=54)}([function(e,t){e.exports=require("react")},function(e,t){e.exports=require("prop-types")},function(e,t){e.exports=require("react-router-dom")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});t.url="/projects",t.Provider="Projects",t.dbModel="Project",t.selector="projects"},function(e,t){e.exports=require("mongoose")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});t.url="/users",t.Provider="Users",t.dbModel="User",t.selector="users"},function(e,t){e.exports=require("koa-router")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=l(n),u=l(r(1)),a=r(10);function l(e){return e&&e.__esModule?e:{default:e}}const s=e=>{const{loading:t,data:r}=e;return o.default.createElement("div",null,r.map(e=>o.default.createElement("div",{key:e._id},o.default.createElement("h2",null,"users defauly consumer"),o.default.createElement("div",null,"name: ",e.name))))};s.propTypes={};class d extends n.Component{render(){const{render:e}=this.props;return o.default.createElement(a.Consumer,null,t=>"function"==typeof e?e(t):o.default.createElement(s,t))}}d.defaultProps={render:null},d.propTypes={render:u.default.func},t.default=d},function(e,t,r){"use strict";const n=process.env.PORT||5e3,o=process.env.IP||"0.0.0.0",u=process.env.WEBSITE_HOSTNAME||`http://${o}:${n}`,a=process.env.DATABASE_URL||"mongodb://localhost/react-bo";e.exports={port:n,host:u,databaseUrl:a}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Provider=t.Consumer=void 0;var n=u(r(23)),o=u(r(15));function u(e){return e&&e.__esModule?e:{default:e}}t.Consumer=o.default,t.Provider=n.default},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Consumer=t.Provider=void 0;var n=r(0);const{Provider:o,Consumer:u}=(0,n.createContext)({data:[],loading:!1,selected:{}});t.Provider=o,t.Consumer=u},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o=r(12),u=(n=o)&&n.__esModule?n:{default:n},a=r(3);const l={fetch:(e,t)=>u.default.get(a.url,{params:e}).then(e=>{const{data:r}=e;return"function"==typeof t?t(r):r})};t.default=l},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o=r(25),u=(n=o)&&n.__esModule?n:{default:n};r(8);t.default=u.default.create({baseURL:"http://localhost:5000/api"})},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o=r(12),u=(n=o)&&n.__esModule?n:{default:n},a=r(5);const l={fetch:(e,t)=>u.default.get(a.url,{params:e}).then(e=>{global.window&&console.log("client");const{data:r}=e;return"function"==typeof t?t(r):r})};t.default=l},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.themes=t.Consumer=t.Provider=void 0;var n=r(0);const o={light:{foreground:"#000000",background:"#eeeeee",color:"red"},dark:{foreground:"#ffffff",background:"#222222",color:"green"}},{Provider:u,Consumer:a}=(0,n.createContext)({theme:o.dark,toggleTheme:()=>{}});t.Provider=u,t.Consumer=a,t.themes=o},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=s(n),u=s(r(1)),a=r(14),l=s(r(26));function s(e){return e&&e.__esModule?e:{default:e}}class d extends n.Component{render(){const{render:e}=this.props;return o.default.createElement(a.Consumer,null,t=>"function"==typeof e?e(t):o.default.createElement(l.default,t))}}d.defaultProps={render:null},d.propTypes={render:u.default.func},t.default=d},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});s(r(0));var n=s(r(33)),o=s(r(32)),u=s(r(29)),a=s(r(13)),l=s(r(11));function s(e){return e&&e.__esModule?e:{default:e}}const d=(0,n.default)({loader:()=>r.e(2).then(function(){var e=r(59);return"object"==typeof e&&e&&e.__esModule?e:Object.assign({},"object"==typeof e&&e,{default:e})})}),c=(0,n.default)({loader:()=>r.e(1).then(function(){var e=r(57);return"object"==typeof e&&e&&e.__esModule?e:Object.assign({},"object"==typeof e&&e,{default:e})})}),i=(0,n.default)({loader:()=>Promise.resolve().then(function(){var e=r(7);return"object"==typeof e&&e&&e.__esModule?e:Object.assign({},"object"==typeof e&&e,{default:e})})}),f=(0,n.default)({loader:()=>r.e(0).then(function(){var e=r(55);return"object"==typeof e&&e&&e.__esModule?e:Object.assign({},"object"==typeof e&&e,{default:e})})}),p=[{path:"/",component:u.default,exact:!0,key:"dashboard",fetch:()=>a.default.fetch(),providers:["Users"]},{path:"/register",component:d,key:"register",fetch:()=>l.default.fetch(),providers:["Projects"]},{path:"/about",component:f,key:"about",fetch:()=>a.default.fetch(),providers:["Users"]},{path:"/topics",component:o.default,key:"topics",fetch:()=>a.default.fetch(),providers:["Users"]},{path:"/projects",component:c,key:"projects",fetch:()=>Promise.all([l.default.fetch(),a.default.fetch()]),providers:["Projects","Users"]},{path:"/users",component:i,key:"users",fetch:()=>a.default.fetch(),providers:["Users"]}];t.default=p},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const n=e=>t=>{e.body=t},o=e=>t=>{e.status=500,e.body=t};t.list=(e=>t=>e.find({}).then(n(t)).catch(o(t))),t.find=(e=>t=>e.findOne({_id:t.params.id}).then(n(t)).catch(o(t))),t.removeOne=(e=>t=>e.findOneAndRemove({_id:t.params.id}).then((e=>t=>{e.body=t._id})(t)).catch(o(t))),t.create=(e=>t=>new e(t.request.body).save().then(n(t)).catch(o(t))),t.response=n,t.responseError=o},function(e,t){e.exports=require("react-loadable")},function(e,t,r){"use strict";e.exports=function(e){var t=[];return t.toString=function(){return this.map(function(t){var r=function(e,t){var r=e[1]||"",n=e[3];if(!n)return r;if(t&&"function"==typeof btoa){var o=(a=n,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */"),u=n.sources.map(function(e){return"/*# sourceURL="+n.sourceRoot+e+" */"});return[r].concat(u).concat([o]).join("\n")}var a;return[r].join("\n")}(t,e);return t[2]?"@media "+t[2]+"{"+r+"}":r}).join("")},t.i=function(e,r){"string"==typeof e&&(e=[[null,e,""]]);for(var n={},o=0;o<this.length;o++){var u=this[o][0];"number"==typeof u&&(n[u]=!0)}for(o=0;o<e.length;o++){var a=e[o];"number"==typeof a[0]&&n[a[0]]||(r&&!a[2]?a[2]=r:r&&(a[2]="("+a[2]+") and ("+r+")"),t.push(a))}},t}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Consumer=t.Provider=void 0;var n=r(0);const{Provider:o,Consumer:u}=(0,n.createContext)({data:[],loading:!1,selected:{}});t.Provider=o,t.Consumer=u},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=s(n),u=s(r(1)),a=r(20),l=s(r(11));function s(e){return e&&e.__esModule?e:{default:e}}class d extends n.Component{constructor(e,t){super(e,t),this.state={data:[],loading:!1},this.fetch=((e,t)=>l.default.fetch(e).then(e=>{this.setState(()=>({data:e.data}),t)}))}render(){const{loading:e,data:t}=this.state;return o.default.createElement(a.Provider,{value:{data:t,loading:e,fetch:this.fetch}},this.props.children)}}d.propTypes={children:u.default.element.isRequired},t.default=d},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=s(n),u=s(r(1)),a=r(10),l=s(r(13));function s(e){return e&&e.__esModule?e:{default:e}}class d extends n.Component{constructor(e,t){super(e,t),this.state={data:[],loading:!1},this.fetch=((e,t)=>l.default.fetch(e).then(e=>{this.setState(()=>({data:e.data}),t)}))}render(){const{loading:e,data:t}=this.state;return o.default.createElement(a.Provider,{value:{data:t,loading:e,fetch:this.fetch}},this.props.children)}}d.propTypes={children:u.default.element.isRequired},t.default=d},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o=r(0),u=(n=o)&&n.__esModule?n:{default:n},a=r(14);const l={light:{foreground:"#000000",background:"#eeeeee",color:"red"},dark:{foreground:"#ffffff",background:"#222222",color:"green"}};t.default=class extends o.Component{constructor(e,t){super(e,t),this.state={theme:l.light},this.toggleTheme=(()=>{this.setState(e=>({theme:e.theme===l.dark?l.light:l.dark}))})}render(){const{theme:e,data:t}=this.state;return u.default.createElement(a.Provider,{value:{theme:e,toggleTheme:this.toggleTheme}},this.props.children)}}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=l(n),u=r(2),a=r(9);l(r(7));function l(e){return e&&e.__esModule?e:{default:e}}const s=e=>(console.log("props",e),o.default.createElement("div",null,"hello theme is ",e.theme.background));t.default=class extends n.Component{render(){return o.default.createElement("header",null,o.default.createElement(a.Consumer,null),o.default.createElement(a.Consumer,{render:e=>o.default.createElement(s,e)}),o.default.createElement("div",null,o.default.createElement("div",null,o.default.createElement(u.Link,{to:"/"},"Dashboard")),o.default.createElement("div",null,o.default.createElement(u.Link,{to:"/about"},"About")),o.default.createElement("div",null,o.default.createElement(u.Link,{to:"/topics"},"Topics")),o.default.createElement("div",null,o.default.createElement(u.Link,{to:"/users"},"Users")),o.default.createElement("div",null,o.default.createElement(u.Link,{to:"/projects"},"Pojects"))))}}},function(e,t){e.exports=require("axios")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=u(r(0)),o=u(r(1));function u(e){return e&&e.__esModule?e:{default:e}}const a=e=>{const{theme:t,toggleTheme:r}=e;return n.default.createElement("div",null,n.default.createElement("button",{style:{background:t.background},onClick:r},"clicks"))};a.propTypes={theme:o.default.shape({}).isRequired,toggleTheme:o.default.func.isRequired},t.default=a},function(e,t,r){(e.exports=r(19)(!1)).push([e.i,".base {\n  color: red; }\n\n.inProgress {\n  color: blue; }\n",""])},function(e,t){e.exports=require("classnames/bind")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(0),o=s(n),u=s(r(28)),a=s(r(27)),l=s(r(15));function s(e){return e&&e.__esModule?e:{default:e}}const d=u.default.bind(a.default);class c extends n.Component{constructor(e){super(e),this.state={form:{valid:!1},store:{submissionInProgress:!0,errorOccurred:!1}}}render(){const e=this.state.store.submissionInProgress?"Processing...":"Submit",t=d({base:!0,inProgress:this.state.store.submissionInProgress,error:this.state.store.errorOccurred,disabled:this.state.form.valid});return o.default.createElement("button",{className:t},e)}}t.default=function(e){return o.default.createElement("div",null,o.default.createElement("h2",null,"Dashboard"),o.default.createElement(l.default,{render:()=>o.default.createElement("div",null,"yebal")}),o.default.createElement(c,null))}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},o=l(r(0)),u=l(r(1)),a=r(2);function l(e){return e&&e.__esModule?e:{default:e}}const s=e=>{const{children:t,routes:r}=e;return o.default.createElement("div",null,t,r.map(e=>o.default.createElement(a.Route,n({key:e.key},e))))};s.defaultProps={children:null},s.propTypes={children:u.default.element,routes:u.default.arrayOf(u.default.shape({path:u.default.string.isRequired})).isRequired},t.default=s},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=u(r(0)),o=u(r(1));function u(e){return e&&e.__esModule?e:{default:e}}const a=({match:e})=>n.default.createElement("div",null,n.default.createElement("h3",null,e.params.topicId));a.propTypes={match:o.default.shape({}).isRequired};const l=[{path:"/topics",component:()=>n.default.createElement("h3",null,"Please select a topic."),exact:!0,key:"/topics/topics"},{path:"/topics/:topicId",component:a,exact:!0,key:"/topics/:topics"}];t.default=l},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=s(r(0)),o=s(r(1)),u=r(2),a=s(r(31)),l=s(r(30));function s(e){return e&&e.__esModule?e:{default:e}}const d=e=>{const{match:t}=e;return n.default.createElement("div",null,n.default.createElement("h2",null,"Topics"),n.default.createElement(l.default,{routes:a.default},n.default.createElement("ul",null,[{value:"props-v-state",title:"Props v. State"},{value:"components",title:"Components"},{value:"rendering",title:"Rendering with React"}].map(e=>n.default.createElement("li",{key:e.value},n.default.createElement(u.Link,{to:`${t.url}/${e.value}`},e.title))))))};d.propTypes={match:o.default.shape({}).isRequired},t.default=d},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){return(0,u.default)(Object.assign({loading:l},e))};var n=a(r(0)),o=a(r(1)),u=a(r(18));function a(e){return e&&e.__esModule?e:{default:e}}const l=e=>e.error?n.default.createElement("div",null,"Error! ",n.default.createElement("button",{onClick:e.retry},"Retry")):e.timedOut?n.default.createElement("div",null,"Taking a long time... ",n.default.createElement("button",{onClick:e.retry},"Retry")):e.pastDelay?n.default.createElement("div",null,"Loading..."):null;l.propTypes={error:o.default.shape({}),pastDelay:o.default.bool,timedOut:o.default.bool,retry:o.default.func}},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},o=i(r(0)),u=r(2),a=(i(r(1)),i(r(16))),l=i(r(24)),s=i(r(22)),d=i(r(21)),c=r(9);function i(e){return e&&e.__esModule?e:{default:e}}t.default=class extends o.default.Component{constructor(e,t){super(e,t)}render(){return o.default.createElement(d.default,null,o.default.createElement(s.default,null,o.default.createElement(c.Provider,null,o.default.createElement(l.default,null),a.default.map(e=>o.default.createElement(u.Route,n({key:e.key},e))),o.default.createElement("div",null,"default footer"))))}}},function(e,t){e.exports=require("socket.io-logger")},function(e,t){e.exports=require("socket.io")},function(e,t){e.exports=require("http")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=a(r(37)),o=a(r(36)),u=a(r(35));function a(e){return e&&e.__esModule?e:{default:e}}t.default=(e=>{const t=n.default.Server(e.callback()),r=(0,o.default)(t),a={};return r.use((0,u.default)()),r.on("connection",e=>{e.on("newMessage",(t,n)=>{const{nickname:o,avatar:u}=e;r.emit("receiveMessage",{message:t,nickname:o,avatar:u}),n()}),e.on("newUser",(t,r)=>{Object.keys(a).includes(t.nickname)?r("Name already in use"):(e.nickname=t.nickname,e.avatar=t.avatar,a[t.nickname]=t,r(null))}),e.on("disconnect",t=>{delete a[e.nickname]})}),t})},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o=r(4),u=(n=o)&&n.__esModule?n:{default:n};t.default=(e=>{u.default.connect(e);const t=u.default.connection;return u.default.Promise=global.Promise,t.on("error",console.error.bind(console,"connection error:")),t.on("connected",()=>{}),t.on("open",()=>{}),t.once("open",()=>{}),t.once("disconnected",()=>{}),(e,r)=>(e.db=t,r())})},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.schema=void 0;var n,o=r(4),u=(n=o)&&n.__esModule?n:{default:n},a=r(3);const l=new o.Schema({name:{type:String,required:!0},description:{type:String,required:!1,default:""},context:{type:Object,required:!0,default:{settings:{},profile:[],general:[]}},settings:{type:Object,required:!0},date:{type:Date,default:Date.now,required:!1}}),s=u.default.model(a.dbModel,l);t.default=s,t.schema=l},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=l(r(6)),o=r(3),u=l(r(40)),a=r(17);function l(e){return e&&e.__esModule?e:{default:e}}const s=new n.default;s.get(o.url,(0,a.list)(u.default)),s.get(`${o.url}/:id`,(0,a.find)(u.default)),s.post(o.url,(0,a.create)(u.default)),s.put(o.url,e=>u.default.findOneAndUpdate({_id:e.request.body._id},{name:"else",email:"",hashPassword:"ta s"}).then((0,a.response)(e)).catch((0,a.responseError)(e))),s.delete(`${o.url}/:id`,(0,a.removeOne)(u.default)),t.default=s.routes()},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UserSchema=void 0;var n,o=r(4),u=(n=o)&&n.__esModule?n:{default:n},a=r(5);const l=new o.Schema({email:{type:String,required:!0},name:String,hashPassword:String}),s=u.default.model(a.dbModel,l);t.default=s,t.UserSchema=l},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=l(r(6)),o=r(5),u=l(r(42)),a=r(17);function l(e){return e&&e.__esModule?e:{default:e}}const s=new n.default;s.get(o.url,(0,a.list)(u.default)),s.get(`${o.url}/:id`,(0,a.find)(u.default)),s.post(o.url,(0,a.create)(u.default)),s.put(o.url,e=>u.default.findOneAndUpdate({_id:e.request.body._id},{name:"else",email:"",hashPassword:"ta s"}).then((0,a.response)(e)).catch((0,a.responseError)(e))),s.delete(`${o.url}/:id`,(0,a.removeOne)(u.default)),t.default=s.routes()},function(e,t){e.exports=require("koa-logger")},function(e,t){e.exports=require("koa-bodyparser")},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=s(r(6)),o=s(r(45)),u=s(r(44)),a=s(r(43)),l=s(r(41));function s(e){return e&&e.__esModule?e:{default:e}}const d=new n.default;d.use((0,u.default)()),d.use((0,o.default)()),d.use("/api",a.default,l.default),t.default=d.routes()},function(e,t){e.exports=require("react-router")},function(e,t){e.exports=require("react-dom/server")},function(e,t){e.exports=require("koa-favicon")},function(e,t){e.exports=require("koa-render-view")},function(e,t){e.exports=require("koa-static")},function(e,t){e.exports=require("koa")},function(e,t){e.exports=require("path")},function(e,t,r){"use strict";var n=b(r(53)),o=b(r(52)),u=b(r(51)),a=b(r(50)),l=b(r(49)),s=b(r(0)),d=b(r(18)),c=r(48),i=r(47),f=r(8),p=b(r(46)),m=b(r(39)),h=b(r(38)),v=b(r(34)),_=b(r(16));function b(e){return e&&e.__esModule?e:{default:e}}const y=new o.default,g=n.default.resolve(__dirname,"assets");y.use((0,u.default)(g)),y.use((0,a.default)(g,{extension:"ejs"})),y.use((0,l.default)(n.default.resolve(g,"favicon.ico"))),y.use((0,m.default)(f.databaseUrl)),y.use(p.default),y.use((e,t)=>{const r=_.default.find(t=>(0,i.matchPath)(e.url,t))||{};return(r.fetch?r.fetch():Promise.resolve([])).then(t=>{let n={};console.log("res",t),t.length&&Array.isArray(r.providers)&&(n=r.providers.reduce((e,r,n)=>(e[r]=Array.isArray(t[0])?t[n]:t,e),n)),console.log("appData",n);const o={},u={},a=(0,c.renderToString)(s.default.createElement(i.StaticRouter,{location:e.url,context:o},s.default.createElement(d.default.Capture,{report:e=>u.push(e)},s.default.createElement(v.default,null))));return e.state={title:"my title",html:a,appData:n},o.url?e.redirect(301,o.url):e.render("index")}).catch(e=>(console.log("err",e.stack),t(e)))}),d.default.preloadAll().then(()=>{(0,h.default)(y).listen(f.port,e=>{e?console.log("err",e):console.log(`running at port: ${f.port}`)})})},,function(e,t){e.exports=require("react-form")},,function(e,t){e.exports=require("socket.io-client")}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// require() chunk loading for javascript
+/******/
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] !== 0) {
+/******/ 			var chunk = require("./" + ({"about":"about","dashboard":"dashboard","projects":"projects","register":"register","users":"users"}[chunkId]||chunkId) + ".js");
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// uncaught error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using import().catch()
+/******/ 		});
+/******/ 	};
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./server.jsx");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./api/index.js":
+/*!**********************!*\
+  !*** ./api/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _koaRouter = __webpack_require__(/*! koa-router */ "koa-router");
+
+var _koaRouter2 = _interopRequireDefault(_koaRouter);
+
+var _koaBodyparser = __webpack_require__(/*! koa-bodyparser */ "koa-bodyparser");
+
+var _koaBodyparser2 = _interopRequireDefault(_koaBodyparser);
+
+var _koaLogger = __webpack_require__(/*! koa-logger */ "koa-logger");
+
+var _koaLogger2 = _interopRequireDefault(_koaLogger);
+
+var _users = __webpack_require__(/*! ./users */ "./api/users/index.js");
+
+var _users2 = _interopRequireDefault(_users);
+
+var _projects = __webpack_require__(/*! ./projects */ "./api/projects/index.js");
+
+var _projects2 = _interopRequireDefault(_projects);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const route = new _koaRouter2.default();
+
+route.use((0, _koaLogger2.default)());
+route.use((0, _koaBodyparser2.default)());
+route.use('/api', _users2.default, _projects2.default);
+
+exports.default = route.routes();
+
+/***/ }),
+
+/***/ "./api/methods.js":
+/*!************************!*\
+  !*** ./api/methods.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const response = ctx => res => {
+    ctx.body = res;
+};
+
+const responseId = ctx => res => {
+    ctx.body = res._id; // eslint-disable-line no-underscore-dangle
+};
+
+const responseError = ctx => err => {
+    ctx.status = 500;
+    ctx.body = err;
+};
+
+const list = Model => ctx => Model.find({}).then(response(ctx)).catch(responseError(ctx));
+
+const find = Model => ctx => Model.findOne({ _id: ctx.params.id }).then(response(ctx)).catch(responseError(ctx));
+
+const removeOne = Model => ctx => Model.findOneAndRemove({ _id: ctx.params.id }).then(responseId(ctx)).catch(responseError(ctx));
+
+const create = Model => ctx => {
+    const user = new Model(ctx.request.body);
+    return user.save().then(response(ctx)).catch(responseError(ctx));
+};
+
+exports.list = list;
+exports.find = find;
+exports.removeOne = removeOne;
+exports.create = create;
+exports.response = response;
+exports.responseError = responseError;
+
+/***/ }),
+
+/***/ "./api/projects/api.js":
+/*!*****************************!*\
+  !*** ./api/projects/api.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _request = __webpack_require__(/*! ../request */ "./api/request.js");
+
+var _request2 = _interopRequireDefault(_request);
+
+var _config = __webpack_require__(/*! ./config */ "./api/projects/config.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const projectsApi = {
+    fetch: (params, cb) => _request2.default.get(_config.url, { params }).then(res => {
+        const { data } = res;
+        if (typeof cb === 'function') {
+            return cb(data);
+        }
+        return data;
+    })
+};
+
+exports.default = projectsApi;
+
+/***/ }),
+
+/***/ "./api/projects/config.js":
+/*!********************************!*\
+  !*** ./api/projects/config.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const url = '/projects';
+const Provider = 'Projects';
+const dbModel = 'Project';
+const selector = 'projects';
+
+exports.url = url;
+exports.Provider = Provider;
+exports.dbModel = dbModel;
+exports.selector = selector;
+
+/***/ }),
+
+/***/ "./api/projects/context.js":
+/*!*********************************!*\
+  !*** ./api/projects/context.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Consumer = exports.Provider = undefined;
+
+var _react = __webpack_require__(/*! react */ "react");
+
+const { Provider, Consumer } = (0, _react.createContext)({
+    data: [],
+    loading: false,
+    selected: {}
+});
+
+exports.Provider = Provider;
+exports.Consumer = Consumer;
+
+/***/ }),
+
+/***/ "./api/projects/index.js":
+/*!*******************************!*\
+  !*** ./api/projects/index.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _koaRouter = __webpack_require__(/*! koa-router */ "koa-router");
+
+var _koaRouter2 = _interopRequireDefault(_koaRouter);
+
+var _config = __webpack_require__(/*! ./config */ "./api/projects/config.js");
+
+var _model = __webpack_require__(/*! ./model */ "./api/projects/model.js");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _methods = __webpack_require__(/*! ../methods */ "./api/methods.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const router = new _koaRouter2.default();
+
+router.get(_config.url, (0, _methods.list)(_model2.default)); // array
+router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
+router.post(_config.url, (0, _methods.create)(_model2.default));
+
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { name: 'else', email: '', hashPassword: 'ta s' }).then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
+
+router.delete(`${_config.url}/:id`, (0, _methods.removeOne)(_model2.default)); // id
+
+exports.default = router.routes();
+
+/***/ }),
+
+/***/ "./api/projects/model.js":
+/*!*******************************!*\
+  !*** ./api/projects/model.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = undefined;
+
+var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _config = __webpack_require__(/*! ./config */ "./api/projects/config.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const schema = new _mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    // description: {
+    //     type: String,
+    //     required: false,
+    //     default: ''
+    // },
+    // context: {
+    //     type: Object,
+    //     required: true,
+    //     default: { settings: {}, profile: [], general: [] }
+    // },
+    // settings: {
+    //     type: Object,
+    //     required: true
+    // },
+    date: {
+        type: Date,
+        default: Date.now,
+        required: false
+    }
+});
+
+const Model = _mongoose2.default.model(_config.dbModel, schema);
+// new Model({
+// //     email: 'd@d.com',
+//     name: 'project1',
+// //     hashPassword: 'sd'
+// }).save();
+
+exports.default = Model;
+exports.schema = schema;
+
+/***/ }),
+
+/***/ "./api/projects/provider.jsx":
+/*!***********************************!*\
+  !*** ./api/projects/provider.jsx ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _context = __webpack_require__(/*! ./context */ "./api/projects/context.js");
+
+var _api = __webpack_require__(/*! ./api */ "./api/projects/api.js");
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ProjectsProvider extends _react.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            data: props.data || [],
+            loading: false,
+            selected: {}
+        };
+
+        this.setSelected = item => {
+            this.setState(() => ({ selected: item }));
+        };
+
+        this.clearSelected = () => {
+            this.setState(() => ({ selected: {} }));
+        };
+
+        this.fetch = (params, cb) => {
+            return this.setState(prevState => {
+                return { loading: !prevState.loading };
+            }, () => {
+                return _api2.default.fetch(params).then(data => {
+                    return this.setState(prevState => {
+                        return { data, loading: !prevState.loading };
+                    }, cb);
+                });
+            });
+        };
+    }
+
+    render() {
+        const { loading, data, selected } = this.state;
+        return _react2.default.createElement(
+            _context.Provider,
+            { value: {
+                    data,
+                    loading,
+                    selected,
+                    fetch: this.fetch,
+                    setSelected: this.setSelected,
+                    clearSelected: this.clearSelected
+                }
+            },
+            this.props.children
+        );
+    }
+}
+
+ProjectsProvider.defaultProps = {
+    data: []
+};
+
+ProjectsProvider.propTypes = {
+    children: _propTypes2.default.element.isRequired,
+    data: _propTypes2.default.arrayOf(_propTypes2.default.shape({}))
+};
+
+exports.default = ProjectsProvider;
+
+/***/ }),
+
+/***/ "./api/request.js":
+/*!************************!*\
+  !*** ./api/request.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _axios = __webpack_require__(/*! axios */ "axios");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _axios2.default.create({ baseURL:  false ? undefined : 'http://localhost:5000/api' });
+
+/***/ }),
+
+/***/ "./api/users/api.js":
+/*!**************************!*\
+  !*** ./api/users/api.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _request = __webpack_require__(/*! ../request */ "./api/request.js");
+
+var _request2 = _interopRequireDefault(_request);
+
+var _config = __webpack_require__(/*! ./config */ "./api/users/config.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const usersApi = {
+    fetch: (params, cb) => _request2.default.get(_config.url, { params }).then(res => {
+        const { data } = res;
+        // res.providerName = Provider;
+        if (typeof cb === 'function') {
+            return cb(data);
+        }
+        return data;
+    })
+};
+
+exports.default = usersApi;
+
+/***/ }),
+
+/***/ "./api/users/config.js":
+/*!*****************************!*\
+  !*** ./api/users/config.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+const url = '/users';
+const Provider = 'Users';
+const dbModel = 'User';
+const selector = 'users';
+
+exports.url = url;
+exports.Provider = Provider;
+exports.dbModel = dbModel;
+exports.selector = selector;
+
+/***/ }),
+
+/***/ "./api/users/context.jsx":
+/*!*******************************!*\
+  !*** ./api/users/context.jsx ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Consumer = exports.Provider = undefined;
+
+var _react = __webpack_require__(/*! react */ "react");
+
+const { Provider, Consumer } = (0, _react.createContext)({
+    data: [],
+    loading: false,
+    selected: {}
+});
+
+exports.Provider = Provider;
+exports.Consumer = Consumer;
+
+/***/ }),
+
+/***/ "./api/users/index.js":
+/*!****************************!*\
+  !*** ./api/users/index.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _koaRouter = __webpack_require__(/*! koa-router */ "koa-router");
+
+var _koaRouter2 = _interopRequireDefault(_koaRouter);
+
+var _config = __webpack_require__(/*! ./config */ "./api/users/config.js");
+
+var _model = __webpack_require__(/*! ./model */ "./api/users/model.js");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _methods = __webpack_require__(/*! ../methods */ "./api/methods.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const router = new _koaRouter2.default();
+
+router.get(_config.url, (0, _methods.list)(_model2.default)); // array
+router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
+router.post(_config.url, (0, _methods.create)(_model2.default));
+
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { name: 'else', email: '', hashPassword: 'ta s' }) // eslint-disable-line no-underscore-dangle
+.then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
+
+router.delete(`${_config.url}/:id`, (0, _methods.removeOne)(_model2.default)); // id
+
+exports.default = router.routes();
+
+/***/ }),
+
+/***/ "./api/users/model.js":
+/*!****************************!*\
+  !*** ./api/users/model.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.UserSchema = undefined;
+
+var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _config = __webpack_require__(/*! ./config */ "./api/users/config.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const UserSchema = new _mongoose.Schema({
+    // id: {
+    //     type: String,
+    //     index: true
+    // },
+    email: { type: String, required: true },
+    name: String,
+    hashPassword: String
+});
+
+const Model = _mongoose2.default.model(_config.dbModel, UserSchema);
+// new Model({
+//     email: 'd@d.com',
+//     name: 'yu',
+//     hashPassword: 'sd'
+// }).save();
+
+exports.default = Model;
+exports.UserSchema = UserSchema;
+
+/***/ }),
+
+/***/ "./api/users/provider.jsx":
+/*!********************************!*\
+  !*** ./api/users/provider.jsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _context = __webpack_require__(/*! ./context */ "./api/users/context.jsx");
+
+var _api = __webpack_require__(/*! ./api */ "./api/users/api.js");
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class UsersProvider extends _react.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            data: props.data || [],
+            loading: false,
+            selected: {}
+        };
+
+        this.fetch = (params, cb) => {
+            return this.setState(prevState => {
+                return { loading: !prevState.loading };
+            }, () => {
+                return _api2.default.fetch(params).then(data => {
+                    return this.setState(prevState => {
+                        return { data, loading: !prevState.loading };
+                    }, cb);
+                });
+            });
+        };
+    }
+
+    render() {
+        const { loading, data } = this.state;
+        return _react2.default.createElement(
+            _context.Provider,
+            { value: {
+                    data,
+                    loading,
+                    fetch: this.fetch
+                }
+            },
+            this.props.children
+        );
+    }
+}
+UsersProvider.propTypes = {
+    children: _propTypes2.default.element.isRequired
+};
+
+exports.default = UsersProvider;
+
+/***/ }),
+
+/***/ "./components/App/Nav.jsx":
+/*!********************************!*\
+  !*** ./components/App/Nav.jsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+
+var _themes = __webpack_require__(/*! ../contexts/themes */ "./components/contexts/themes/index.jsx");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Something = props => {
+    console.log('props', props);
+    return _react2.default.createElement(
+        'div',
+        null,
+        'hello theme is ',
+        props.theme.background
+    );
+};
+
+function MainNav() {
+    return _react2.default.createElement(
+        'header',
+        null,
+        _react2.default.createElement(_themes.Consumer, null),
+        _react2.default.createElement(_themes.Consumer, { render: props => {
+                return _react2.default.createElement(Something, props);
+            }
+        }),
+        _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/' },
+                    'Dashboard'
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/about' },
+                    'About'
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/topics' },
+                    'Topics'
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/users' },
+                    'Users'
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/projects' },
+                    'Pojects'
+                )
+            )
+        )
+    );
+}
+
+exports.default = MainNav;
+
+/***/ }),
+
+/***/ "./components/App/index.jsx":
+/*!**********************************!*\
+  !*** ./components/App/index.jsx ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _routes = __webpack_require__(/*! ../routes */ "./components/routes.js");
+
+var _routes2 = _interopRequireDefault(_routes);
+
+var _Nav = __webpack_require__(/*! ./Nav */ "./components/App/Nav.jsx");
+
+var _Nav2 = _interopRequireDefault(_Nav);
+
+var _provider = __webpack_require__(/*! ../../api/users/provider */ "./api/users/provider.jsx");
+
+var _provider2 = _interopRequireDefault(_provider);
+
+var _provider3 = __webpack_require__(/*! ../../api/projects/provider */ "./api/projects/provider.jsx");
+
+var _provider4 = _interopRequireDefault(_provider3);
+
+var _themes = __webpack_require__(/*! ../contexts/themes */ "./components/contexts/themes/index.jsx");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// const Providers = [ThemesProvider, UsersProvider];
+
+class App extends _react2.default.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            appData: global.window && global.window.appData || {}
+        };
+        if (global.window) {
+            delete global.window.appData;
+        }
+    }
+
+    render() {
+        const { appData } = this.state;
+        return _react2.default.createElement(
+            _provider4.default,
+            { data: appData.Projects },
+            _react2.default.createElement(
+                _provider2.default,
+                { data: appData.Users },
+                _react2.default.createElement(
+                    _themes.Provider,
+                    null,
+                    _react2.default.createElement(_Nav2.default, null),
+                    _routes2.default.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route))),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        'default footer'
+                    )
+                )
+            )
+        );
+    }
+}
+
+exports.default = App;
+
+// export { Consumer };
+
+/***/ }),
+
+/***/ "./components/Loadable/index.jsx":
+/*!***************************************!*\
+  !*** ./components/Loadable/index.jsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (opts) {
+    return (0, _reactLoadable2.default)(Object.assign({
+        loading: Loading
+        // delay: 200,
+        // timeout: 10,
+    }, opts));
+};
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactLoadable = __webpack_require__(/*! react-loadable */ "react-loadable");
+
+var _reactLoadable2 = _interopRequireDefault(_reactLoadable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Loading = props => {
+    if (props.error) {
+        return _react2.default.createElement(
+            'div',
+            null,
+            'Error! ',
+            _react2.default.createElement(
+                'button',
+                { onClick: props.retry },
+                'Retry'
+            )
+        );
+    } else if (props.timedOut) {
+        return _react2.default.createElement(
+            'div',
+            null,
+            'Taking a long time... ',
+            _react2.default.createElement(
+                'button',
+                { onClick: props.retry },
+                'Retry'
+            )
+        );
+    } else if (props.pastDelay) {
+        return _react2.default.createElement(
+            'div',
+            null,
+            'Loading...'
+        );
+    }
+    return null;
+};
+
+Loading.defaultProps = {
+    error: '',
+    pastDelay: '',
+    timedOut: '',
+    retry: () => {}
+};
+
+Loading.propTypes = {
+    error: _propTypes2.default.shape({}),
+    pastDelay: _propTypes2.default.bool,
+    timedOut: _propTypes2.default.bool,
+    retry: _propTypes2.default.func
+};
+
+/***/ }),
+
+/***/ "./components/Router/index.jsx":
+/*!*************************************!*\
+  !*** ./components/Router/index.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Routes = props => {
+    const { children, routes } = props;
+    return _react2.default.createElement(
+        'div',
+        null,
+        children,
+        routes.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route)))
+    );
+};
+
+Routes.defaultProps = {
+    children: null
+};
+
+Routes.propTypes = {
+    children: _propTypes2.default.element,
+    routes: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+        path: _propTypes2.default.string.isRequired
+    })).isRequired
+};
+
+exports.default = Routes;
+
+/***/ }),
+
+/***/ "./components/Topics/index.jsx":
+/*!*************************************!*\
+  !*** ./components/Topics/index.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+
+var _routes = __webpack_require__(/*! ./routes */ "./components/Topics/routes.jsx");
+
+var _routes2 = _interopRequireDefault(_routes);
+
+var _index = __webpack_require__(/*! ../Router/index */ "./components/Router/index.jsx");
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Topics = props => {
+    const { match } = props;
+    const data = [{
+        value: 'props-v-state',
+        title: 'Props v. State'
+    }, {
+        value: 'components',
+        title: 'Components'
+    }, {
+        value: 'rendering',
+        title: 'Rendering with React'
+    }];
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'h2',
+            null,
+            'Topics'
+        ),
+        _react2.default.createElement(
+            _index2.default,
+            { routes: _routes2.default },
+            _react2.default.createElement(
+                'ul',
+                null,
+                data.map(val => _react2.default.createElement(
+                    'li',
+                    { key: val.value },
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: `${match.url}/${val.value}` },
+                        val.title
+                    )
+                ))
+            )
+        )
+    );
+};
+
+Topics.propTypes = {
+    match: _propTypes2.default.shape({}).isRequired
+};
+
+exports.default = Topics;
+
+/***/ }),
+
+/***/ "./components/Topics/routes.jsx":
+/*!**************************************!*\
+  !*** ./components/Topics/routes.jsx ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import { Redirect } from 'react-router-dom';
+
+const Topic = ({ match }) => _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+        'h3',
+        null,
+        match.params.topicId
+    )
+);
+
+Topic.propTypes = {
+    match: _propTypes2.default.shape({}).isRequired
+};
+
+const routes = [{
+    path: '/topics',
+    component: () => _react2.default.createElement(
+        'h3',
+        null,
+        'Please select a topic.'
+    ),
+    // component: () => (<Redirect to="/topics/components" />),
+    exact: true,
+    key: '/topics/topics'
+}, {
+    path: '/topics/:topicId',
+    component: Topic,
+    exact: true,
+    key: '/topics/:topics'
+}];
+
+exports.default = routes;
+
+/***/ }),
+
+/***/ "./components/contexts/themes/consumer.jsx":
+/*!*************************************************!*\
+  !*** ./components/contexts/themes/consumer.jsx ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _context = __webpack_require__(/*! ./context */ "./components/contexts/themes/context.jsx");
+
+var _defaultButton = __webpack_require__(/*! ./defaultButton */ "./components/contexts/themes/defaultButton.jsx");
+
+var _defaultButton2 = _interopRequireDefault(_defaultButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ThemesConsumer extends _react.Component {
+    render() {
+        const { render } = this.props;
+        return _react2.default.createElement(
+            _context.Consumer,
+            null,
+            props => {
+                if (typeof render === 'function') {
+                    return render(props);
+                }
+                return _react2.default.createElement(_defaultButton2.default, props);
+            }
+        );
+    }
+}
+
+ThemesConsumer.defaultProps = {
+    render: null
+};
+
+ThemesConsumer.propTypes = {
+    render: _propTypes2.default.func
+};
+
+exports.default = ThemesConsumer;
+
+/***/ }),
+
+/***/ "./components/contexts/themes/context.jsx":
+/*!************************************************!*\
+  !*** ./components/contexts/themes/context.jsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.themes = exports.Consumer = exports.Provider = undefined;
+
+var _react = __webpack_require__(/*! react */ "react");
+
+const themes = {
+    light: {
+        foreground: '#000000',
+        background: '#eeeeee',
+        color: 'red'
+    },
+    dark: {
+        foreground: '#ffffff',
+        background: '#222222',
+        color: 'green'
+    }
+};
+
+const { Provider, Consumer } = (0, _react.createContext)({
+    theme: themes.dark,
+    toggleTheme: () => {}
+});
+
+exports.Provider = Provider;
+exports.Consumer = Consumer;
+exports.themes = themes;
+
+/***/ }),
+
+/***/ "./components/contexts/themes/defaultButton.jsx":
+/*!******************************************************!*\
+  !*** ./components/contexts/themes/defaultButton.jsx ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const DefaultConsumer = props => {
+    const { theme, toggleTheme } = props;
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'button',
+            { style: { background: theme.background }, onClick: toggleTheme },
+            'clicks'
+        )
+    );
+};
+
+DefaultConsumer.propTypes = {
+    theme: _propTypes2.default.shape({}).isRequired,
+    toggleTheme: _propTypes2.default.func.isRequired
+};
+
+exports.default = DefaultConsumer;
+
+/***/ }),
+
+/***/ "./components/contexts/themes/index.jsx":
+/*!**********************************************!*\
+  !*** ./components/contexts/themes/index.jsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Provider = exports.Consumer = undefined;
+
+var _provider = __webpack_require__(/*! ./provider */ "./components/contexts/themes/provider.jsx");
+
+var _provider2 = _interopRequireDefault(_provider);
+
+var _consumer = __webpack_require__(/*! ./consumer */ "./components/contexts/themes/consumer.jsx");
+
+var _consumer2 = _interopRequireDefault(_consumer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Consumer = _consumer2.default;
+exports.Provider = _provider2.default;
+
+/***/ }),
+
+/***/ "./components/contexts/themes/provider.jsx":
+/*!*************************************************!*\
+  !*** ./components/contexts/themes/provider.jsx ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _context = __webpack_require__(/*! ./context */ "./components/contexts/themes/context.jsx");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const themes = {
+    light: {
+        foreground: '#000000',
+        background: '#eeeeee',
+        color: 'red'
+    },
+    dark: {
+        foreground: '#ffffff',
+        background: '#222222',
+        color: 'green'
+    }
+};
+
+class ThemesProvider extends _react.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            theme: themes.light
+        };
+        //
+        this.toggleTheme = () => {
+            this.setState(state => ({
+                theme: state.theme === themes.dark ? themes.light : themes.dark
+            }));
+        };
+    }
+
+    render() {
+        const { theme, data } = this.state;
+        return _react2.default.createElement(
+            _context.Provider,
+            { value: {
+                    theme,
+                    toggleTheme: this.toggleTheme
+                } },
+            this.props.children
+        );
+    }
+}
+
+exports.default = ThemesProvider;
+
+/***/ }),
+
+/***/ "./components/routes.js":
+/*!******************************!*\
+  !*** ./components/routes.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Loadable = __webpack_require__(/*! ./Loadable */ "./components/Loadable/index.jsx");
+
+var _Loadable2 = _interopRequireDefault(_Loadable);
+
+var _index = __webpack_require__(/*! ./Topics/index */ "./components/Topics/index.jsx");
+
+var _index2 = _interopRequireDefault(_index);
+
+var _api = __webpack_require__(/*! ../api/users/api */ "./api/users/api.js");
+
+var _api2 = _interopRequireDefault(_api);
+
+var _api3 = __webpack_require__(/*! ../api/projects/api */ "./api/projects/api.js");
+
+var _api4 = _interopRequireDefault(_api3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const DashboardLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | dashboard */ "dashboard").then(function() { var module = __webpack_require__(/*! ./Dashboard */ "./components/Dashboard/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const RegisterLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | register */ "register").then(function() { var module = __webpack_require__(/*! ./Register */ "./components/Register/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const ProjectsLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | projects */ "projects").then(function() { var module = __webpack_require__(/*! ./Projects */ "./components/Projects/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+const UsersLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | users */ "users").then(function() { var module = __webpack_require__(/*! ./Users */ "./components/Users/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const AboutLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | about */ "about").then(function() { var module = __webpack_require__(/*! ./About */ "./components/About/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const routes = [{
+    path: '/',
+    component: DashboardLoadableComponent,
+    exact: true,
+    key: 'dashboard',
+    fetch: () => Promise.all([_api4.default.fetch(), _api2.default.fetch()]),
+    // need inject to providers...
+    providers: ['Projects', 'Users']
+}, {
+    path: '/register',
+    component: RegisterLoadableComponent,
+    key: 'register'
+    // fetch: () => projectsApi.fetch(),
+    // providers: ['Projects']
+}, {
+    path: '/about',
+    component: AboutLoadableComponent,
+    key: 'about'
+    // fetch: () => usersApi.fetch(),
+    // providers: ['Users']
+}, {
+    path: '/topics',
+    component: _index2.default,
+    key: 'topics'
+    // fetch: () => usersApi.fetch(),
+    // providers: ['Users']
+}, {
+    path: '/projects',
+    component: ProjectsLoadableComponent,
+    key: 'projects',
+    fetch: () => _api4.default.fetch(),
+    // need inject to providers...
+    providers: ['Projects']
+}, {
+    path: '/users',
+    component: UsersLoadableComponent,
+    key: 'users',
+    fetch: () => _api2.default.fetch(),
+    providers: ['Users']
+}];
+
+exports.default = routes;
+
+/***/ }),
+
+/***/ "./config.js":
+/*!*******************!*\
+  !*** ./config.js ***!
+  \*******************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+const port = process.env.PORT || 5000;
+const ip = process.env.IP || '0.0.0.0' || 'localhost';
+const host = process.env.WEBSITE_HOSTNAME || `http://${ip}:${port}`;
+const databaseUrl = process.env.DATABASE_URL || 'mongodb://localhost/react-bo';
+
+module.exports = {
+    port,
+    host,
+    databaseUrl
+};
+
+/***/ }),
+
+/***/ "./server.jsx":
+/*!********************!*\
+  !*** ./server.jsx ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _path = __webpack_require__(/*! path */ "path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var _koa = __webpack_require__(/*! koa */ "koa");
+
+var _koa2 = _interopRequireDefault(_koa);
+
+var _koaStatic = __webpack_require__(/*! koa-static */ "koa-static");
+
+var _koaStatic2 = _interopRequireDefault(_koaStatic);
+
+var _koaRenderView = __webpack_require__(/*! koa-render-view */ "koa-render-view");
+
+var _koaRenderView2 = _interopRequireDefault(_koaRenderView);
+
+var _koaFavicon = __webpack_require__(/*! koa-favicon */ "koa-favicon");
+
+var _koaFavicon2 = _interopRequireDefault(_koaFavicon);
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactLoadable = __webpack_require__(/*! react-loadable */ "react-loadable");
+
+var _reactLoadable2 = _interopRequireDefault(_reactLoadable);
+
+var _server = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+
+var _reactRouter = __webpack_require__(/*! react-router */ "react-router");
+
+var _config = __webpack_require__(/*! ./config */ "./config.js");
+
+var _api = __webpack_require__(/*! ./api */ "./api/index.js");
+
+var _api2 = _interopRequireDefault(_api);
+
+var _db = __webpack_require__(/*! ./services/db */ "./services/db/index.js");
+
+var _db2 = _interopRequireDefault(_db);
+
+var _server2 = __webpack_require__(/*! ./services/socket/server */ "./services/socket/server.js");
+
+var _server3 = _interopRequireDefault(_server2);
+
+var _App = __webpack_require__(/*! ./components/App */ "./components/App/index.jsx");
+
+var _App2 = _interopRequireDefault(_App);
+
+var _routes = __webpack_require__(/*! ./components/routes */ "./components/routes.js");
+
+var _routes2 = _interopRequireDefault(_routes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import stats from './react-loadable.json';
+
+const app = new _koa2.default();
+const assets = _path2.default.resolve(__dirname, 'assets');
+
+app.use((0, _koaStatic2.default)(assets));
+app.use((0, _koaRenderView2.default)(assets, { extension: 'ejs' }));
+app.use((0, _koaFavicon2.default)(_path2.default.resolve(assets, 'favicon.ico')));
+app.use((0, _db2.default)(_config.databaseUrl));
+app.use(_api2.default);
+
+app.use((ctx, next) => {
+    const activeRoute = _routes2.default.find(route => (0, _reactRouter.matchPath)(ctx.url, route)) || {};
+    const promise = activeRoute.fetch ? activeRoute.fetch() : Promise.resolve([]);
+
+    return promise.then(res => {
+        let appData = {};
+        if (res.length && Array.isArray(activeRoute.providers)) {
+            appData = activeRoute.providers.reduce((acc, nextProvider, i) => {
+                acc[nextProvider] = Array.isArray(res[0]) ? res[i] : res;
+                return acc;
+            }, appData);
+        }
+        const context = {};
+        const modules = {};
+        const title = 'my title';
+        const html = (0, _server.renderToString)(_react2.default.createElement(
+            _reactRouter.StaticRouter,
+            {
+                location: ctx.url,
+                context: context
+            },
+            _react2.default.createElement(
+                _reactLoadable2.default.Capture,
+                { report: moduleName => modules.push(moduleName) },
+                _react2.default.createElement(_App2.default, null)
+            )
+        ));
+        ctx.state = { title, html, appData };
+        return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
+    }).catch(err => {
+        console.log('err', err.stack); // eslint-disable-line no-console
+        return next(err);
+    });
+});
+
+_reactLoadable2.default.preloadAll().then(() => {
+    (0, _server3.default)(app).listen(_config.port, err => {
+        if (err) {
+            console.log('err', err); // eslint-disable-line no-console
+        } else {
+            console.log(`running at port: ${_config.port}`); // eslint-disable-line no-console
+        }
+    });
+});
+
+/***/ }),
+
+/***/ "./services/db/index.js":
+/*!******************************!*\
+  !*** ./services/db/index.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = url => {
+    _mongoose2.default.connect(url);
+    const db = _mongoose2.default.connection;
+    _mongoose2.default.Promise = global.Promise;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.on('connected', () => {
+        // console.log('connected:');
+    });
+    db.on('open', () => {
+        // we're connected!
+        // console.log('connected to a');
+    });
+    db.once('open', () => {
+        // we're connected!
+        // console.log('connected to b');
+    });
+    db.once('disconnected', () => {
+        // we're connected!
+        // console.log('disconnected');
+    });
+    return (ctx, next) => {
+        ctx.db = db;
+        return next();
+    };
+};
+
+/***/ }),
+
+/***/ "./services/socket/server.js":
+/*!***********************************!*\
+  !*** ./services/socket/server.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _http = __webpack_require__(/*! http */ "http");
+
+var _http2 = _interopRequireDefault(_http);
+
+var _socket = __webpack_require__(/*! socket.io */ "socket.io");
+
+var _socket2 = _interopRequireDefault(_socket);
+
+var _socket3 = __webpack_require__(/*! socket.io-logger */ "socket.io-logger");
+
+var _socket4 = _interopRequireDefault(_socket3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = app => {
+    const server = _http2.default.Server(app.callback());
+    const io = (0, _socket2.default)(server);
+    const users = {}; // list of messages locally saved in the server
+    io.use((0, _socket4.default)());
+    io.on('connection', socket => {
+        socket.on('newMessage', (message, next) => {
+            const { nickname, avatar } = socket;
+            // send nickname and avatar with the message taken from socket to all messages
+            io.emit('receiveMessage', { message, nickname, avatar });
+            next();
+        });
+
+        socket.on('newUser', (user, next) => {
+            if (Object.keys(users).includes(user.nickname)) {
+                next('Name already in use');
+            } else {
+                // set nickname and avatar on socket object to retrieve later
+                socket.nickname = user.nickname; // eslint-disable-line no-param-reassign
+                socket.avatar = user.avatar; // eslint-disable-line no-param-reassign
+                users[user.nickname] = user;
+                next(null);
+            }
+        });
+
+        socket.on('disconnect', reason => {
+            // eslint-disable-line no-unused-vars
+            delete users[socket.nickname];
+        });
+    });
+
+    return server;
+};
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
+
+/***/ }),
+
+/***/ "classnames/bind":
+/*!**********************************!*\
+  !*** external "classnames/bind" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("classnames/bind");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+
+/***/ "koa":
+/*!**********************!*\
+  !*** external "koa" ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa");
+
+/***/ }),
+
+/***/ "koa-bodyparser":
+/*!*********************************!*\
+  !*** external "koa-bodyparser" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-bodyparser");
+
+/***/ }),
+
+/***/ "koa-favicon":
+/*!******************************!*\
+  !*** external "koa-favicon" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-favicon");
+
+/***/ }),
+
+/***/ "koa-logger":
+/*!*****************************!*\
+  !*** external "koa-logger" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-logger");
+
+/***/ }),
+
+/***/ "koa-render-view":
+/*!**********************************!*\
+  !*** external "koa-render-view" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-render-view");
+
+/***/ }),
+
+/***/ "koa-router":
+/*!*****************************!*\
+  !*** external "koa-router" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-router");
+
+/***/ }),
+
+/***/ "koa-static":
+/*!*****************************!*\
+  !*** external "koa-static" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-static");
+
+/***/ }),
+
+/***/ "mongoose":
+/*!***************************!*\
+  !*** external "mongoose" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("mongoose");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+
+/***/ "prop-types":
+/*!*****************************!*\
+  !*** external "prop-types" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
+
+/***/ "react-dom/server":
+/*!***********************************!*\
+  !*** external "react-dom/server" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "react-loadable":
+/*!*********************************!*\
+  !*** external "react-loadable" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-loadable");
+
+/***/ }),
+
+/***/ "react-router":
+/*!*******************************!*\
+  !*** external "react-router" ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router");
+
+/***/ }),
+
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "socket.io":
+/*!****************************!*\
+  !*** external "socket.io" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io");
+
+/***/ }),
+
+/***/ "socket.io-logger":
+/*!***********************************!*\
+  !*** external "socket.io-logger" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io-logger");
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=server.js.map

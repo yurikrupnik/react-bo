@@ -7,17 +7,20 @@ class UsersProvider extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            data: [], // props.data ||
-            loading: false
+            data: props.data || [],
+            loading: false,
+            selected: {}
         };
 
         this.fetch = (params, cb) => {
-            return usersApi.fetch(params).then((res) => {
-                this.setState(() => {
-                    return {
-                        data: res.data
-                    };
-                }, cb);
+            return this.setState((prevState) => {
+                return { loading: !prevState.loading };
+            }, () => {
+                return usersApi.fetch(params).then((data) => {
+                    return this.setState((prevState) => {
+                        return { data, loading: !prevState.loading };
+                    }, cb);
+                });
             });
         };
     }

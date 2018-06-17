@@ -4,7 +4,7 @@ import statics from 'koa-static';
 import views from 'koa-render-view';
 import favicon from 'koa-favicon';
 import React from 'react';
-import Loadable, { getBundles } from 'react-loadable';
+import Loadable from 'react-loadable';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
 import { port, databaseUrl } from './config';
@@ -33,16 +33,12 @@ app.use((ctx, next) => {
     return promise
         .then((res) => {
             let appData = {};
-            console.log('res', res);
-
             if (res.length && Array.isArray(activeRoute.providers)) {
                 appData = activeRoute.providers.reduce((acc, nextProvider, i) => {
                     acc[nextProvider] = Array.isArray(res[0]) ? res[i] : res;
                     return acc;
                 }, appData);
             }
-            console.log('appData', appData);
-
             const context = {};
             const modules = {};
             const title = 'my title';
@@ -60,7 +56,7 @@ app.use((ctx, next) => {
             return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
         })
         .catch(err => {
-            console.log('err', err.stack);
+            console.log('err', err.stack); // eslint-disable-line no-console
             return next(err);
         });
 });

@@ -1,19 +1,21 @@
-import React from 'react';
 import Loadable from './Loadable';
 import Topics from './Topics/index';
-import Dashboard from './Dashboard/index';
 import usersApi from '../api/users/api';
 import projectsApi from '../api/projects/api';
+
+const DashboardLoadableComponent = Loadable({
+    loader: () => import(/* webpackChunkName: "dashboard" */ './Dashboard'),
+});
 
 const RegisterLoadableComponent = Loadable({
     loader: () => import(/* webpackChunkName: "register" */ './Register'),
 });
 
 const ProjectsLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "projects" */ '../api/projects/container'),
+    loader: () => import(/* webpackChunkName: "projects" */ './Projects'),
 });
 const UsersLoadableComponent = Loadable({
-    loader: () => import(/* webpackChunkName: "users" */ '../api/users/consumer'),
+    loader: () => import(/* webpackChunkName: "users" */ './Users'),
 });
 
 const AboutLoadableComponent = Loadable({
@@ -23,40 +25,41 @@ const AboutLoadableComponent = Loadable({
 const routes = [
     {
         path: '/',
-        component: Dashboard,
+        component: DashboardLoadableComponent,
         exact: true,
         key: 'dashboard',
-        fetch: () => usersApi.fetch(),
-        providers: ['Users']
+        fetch: () => Promise.all([projectsApi.fetch(), usersApi.fetch()]),
+        // need inject to providers...
+        providers: ['Projects', 'Users']
     },
     {
         path: '/register',
         component: RegisterLoadableComponent,
         key: 'register',
-        fetch: () => projectsApi.fetch(),
-        providers: ['Projects']
+        // fetch: () => projectsApi.fetch(),
+        // providers: ['Projects']
     },
     {
         path: '/about',
         component: AboutLoadableComponent,
         key: 'about',
-        fetch: () => usersApi.fetch(),
-        providers: ['Users']
+        // fetch: () => usersApi.fetch(),
+        // providers: ['Users']
     },
     {
         path: '/topics',
         component: Topics,
         key: 'topics',
-        fetch: () => usersApi.fetch(),
-        providers: ['Users']
+        // fetch: () => usersApi.fetch(),
+        // providers: ['Users']
     },
     {
         path: '/projects',
         component: ProjectsLoadableComponent,
         key: 'projects',
-        fetch: () => Promise.all([projectsApi.fetch(), usersApi.fetch()]),
+        fetch: () => projectsApi.fetch(),
         // need inject to providers...
-        providers: ['Projects', 'Users']
+        providers: ['Projects']
     },
     {
         path: '/users',
