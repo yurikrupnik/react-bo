@@ -51,6 +51,15 @@ module.exports = {
             {
                 test: /\.ejs$/,
                 use: ['raw-loader']
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
             }
         ]
     },

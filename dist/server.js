@@ -770,6 +770,17 @@ exports.default = UsersProvider;
 
 /***/ }),
 
+/***/ "./assets/IF-pin1.png":
+/*!****************************!*\
+  !*** ./assets/IF-pin1.png ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "5fd8843c5b8a7b1881c8110af5f9d077.png";
+
+/***/ }),
+
 /***/ "./components/App/Nav.jsx":
 /*!********************************!*\
   !*** ./components/App/Nav.jsx ***!
@@ -990,11 +1001,150 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _IFPin = __webpack_require__(/*! ../../assets/IF-pin1.png */ "./assets/IF-pin1.png");
+
+var _IFPin2 = _interopRequireDefault(_IFPin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// wrapper component that renders children
+// usually used to wrap some logic in lifecycle events
+// limitations - pass state/props to children
+// using state here is useless
+
+class WrapperOfSomeKind extends _react.Component {
+    componentDidMount() {
+        console.log('this.props of WrapperOfSomeKind in componentDidMount', this.props);
+    }
+
+    render() {
+        return _react2.default.createElement(
+            'div',
+            null,
+            this.props.children
+        );
+    }
+}
+
+// regular func - no lifecycle and no state - dumb = PureComponent
+// same thing with state and lifecycle - smart = Component
+function StateAndToggle(props) {
+    const { state, toggle } = props;
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'div',
+            null,
+            'state: ',
+            state.toString()
+        ),
+        _react2.default.createElement(
+            'button',
+            { onClick: toggle },
+            'toggle'
+        )
+    );
+}
+
+// hoc 1 - example
+function Hoc2Wrapper() {
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'h2',
+            null,
+            'Hoc Wrapper stuff'
+        )
+    );
+}
+
+function Hoc2(Wrapper) {
+    return class extends _react.Component {
+        render() {
+            return _react2.default.createElement(Wrapper, null);
+        }
+    };
+}
+
+// hoc 2 - example
+function WithStateAndToggle(Wrapper) {
+    return class extends _react.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                isOpen: false
+            };
+            this.toggle = this.toggle.bind(this);
+        }
+
+        toggle() {
+            this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+        }
+
+        render() {
+            return _react2.default.createElement(Wrapper, _extends({}, this.props, { state: this.state.isOpen, toggle: this.toggle }));
+        }
+    };
+}
+
+class RenderPropStateAndToggle extends _react.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        };
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState(prevState => {
+            return { isOpen: !prevState.isOpen };
+        });
+    }
+
+    render() {
+        const { render } = this.props;
+        return render({
+            isOpen: this.state.isOpen,
+            toggle: this.toggle
+        });
+    }
+}
+
+function fuHoc(params) {
+    return function (Wrapper) {
+        return class extends _react.Component {
+            render() {
+                return _react2.default.createElement(Wrapper, params);
+            }
+        };
+    };
+}
+
+function FuHocWrapper(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'h2',
+            null,
+            'Age is: ',
+            props.age
+        )
+    );
+}
+
+function FuRenderProps(props) {
+    return props.render(props);
+}
 
 class Container extends _react.Component {
     constructor(props) {
@@ -1005,10 +1155,44 @@ class Container extends _react.Component {
     }
 
     render() {
+        const HocInRender = Hoc2(Hoc2Wrapper);
+        const WithStateAndToggleReady = WithStateAndToggle(StateAndToggle);
+        const FuHocC = fuHoc({ age: 21 })(FuHocWrapper);
         return _react2.default.createElement(
-            'div',
+            _react.Fragment,
             null,
-            'hello from container'
+            _react2.default.createElement(
+                'h2',
+                null,
+                'hello from container'
+            ),
+            _react2.default.createElement(WrapperOfSomeKind, { children: _react2.default.createElement(HocInRender, null) }),
+            _react2.default.createElement(
+                WrapperOfSomeKind,
+                null,
+                _react2.default.createElement(HocInRender, null)
+            ),
+            _react2.default.createElement(
+                'h5',
+                null,
+                'Hoc of State And Toggle'
+            ),
+            _react2.default.createElement(WithStateAndToggleReady, null),
+            _react2.default.createElement(
+                'h5',
+                null,
+                'Render Prop State and Toggle'
+            ),
+            _react2.default.createElement(RenderPropStateAndToggle, { render: props => {
+                    return _react2.default.createElement(StateAndToggle, { state: props.isOpen, toggle: props.toggle });
+                }
+            }),
+            _react2.default.createElement(FuHocC, null),
+            _react2.default.createElement(FuRenderProps, { render: props => {
+                    return _react2.default.createElement(FuHocWrapper, { age: props.age });
+                }, age: 23 }),
+            _react2.default.createElement(HocInRender, null),
+            _react2.default.createElement('img', { src: _IFPin2.default, alt: 'no imgag' })
         );
     }
 }
@@ -1328,20 +1512,24 @@ var _defaultButton2 = _interopRequireDefault(_defaultButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class ThemesConsumer extends _react.Component {
-    render() {
-        const { render } = this.props;
-        return _react2.default.createElement(
-            _context.Consumer,
-            null,
-            props => {
-                if (typeof render === 'function') {
-                    return render(props);
-                }
-                return _react2.default.createElement(_defaultButton2.default, props);
+function ThemesConsumer({ render, children }) {
+    // console.log('children', children);
+    // const Child = children;
+    return _react2.default.createElement(
+        _context.Consumer,
+        null,
+        props => {
+            // const Child = React.createElement('div', props, children);
+            // console.log('Child', Child);
+
+            if (typeof render === 'function') {
+                return render(props);
+            } else if (children) {
+                // return <Child />;
             }
-        );
-    }
+            return _react2.default.createElement(_defaultButton2.default, props);
+        }
+    );
 }
 
 ThemesConsumer.defaultProps = {
@@ -1387,7 +1575,7 @@ const themes = {
 };
 
 const { Provider, Consumer } = (0, _react.createContext)({
-    theme: themes.dark,
+    theme: themes.light,
     toggleTheme: () => {}
 });
 
@@ -1429,7 +1617,7 @@ const DefaultConsumer = props => {
         _react2.default.createElement(
             'button',
             { style: { background: theme.background }, onClick: toggleTheme },
-            'clicks'
+            'Toggle'
         )
     );
 };
@@ -1499,30 +1687,17 @@ var _context = __webpack_require__(/*! ./context */ "./components/contexts/theme
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const themes = {
-    light: {
-        foreground: '#000000',
-        background: '#eeeeee',
-        color: 'red'
-    },
-    dark: {
-        foreground: '#ffffff',
-        background: '#222222',
-        color: 'green'
-    }
-};
-
 class ThemesProvider extends _react.Component {
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            theme: themes.light
+            theme: _context.themes.light
         };
 
         this.toggleTheme = () => {
             this.setState(state => ({
-                theme: state.theme === themes.dark ? themes.light : themes.dark
+                theme: state.theme === _context.themes.dark ? _context.themes.light : _context.themes.dark
             }));
         };
     }

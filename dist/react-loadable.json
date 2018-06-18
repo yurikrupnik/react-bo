@@ -399,6 +399,20 @@
       "publicPath": "server.js.map"
     }
   ],
+  "../../assets/IF-pin1.png": [
+    {
+      "id": "./assets/IF-pin1.png",
+      "name": "./assets/IF-pin1.png",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./assets/IF-pin1.png",
+      "name": "./assets/IF-pin1.png",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
   "./Nav": [
     {
       "id": "./components/App/Nav.jsx",

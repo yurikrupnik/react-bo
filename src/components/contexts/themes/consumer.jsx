@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './context';
 import DefaultConsumer from './defaultButton';
 
-class ThemesConsumer extends Component {
-    render() {
-        const { render } = this.props;
-        return (
-            <Consumer>
-                {(props) => {
-                    if (typeof render === 'function') {
-                        return render(props);
-                    }
-                    return (
-                        <DefaultConsumer {...props} />
-                    );
-                }}
-            </Consumer>
-        );
-    }
+function ThemesConsumer({ render, children }) {
+    // console.log('children', children);
+    // const Child = children;
+    return (
+        <Consumer>
+            {(props) => {
+                // const Child = React.createElement('div', props, children);
+                // console.log('Child', Child);
+
+                if (typeof render === 'function') {
+                    return render(props);
+                } else if (children) {
+                    // return <Child />;
+                }
+                return (
+                    <DefaultConsumer {...props} />
+                );
+            }}
+        </Consumer>
+    );
 }
 
 ThemesConsumer.defaultProps = {

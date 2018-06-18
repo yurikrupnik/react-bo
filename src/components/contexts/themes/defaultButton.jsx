@@ -6,7 +6,7 @@ const DefaultConsumer = (props) => {
     return (
         <div>
             <button style={{ background: theme.background }} onClick={toggleTheme}>
-                clicks
+                Toggle
             </button>
         </div>
     );

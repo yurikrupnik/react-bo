@@ -1,6 +1,4 @@
-// import React from 'react';
 import React from 'react';
-// import classNames from 'classnames/bind';
 import './styles.css';
 import ThemesConsumer from '../contexts/themes/consumer';
 import UsersConsumer from '../../api/users/consumer';
@@ -13,8 +11,11 @@ function Dashboard() {
             <h2>Dashboard</h2>
             <UsersConsumer />
             <ProjectsConsumer />
+            <ThemesConsumer>
+                <div>hello from theme consumer children</div>
+            </ThemesConsumer>
             <ThemesConsumer />
-            <ThemesConsumer render={() => <div>yebal</div>} />
+            <ThemesConsumer render={() => <div>nuuuu</div>} />
             <Form />
         </div>
     );

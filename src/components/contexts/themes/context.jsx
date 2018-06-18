@@ -14,7 +14,7 @@ const themes = {
 };
 
 const { Provider, Consumer } = createContext({
-    theme: themes.dark,
+    theme: themes.light,
     toggleTheme: () => {}
 });
 

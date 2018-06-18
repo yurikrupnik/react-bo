@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from './context';
-
-const themes = {
-    light: {
-        foreground: '#000000',
-        background: '#eeeeee',
-        color: 'red'
-    },
-    dark: {
-        foreground: '#ffffff',
-        background: '#222222',
-        color: 'green'
-    },
-};
+import { Provider, themes } from './context';
 
 class ThemesProvider extends Component {
     constructor(props, context) {
