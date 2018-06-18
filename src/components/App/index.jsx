@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from '../routes';
@@ -9,7 +9,7 @@ import { Provider as ThemesProvider } from '../contexts/themes';
 
 // const Providers = [ThemesProvider, UsersProvider];
 
-class App extends React.Component {
+class App extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -26,9 +26,11 @@ class App extends React.Component {
             <ProjectsProvider data={appData.Projects}>
                 <UsersProvider data={appData.Users}>
                     <ThemesProvider>
-                        <Nav />
-                        {routes.map(route => <Route key={route.key} {...route} />)}
-                        <div>default footer</div>
+                        <Fragment>
+                            <Nav />
+                            {routes.map(route => <Route key={route.key} {...route} />)}
+                            <div>default footer</div>
+                        </Fragment>
                     </ThemesProvider>
                 </UsersProvider>
             </ProjectsProvider>
@@ -37,5 +39,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// export { Consumer };

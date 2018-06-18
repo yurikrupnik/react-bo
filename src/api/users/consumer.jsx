@@ -1,30 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from './context';
-
-const DefaultConsumer = (props) => {
-    const { loading, data } = props;
-
-    return (
-        <div>
-            {data.map(val => {
-                return (
-                    <div key={val._id}>
-                        <h2>users defauly consumer</h2>
-                        <div >
-                            name: {val.name}
-                        </div>
-                    </div>
-                );
-            })}
-        </div>
-    );
-};
-
-DefaultConsumer.propTypes = {
-    // theme: PropTypes.shape({}).isRequired,
-    // toggleTheme: PropTypes.func.isRequired
-};
+import List from '../../components/List';
 
 class UsersConsumer extends Component {
     render() {
@@ -32,14 +9,11 @@ class UsersConsumer extends Component {
         return (
             <Consumer>
                 {(props) => {
-                    // if (!props.data.length) {
-                    //     props.fetch();
-                    // }
                     if (typeof render === 'function') {
                         return render(props);
                     }
                     return (
-                        <DefaultConsumer {...props} />
+                        <List {...props} />
                     );
                 }}
             </Consumer>

@@ -4,9 +4,9 @@ import React from 'react';
 // import Enzyme, { mount } from 'enzyme';
 // import Adapter from 'enzyme-adapter-react-16';
 // import jest from 'jest-mock';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
+// import sinon from 'sinon';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import DefaultButton from './defaultButton';
 
@@ -29,10 +29,10 @@ describe('default button', () => {
     });
 
     it('should simulate click', () => {
-        const props = {
-            theme: { background: 'red' },
-        };
-        const onButtonClick = sinon.spy();
+        // const props = {
+        //     theme: { background: 'red' },
+        // };
+        // const onButtonClick = sinon.spy();
         // const wrapper = shallow(<DefaultButton {...props} toggleTheme={onButtonClick} />);
         // wrapper.find('button').simulate('click');
         // expect(onButtonClick).toBeCalled();

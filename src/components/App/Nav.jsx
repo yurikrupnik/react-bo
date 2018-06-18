@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Consumer as ThemesConsumer } from '../contexts/themes';
 
-const Something = (props) => {
-    console.log('props', props);
-    return (
-        <div>hello theme is {props.theme.background}</div>
-    );
-};
+const Something = props => (<div>hello theme is {props.theme.background}</div>);
 
+Something.propTypes = {
+    theme: PropTypes.shape({
+        background: PropTypes.string.isRequired
+    }).isRequired
+};
 
 function MainNav() {
     return (
@@ -36,6 +37,9 @@ function MainNav() {
                 </div>
                 <div>
                     <Link to="/projects">Pojects</Link>
+                </div>
+                <div>
+                    <Link to="/examples">Examples</Link>
                 </div>
             </div>
         </header>

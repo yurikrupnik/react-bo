@@ -12,6 +12,14 @@ class UsersProvider extends Component {
             selected: {}
         };
 
+        this.setSelected = (item) => {
+            this.setState(() => ({ selected: item }));
+        };
+
+        this.clearSelected = () => {
+            this.setState(() => ({ selected: {} }));
+        };
+
         this.fetch = (params, cb) => {
             return this.setState((prevState) => {
                 return { loading: !prevState.loading };
@@ -26,12 +34,15 @@ class UsersProvider extends Component {
     }
 
     render() {
-        const { loading, data } = this.state;
+        const { loading, data, selected } = this.state;
         return (
             <Provider value={{
                 data,
                 loading,
-                fetch: this.fetch
+                selected,
+                fetch: this.fetch,
+                setSelected: this.setSelected,
+                clearSelected: this.clearSelected
             }}
             >
                 {this.props.children}
@@ -39,8 +50,13 @@ class UsersProvider extends Component {
         );
     }
 }
+
+UsersProvider.defaultProps = {
+    data: []
+};
 UsersProvider.propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 export default UsersProvider;

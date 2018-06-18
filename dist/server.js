@@ -528,7 +528,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const usersApi = {
     fetch: (params, cb) => _request2.default.get(_config.url, { params }).then(res => {
         const { data } = res;
-        // res.providerName = Provider;
         if (typeof cb === 'function') {
             return cb(data);
         }
@@ -720,6 +719,14 @@ class UsersProvider extends _react.Component {
             selected: {}
         };
 
+        this.setSelected = item => {
+            this.setState(() => ({ selected: item }));
+        };
+
+        this.clearSelected = () => {
+            this.setState(() => ({ selected: {} }));
+        };
+
         this.fetch = (params, cb) => {
             return this.setState(prevState => {
                 return { loading: !prevState.loading };
@@ -734,21 +741,29 @@ class UsersProvider extends _react.Component {
     }
 
     render() {
-        const { loading, data } = this.state;
+        const { loading, data, selected } = this.state;
         return _react2.default.createElement(
             _context.Provider,
             { value: {
                     data,
                     loading,
-                    fetch: this.fetch
+                    selected,
+                    fetch: this.fetch,
+                    setSelected: this.setSelected,
+                    clearSelected: this.clearSelected
                 }
             },
             this.props.children
         );
     }
 }
+
+UsersProvider.defaultProps = {
+    data: []
+};
 UsersProvider.propTypes = {
-    children: _propTypes2.default.element.isRequired
+    children: _propTypes2.default.element.isRequired,
+    data: _propTypes2.default.arrayOf(_propTypes2.default.shape({}))
 };
 
 exports.default = UsersProvider;
@@ -773,20 +788,27 @@ var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "react-router-dom");
 
 var _themes = __webpack_require__(/*! ../contexts/themes */ "./components/contexts/themes/index.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Something = props => {
-    console.log('props', props);
-    return _react2.default.createElement(
-        'div',
-        null,
-        'hello theme is ',
-        props.theme.background
-    );
+const Something = props => _react2.default.createElement(
+    'div',
+    null,
+    'hello theme is ',
+    props.theme.background
+);
+
+Something.propTypes = {
+    theme: _propTypes2.default.shape({
+        background: _propTypes2.default.string.isRequired
+    }).isRequired
 };
 
 function MainNav() {
@@ -845,6 +867,15 @@ function MainNav() {
                     { to: '/projects' },
                     'Pojects'
                 )
+            ),
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/examples' },
+                    'Examples'
+                )
             )
         )
     );
@@ -902,7 +933,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // const Providers = [ThemesProvider, UsersProvider];
 
-class App extends _react2.default.Component {
+class App extends _react.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -924,12 +955,16 @@ class App extends _react2.default.Component {
                 _react2.default.createElement(
                     _themes.Provider,
                     null,
-                    _react2.default.createElement(_Nav2.default, null),
-                    _routes2.default.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route))),
                     _react2.default.createElement(
-                        'div',
+                        _react.Fragment,
                         null,
-                        'default footer'
+                        _react2.default.createElement(_Nav2.default, null),
+                        _routes2.default.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route))),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'default footer'
+                        )
                     )
                 )
             )
@@ -939,7 +974,46 @@ class App extends _react2.default.Component {
 
 exports.default = App;
 
-// export { Consumer };
+/***/ }),
+
+/***/ "./components/Examples/container.jsx":
+/*!*******************************************!*\
+  !*** ./components/Examples/container.jsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Container extends _react.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lo: false
+        };
+    }
+
+    render() {
+        return _react2.default.createElement(
+            'div',
+            null,
+            'hello from container'
+        );
+    }
+}
+
+exports.default = Container;
 
 /***/ }),
 
@@ -1417,6 +1491,10 @@ var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _context = __webpack_require__(/*! ./context */ "./components/contexts/themes/context.jsx");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -1441,7 +1519,7 @@ class ThemesProvider extends _react.Component {
         this.state = {
             theme: themes.light
         };
-        //
+
         this.toggleTheme = () => {
             this.setState(state => ({
                 theme: state.theme === themes.dark ? themes.light : themes.dark
@@ -1450,17 +1528,23 @@ class ThemesProvider extends _react.Component {
     }
 
     render() {
-        const { theme, data } = this.state;
+        const { theme } = this.state;
+        const { children } = this.props;
         return _react2.default.createElement(
             _context.Provider,
             { value: {
                     theme,
                     toggleTheme: this.toggleTheme
-                } },
-            this.props.children
+                }
+            },
+            children
         );
     }
 }
+
+ThemesProvider.propTypes = {
+    children: _propTypes2.default.element.isRequired
+};
 
 exports.default = ThemesProvider;
 
@@ -1484,9 +1568,13 @@ var _Loadable = __webpack_require__(/*! ./Loadable */ "./components/Loadable/ind
 
 var _Loadable2 = _interopRequireDefault(_Loadable);
 
-var _index = __webpack_require__(/*! ./Topics/index */ "./components/Topics/index.jsx");
+var _Topics = __webpack_require__(/*! ./Topics */ "./components/Topics/index.jsx");
 
-var _index2 = _interopRequireDefault(_index);
+var _Topics2 = _interopRequireDefault(_Topics);
+
+var _container = __webpack_require__(/*! ./Examples/container */ "./components/Examples/container.jsx");
+
+var _container2 = _interopRequireDefault(_container);
 
 var _api = __webpack_require__(/*! ../api/users/api */ "./api/users/api.js");
 
@@ -1523,32 +1611,24 @@ const routes = [{
     exact: true,
     key: 'dashboard',
     fetch: () => Promise.all([_api4.default.fetch(), _api2.default.fetch()]),
-    // need inject to providers...
     providers: ['Projects', 'Users']
 }, {
     path: '/register',
     component: RegisterLoadableComponent,
     key: 'register'
-    // fetch: () => projectsApi.fetch(),
-    // providers: ['Projects']
 }, {
     path: '/about',
     component: AboutLoadableComponent,
     key: 'about'
-    // fetch: () => usersApi.fetch(),
-    // providers: ['Users']
 }, {
     path: '/topics',
-    component: _index2.default,
+    component: _Topics2.default,
     key: 'topics'
-    // fetch: () => usersApi.fetch(),
-    // providers: ['Users']
 }, {
     path: '/projects',
     component: ProjectsLoadableComponent,
     key: 'projects',
     fetch: () => _api4.default.fetch(),
-    // need inject to providers...
     providers: ['Projects']
 }, {
     path: '/users',
@@ -1556,6 +1636,10 @@ const routes = [{
     key: 'users',
     fetch: () => _api2.default.fetch(),
     providers: ['Users']
+}, {
+    path: '/examples',
+    component: _container2.default,
+    key: 'examples'
 }];
 
 exports.default = routes;
@@ -1733,7 +1817,7 @@ exports.default = url => {
     _mongoose2.default.connect(url);
     const db = _mongoose2.default.connection;
     _mongoose2.default.Promise = global.Promise;
-    db.on('error', console.error.bind(console, 'connection error:'));
+    db.on('error', console.error.bind(console, 'connection error:')); // eslint-disable-line no-console
     db.on('connected', () => {
         // console.log('connected:');
     });
@@ -1829,17 +1913,6 @@ exports.default = app => {
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
-
-/***/ }),
-
-/***/ "classnames/bind":
-/*!**********************************!*\
-  !*** external "classnames/bind" ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("classnames/bind");
 
 /***/ }),
 
@@ -1983,6 +2056,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "react-form":
+/*!*****************************!*\
+  !*** external "react-form" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-form");
 
 /***/ }),
 

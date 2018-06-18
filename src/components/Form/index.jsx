@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Form, Text } from 'react-form';
-import styles from './projects.css';
+import styles from './styles.css';
 
 class FormWithArrays extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit(submittedValues) {
+        console.log('submittedValues', submittedValues);
+        // this.setState({ submittedValues });
     }
 
     render() {
@@ -15,8 +21,7 @@ class FormWithArrays extends Component {
                     <div className="col-xs-7">
                         <div className={styles.root}>
                             <div className="root">stam</div>
-                            <Form
-                                onSubmit={submittedValues => this.setState({ submittedValues })}>
+                            <Form onSubmit={this.onSubmit} >
                                 {formApi => (
                                     <form onSubmit={formApi.submitForm} id="form3">
                                         <label htmlFor="firstName2">First name</label>

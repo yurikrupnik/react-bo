@@ -1,5 +1,6 @@
 import Loadable from './Loadable';
-import Topics from './Topics/index';
+import Topics from './Topics';
+import Examples from './Examples/container';
 import usersApi from '../api/users/api';
 import projectsApi from '../api/projects/api';
 
@@ -29,36 +30,28 @@ const routes = [
         exact: true,
         key: 'dashboard',
         fetch: () => Promise.all([projectsApi.fetch(), usersApi.fetch()]),
-        // need inject to providers...
         providers: ['Projects', 'Users']
     },
     {
         path: '/register',
         component: RegisterLoadableComponent,
-        key: 'register',
-        // fetch: () => projectsApi.fetch(),
-        // providers: ['Projects']
+        key: 'register'
     },
     {
         path: '/about',
         component: AboutLoadableComponent,
-        key: 'about',
-        // fetch: () => usersApi.fetch(),
-        // providers: ['Users']
+        key: 'about'
     },
     {
         path: '/topics',
         component: Topics,
-        key: 'topics',
-        // fetch: () => usersApi.fetch(),
-        // providers: ['Users']
+        key: 'topics'
     },
     {
         path: '/projects',
         component: ProjectsLoadableComponent,
         key: 'projects',
         fetch: () => projectsApi.fetch(),
-        // need inject to providers...
         providers: ['Projects']
     },
     {
@@ -67,6 +60,11 @@ const routes = [
         key: 'users',
         fetch: () => usersApi.fetch(),
         providers: ['Users']
+    },
+    {
+        path: '/examples',
+        component: Examples,
+        key: 'examples'
     }
 ];
 

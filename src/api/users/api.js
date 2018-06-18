@@ -1,11 +1,10 @@
 import request from '../request';
-import { url, Provider } from './config';
+import { url } from './config';
 
 const usersApi = {
     fetch: (params, cb) => request.get(url, { params })
         .then((res) => {
             const { data } = res;
-            // res.providerName = Provider;
             if (typeof cb === 'function') {
                 return cb(data);
             }

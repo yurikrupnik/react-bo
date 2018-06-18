@@ -4,7 +4,7 @@ export default (url) => {
     mongoose.connect(url);
     const db = mongoose.connection;
     mongoose.Promise = global.Promise;
-    db.on('error', console.error.bind(console, 'connection error:'));
+    db.on('error', console.error.bind(console, 'connection error:')); // eslint-disable-line no-console
     db.on('connected', () => {
         // console.log('connected:');
     });

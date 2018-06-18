@@ -30,7 +30,7 @@ List.defaultProps = {
 List.propTypes = {
     fetch: PropTypes.func,
     loading: PropTypes.bool,
-    // data: PropTypes.arrayOf({})
+    data: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 export default List;

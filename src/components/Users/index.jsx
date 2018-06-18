@@ -12,10 +12,7 @@ class Container extends Component {
         return (
             <div>
                 <h2>Users</h2>
-                <UsersConsumer render={(props) => {
-                    return <List {...props} />;
-                }}
-                />
+                <UsersConsumer render={props => <List {...props} />} />
             </div>
         );
     }

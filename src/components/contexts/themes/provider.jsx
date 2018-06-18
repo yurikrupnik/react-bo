@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from './context';
 
 const themes = {
@@ -21,7 +22,7 @@ class ThemesProvider extends Component {
         this.state = {
             theme: themes.light,
         };
-        //
+
         this.toggleTheme = () => {
             this.setState(state => ({
                 theme:
@@ -33,16 +34,22 @@ class ThemesProvider extends Component {
     }
 
     render() {
-        const { theme, data } = this.state;
+        const { theme } = this.state;
+        const { children } = this.props;
         return (
             <Provider value={{
                 theme,
                 toggleTheme: this.toggleTheme
-            }} >
-                {this.props.children}
+            }}
+            >
+                {children}
             </Provider>
         );
     }
 }
+
+ThemesProvider.propTypes = {
+    children: PropTypes.element.isRequired
+};
 
 export default ThemesProvider;
