@@ -1011,29 +1011,54 @@ var _IFPin = __webpack_require__(/*! ../../assets/IF-pin1.png */ "./assets/IF-pi
 
 var _IFPin2 = _interopRequireDefault(_IFPin);
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "react-redux");
+
+var _Button = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _Checkbox = __webpack_require__(/*! @material-ui/core/Checkbox */ "@material-ui/core/Checkbox");
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// wrapper component that renders children
-// usually used to wrap some logic in lifecycle events
-// limitations - pass state/props to children
-// using state here is useless
+// it is js, many things will work
+// many ppl will write posts and articles telling you they have the solution for u
+// npm is full with bad packages - need to choose wisely
+// u are not in client but in node, https://nodejs.org/api/globals.html
+// forget about jquery - different thinking = different patterns
+// it is all about scopes...
 
-class WrapperOfSomeKind extends _react.Component {
-    componentDidMount() {
-        console.log('this.props of WrapperOfSomeKind in componentDidMount', this.props);
-    }
+const data = [{
+    name: 'asd'
+}, {
+    name: 'dfgh'
+}];
 
-    render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            this.props.children
-        );
-    }
-}
+const getName = v => v.name;
 
-// regular func - no lifecycle and no state - dumb = PureComponent
-// same thing with state and lifecycle - smart = Component
+const names = data.map(v => v.name);
+const names1 = data.map(v => v.name);
+
+const getData = v => v.data;
+Promise.resolve({}).then(getData);
+Promise.resolve({ status: 200, data: [] }).then(res => {
+    const { status } = res; // do with it something
+    console.log('status', status);
+    return getData(res);
+});
+
+// regular func - no lifecycle and no state - dumb = PureComponent = stateless
+// same thing with state and lifecycle - smart = Component = statefull?
+// usually used for ui components: styled components - can be changed by props
+// buttons and alot more = ui material is a great example https://material-ui.com/api/button/
+// dropdown that can have his own inner state either open or closed
+// limitations - always in a container, you will not put as main route a dropdown or button
+// need to pass many props and define/learn api
+// good side - written once and used as new instance provides full control by the class
+// most components used by libs use almost the same props
+// object oriented combined with functional patten - u can do what ever u want - full power of js
 function StateAndToggle(props) {
     const { state, toggle } = props;
     return _react2.default.createElement(
@@ -1053,20 +1078,52 @@ function StateAndToggle(props) {
     );
 }
 
-// hoc 1 - example
-function Hoc2Wrapper() {
+function DumbComponent() {
     return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
-            'h2',
+            'h4',
             null,
-            'Hoc Wrapper stuff'
+            'I am dumb component that has simple h2'
         )
     );
 }
 
-function Hoc2(Wrapper) {
+// wrapper component that renders children
+// usually used to wrap some logic with lifecycle events or to store data
+// limitations - pass state/props to children
+// using state here is useless
+// use it rarely
+// example - redux Provider https://github.com/reduxjs/react-redux/blob/master/docs/api.md#provider-store
+class WrapperOfSomeKind extends _react.Component {
+    componentDidMount() {
+        console.log('this.props of WrapperOfSomeKind in componentDidMount', this.props);
+    }
+
+    render() {
+        return _react2.default.createElement(
+            'div',
+            null,
+            this.props.children
+        );
+    }
+}
+
+// HOC
+// function that returns new react component
+// used to close logic in the react component and reuse with any Component that passed to the Hoc as Wrapper
+// used when not knowing about render props
+// limitations:
+// what is your props? the params or this.props?
+// if it is params use regular function or react Component from the first example
+// Wrapper must be ready to revieve calculated data if any
+// user (developer) asks him self what is the data structure returned by the component
+// many hocs can bring to name colitions - naming should be withXPostionYPostion :)
+// calling in jsx = omg why would i do that, but u want static = creates chain of hocs as pattern
+function WithNothing(Wrapper, params) {
+    // if this area is not used by any of the 2 parameters currently apear = react should not be inside
+    // this area is a closure that never in use - can wrap in 10 functions and have the same effect
     return class extends _react.Component {
         render() {
             return _react2.default.createElement(Wrapper, null);
@@ -1074,7 +1131,16 @@ function Hoc2(Wrapper) {
     };
 }
 
-// hoc 2 - example
+function fuHoc(params) {
+    return function (Wrapper) {
+        return class extends _react.Component {
+            render() {
+                return _react2.default.createElement(Wrapper, params);
+            }
+        };
+    };
+}
+
 function WithStateAndToggle(Wrapper) {
     return class extends _react.Component {
         constructor(props) {
@@ -1095,6 +1161,10 @@ function WithStateAndToggle(Wrapper) {
     };
 }
 
+// render prop
+// the solution to dynamic component (HOC Wrapper) recieving specific props by the wrapper Component
+// use cases very dynamic and powerful - the perfect container
+// advanced example context api
 class RenderPropStateAndToggle extends _react.Component {
     constructor(props) {
         super(props);
@@ -1105,9 +1175,7 @@ class RenderPropStateAndToggle extends _react.Component {
     }
 
     toggle() {
-        this.setState(prevState => {
-            return { isOpen: !prevState.isOpen };
-        });
+        this.setState(prevState => ({ isOpen: !prevState.isOpen }));
     }
 
     render() {
@@ -1117,16 +1185,6 @@ class RenderPropStateAndToggle extends _react.Component {
             toggle: this.toggle
         });
     }
-}
-
-function fuHoc(params) {
-    return function (Wrapper) {
-        return class extends _react.Component {
-            render() {
-                return _react2.default.createElement(Wrapper, params);
-            }
-        };
-    };
 }
 
 function FuHocWrapper(props) {
@@ -1143,43 +1201,38 @@ function FuHocWrapper(props) {
 }
 
 function FuRenderProps(props) {
-    return props.render(props);
+    const age = props.age || 18;
+    return props.render({ age });
 }
 
 class Container extends _react.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            lo: false
-        };
-    }
-
     render() {
-        const HocInRender = Hoc2(Hoc2Wrapper);
+        const HocInRender = WithNothing(DumbComponent);
         const WithStateAndToggleReady = WithStateAndToggle(StateAndToggle);
         const FuHocC = fuHoc({ age: 21 })(FuHocWrapper);
         return _react2.default.createElement(
             _react.Fragment,
             null,
             _react2.default.createElement(
-                'h2',
+                'h1',
                 null,
                 'hello from container'
             ),
-            _react2.default.createElement(WrapperOfSomeKind, { children: _react2.default.createElement(HocInRender, null) }),
+            _react2.default.createElement(HocInRender, null),
+            _react2.default.createElement(WrapperOfSomeKind, { children: _react2.default.createElement(DumbComponent, null) }),
             _react2.default.createElement(
                 WrapperOfSomeKind,
                 null,
-                _react2.default.createElement(HocInRender, null)
+                _react2.default.createElement(DumbComponent, null)
             ),
             _react2.default.createElement(
-                'h5',
+                'h3',
                 null,
                 'Hoc of State And Toggle'
             ),
             _react2.default.createElement(WithStateAndToggleReady, null),
             _react2.default.createElement(
-                'h5',
+                'h3',
                 null,
                 'Render Prop State and Toggle'
             ),
@@ -1188,10 +1241,10 @@ class Container extends _react.Component {
                 }
             }),
             _react2.default.createElement(FuHocC, null),
-            _react2.default.createElement(FuRenderProps, { render: props => {
+            _react2.default.createElement(FuRenderProps, { age: 12, render: props => {
                     return _react2.default.createElement(FuHocWrapper, { age: props.age });
-                }, age: 23 }),
-            _react2.default.createElement(HocInRender, null),
+                }
+            }),
             _react2.default.createElement('img', { src: _IFPin2.default, alt: 'no imgag' })
         );
     }
@@ -2080,6 +2133,28 @@ exports.default = app => {
 
 /***/ }),
 
+/***/ "@material-ui/core/Button":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Button" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Button");
+
+/***/ }),
+
+/***/ "@material-ui/core/Checkbox":
+/*!*********************************************!*\
+  !*** external "@material-ui/core/Checkbox" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Checkbox");
+
+/***/ }),
+
 /***/ "axios":
 /*!************************!*\
   !*** external "axios" ***!
@@ -2253,6 +2328,17 @@ module.exports = require("react-form");
 /***/ (function(module, exports) {
 
 module.exports = require("react-loadable");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
 
 /***/ }),
 

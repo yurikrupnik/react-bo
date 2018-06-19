@@ -625,6 +625,18 @@
   ],
   "undefined": [
     {
+      "id": "@material-ui/core/Button",
+      "name": "@material-ui/core/Button",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "@material-ui/core/Checkbox",
+      "name": "@material-ui/core/Checkbox",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
       "id": "axios",
       "name": "axios",
       "file": "server.js",
@@ -717,6 +729,12 @@
     {
       "id": "react-loadable",
       "name": "react-loadable",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "react-redux",
+      "name": "react-redux",
       "file": "server.js",
       "publicPath": "server.js"
     },
@@ -745,6 +763,18 @@
       "publicPath": "server.js"
     },
     {
+      "id": "@material-ui/core/Button",
+      "name": "@material-ui/core/Button",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
+      "id": "@material-ui/core/Checkbox",
+      "name": "@material-ui/core/Checkbox",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
       "id": "axios",
       "name": "axios",
       "file": "server.js.map",
@@ -837,6 +867,12 @@
     {
       "id": "react-loadable",
       "name": "react-loadable",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
+      "id": "react-redux",
+      "name": "react-redux",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     },
