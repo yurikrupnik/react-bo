@@ -9,15 +9,15 @@ class UsersProvider extends Component {
         this.state = {
             data: props.data || [],
             loading: false,
-            selected: {}
+            selected: null
         };
 
-        this.setSelected = (item) => {
-            this.setState(() => ({ selected: item }));
+        this.setSelected = (selected) => {
+            this.setState(() => ({ selected }));
         };
 
         this.clearSelected = () => {
-            this.setState(() => ({ selected: {} }));
+            this.setState(() => ({ selected: null }));
         };
 
         this.fetch = (params, cb) => {

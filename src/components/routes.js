@@ -1,6 +1,5 @@
 import Loadable from './Loadable';
 import Topics from './Topics';
-import Examples from './Examples/container';
 import usersApi from '../api/users/api';
 import projectsApi from '../api/projects/api';
 
@@ -60,11 +59,6 @@ const routes = [
         key: 'users',
         fetch: () => usersApi.fetch(),
         providers: ['Users']
-    },
-    {
-        path: '/examples',
-        component: Examples,
-        key: 'examples'
     }
 ];
 

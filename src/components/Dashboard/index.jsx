@@ -11,9 +11,6 @@ function Dashboard() {
             <h2>Dashboard</h2>
             <UsersConsumer />
             <ProjectsConsumer />
-            <ThemesConsumer>
-                <div>hello from theme consumer children</div>
-            </ThemesConsumer>
             <ThemesConsumer />
             <ThemesConsumer render={() => <div>nuuuu</div>} />
             <Form />

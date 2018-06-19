@@ -38,9 +38,6 @@ function MainNav() {
                 <div>
                     <Link to="/projects">Pojects</Link>
                 </div>
-                <div>
-                    <Link to="/examples">Examples</Link>
-                </div>
             </div>
         </header>
     );
