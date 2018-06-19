@@ -399,20 +399,6 @@
       "publicPath": "server.js.map"
     }
   ],
-  "../../assets/IF-pin1.png": [
-    {
-      "id": "./assets/IF-pin1.png",
-      "name": "./assets/IF-pin1.png",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "./assets/IF-pin1.png",
-      "name": "./assets/IF-pin1.png",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    }
-  ],
   "./Nav": [
     {
       "id": "./components/App/Nav.jsx",
@@ -437,20 +423,6 @@
     {
       "id": "./components/App/index.jsx",
       "name": "./components/App/index.jsx",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    }
-  ],
-  "./Examples/container": [
-    {
-      "id": "./components/Examples/container.jsx",
-      "name": "./components/Examples/container.jsx",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "./components/Examples/container.jsx",
-      "name": "./components/Examples/container.jsx",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -595,56 +567,10 @@
       "publicPath": "server.js.map"
     }
   ],
-  "./services/db": [
-    {
-      "id": "./services/db/index.js",
-      "name": "./services/db/index.js",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "./services/db/index.js",
-      "name": "./services/db/index.js",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    }
-  ],
-  "./services/socket/server": [
-    {
-      "id": "./services/socket/server.js",
-      "name": "./services/socket/server.js",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "./services/socket/server.js",
-      "name": "./services/socket/server.js",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    }
-  ],
   "undefined": [
     {
-      "id": "@material-ui/core/Button",
-      "name": "@material-ui/core/Button",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "@material-ui/core/Checkbox",
-      "name": "@material-ui/core/Checkbox",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
       "id": "axios",
       "name": "axios",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "http",
-      "name": "http",
       "file": "server.js",
       "publicPath": "server.js"
     },
@@ -733,12 +659,6 @@
       "publicPath": "server.js"
     },
     {
-      "id": "react-redux",
-      "name": "react-redux",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
       "id": "react-router",
       "name": "react-router",
       "file": "server.js",
@@ -751,38 +671,8 @@
       "publicPath": "server.js"
     },
     {
-      "id": "socket.io",
-      "name": "socket.io",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "socket.io-logger",
-      "name": "socket.io-logger",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "@material-ui/core/Button",
-      "name": "@material-ui/core/Button",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "@material-ui/core/Checkbox",
-      "name": "@material-ui/core/Checkbox",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
       "id": "axios",
       "name": "axios",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "http",
-      "name": "http",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     },
@@ -871,12 +761,6 @@
       "publicPath": "server.js.map"
     },
     {
-      "id": "react-redux",
-      "name": "react-redux",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
       "id": "react-router",
       "name": "react-router",
       "file": "server.js.map",
@@ -885,18 +769,6 @@
     {
       "id": "react-router-dom",
       "name": "react-router-dom",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "socket.io",
-      "name": "socket.io",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "socket.io-logger",
-      "name": "socket.io-logger",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }

@@ -315,11 +315,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = new _koaRouter2.default();
 
-router.get(_config.url, (0, _methods.list)(_model2.default)); // array
+router.get(_config.url, ctx => {
+    ctx.body = [{
+        date: '2018-06-16T20:51:09.232Z',
+        _id: '5b25783da4fa073279237e5f',
+        name: 'project1'
+    }, {
+        date: '2018-04-16T20:51:09.232Z',
+        _id: '5b25713da4fa073279237e5f',
+        name: 'project2'
+    }];
+}); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
-router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { name: 'else', email: '', hashPassword: 'ta s' }).then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, {
+    name: 'else',
+    email: '',
+    hashPassword: 'tas'
+}).then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
 
 router.delete(`${_config.url}/:id`, (0, _methods.removeOne)(_model2.default)); // id
 
@@ -622,11 +636,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = new _koaRouter2.default();
 
-router.get(_config.url, (0, _methods.list)(_model2.default)); // array
+router.get(_config.url, ctx => {
+    ctx.body = [{
+        _id: '5ad3c7f60e3028920225ab3f',
+        name: 'else',
+        hashPassword: 'ta s',
+        email: ''
+    }, {
+        id: '5aeb2d96f0fb7e0458ad5cc2',
+        name: 'ta',
+        hashPassword: 'sd',
+        email: 'de@d.com'
+    }, {
+        id: '5aeb2e168eee9b045d4f049a',
+        name: 'yosso',
+        email: 'yuri@yuri.com',
+        hashPassword: '123d'
+    }, {
+        id: '5aeb44c423c91d05fc13bc7d',
+        email: 'sddsa@2.com',
+        hashPassword: '123dasdasd'
+    }, {
+        id: '5aeb44ce23c91d05fc13bc7e',
+        name: 'mikey',
+        email: 'sddsa@2.com',
+        hashPassword: '123dasdasd'
+    }];
+}); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
-router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { name: 'else', email: '', hashPassword: 'ta s' }) // eslint-disable-line no-underscore-dangle
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, {
+    name: 'else',
+    email: '',
+    hashPassword: 'ta s'
+}) // eslint-disable-line no-underscore-dangle
 .then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
 
 router.delete(`${_config.url}/:id`, (0, _methods.removeOne)(_model2.default)); // id
@@ -716,15 +760,15 @@ class UsersProvider extends _react.Component {
         this.state = {
             data: props.data || [],
             loading: false,
-            selected: {}
+            selected: null
         };
 
-        this.setSelected = item => {
-            this.setState(() => ({ selected: item }));
+        this.setSelected = selected => {
+            this.setState(() => ({ selected }));
         };
 
         this.clearSelected = () => {
-            this.setState(() => ({ selected: {} }));
+            this.setState(() => ({ selected: null }));
         };
 
         this.fetch = (params, cb) => {
@@ -767,17 +811,6 @@ UsersProvider.propTypes = {
 };
 
 exports.default = UsersProvider;
-
-/***/ }),
-
-/***/ "./assets/IF-pin1.png":
-/*!****************************!*\
-  !*** ./assets/IF-pin1.png ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "5fd8843c5b8a7b1881c8110af5f9d077.png";
 
 /***/ }),
 
@@ -878,15 +911,6 @@ function MainNav() {
                     { to: '/projects' },
                     'Pojects'
                 )
-            ),
-            _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/examples' },
-                    'Examples'
-                )
             )
         )
     );
@@ -984,273 +1008,6 @@ class App extends _react.Component {
 }
 
 exports.default = App;
-
-/***/ }),
-
-/***/ "./components/Examples/container.jsx":
-/*!*******************************************!*\
-  !*** ./components/Examples/container.jsx ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _IFPin = __webpack_require__(/*! ../../assets/IF-pin1.png */ "./assets/IF-pin1.png");
-
-var _IFPin2 = _interopRequireDefault(_IFPin);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "react-redux");
-
-var _Button = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _Checkbox = __webpack_require__(/*! @material-ui/core/Checkbox */ "@material-ui/core/Checkbox");
-
-var _Checkbox2 = _interopRequireDefault(_Checkbox);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// it is js, many things will work
-// many ppl will write posts and articles telling you they have the solution for u
-// npm is full with bad packages - need to choose wisely
-// u are not in client but in node, https://nodejs.org/api/globals.html
-// forget about jquery - different thinking = different patterns
-// it is all about scopes...
-
-const data = [{
-    name: 'asd'
-}, {
-    name: 'dfgh'
-}];
-
-const getName = v => v.name;
-
-const names = data.map(v => v.name);
-const names1 = data.map(v => v.name);
-
-const getData = v => v.data;
-Promise.resolve({}).then(getData);
-Promise.resolve({ status: 200, data: [] }).then(res => {
-    const { status } = res; // do with it something
-    console.log('status', status);
-    return getData(res);
-});
-
-// regular func - no lifecycle and no state - dumb = PureComponent = stateless
-// same thing with state and lifecycle - smart = Component = statefull?
-// usually used for ui components: styled components - can be changed by props
-// buttons and alot more = ui material is a great example https://material-ui.com/api/button/
-// dropdown that can have his own inner state either open or closed
-// limitations - always in a container, you will not put as main route a dropdown or button
-// need to pass many props and define/learn api
-// good side - written once and used as new instance provides full control by the class
-// most components used by libs use almost the same props
-// object oriented combined with functional patten - u can do what ever u want - full power of js
-function StateAndToggle(props) {
-    const { state, toggle } = props;
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'div',
-            null,
-            'state: ',
-            state.toString()
-        ),
-        _react2.default.createElement(
-            'button',
-            { onClick: toggle },
-            'toggle'
-        )
-    );
-}
-
-function DumbComponent() {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'h4',
-            null,
-            'I am dumb component that has simple h2'
-        )
-    );
-}
-
-// wrapper component that renders children
-// usually used to wrap some logic with lifecycle events or to store data
-// limitations - pass state/props to children
-// using state here is useless
-// use it rarely
-// example - redux Provider https://github.com/reduxjs/react-redux/blob/master/docs/api.md#provider-store
-class WrapperOfSomeKind extends _react.Component {
-    componentDidMount() {
-        console.log('this.props of WrapperOfSomeKind in componentDidMount', this.props);
-    }
-
-    render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            this.props.children
-        );
-    }
-}
-
-// HOC
-// function that returns new react component
-// used to close logic in the react component and reuse with any Component that passed to the Hoc as Wrapper
-// used when not knowing about render props
-// limitations:
-// what is your props? the params or this.props?
-// if it is params use regular function or react Component from the first example
-// Wrapper must be ready to revieve calculated data if any
-// user (developer) asks him self what is the data structure returned by the component
-// many hocs can bring to name colitions - naming should be withXPostionYPostion :)
-// calling in jsx = omg why would i do that, but u want static = creates chain of hocs as pattern
-function WithNothing(Wrapper, params) {
-    // if this area is not used by any of the 2 parameters currently apear = react should not be inside
-    // this area is a closure that never in use - can wrap in 10 functions and have the same effect
-    return class extends _react.Component {
-        render() {
-            return _react2.default.createElement(Wrapper, null);
-        }
-    };
-}
-
-function fuHoc(params) {
-    return function (Wrapper) {
-        return class extends _react.Component {
-            render() {
-                return _react2.default.createElement(Wrapper, params);
-            }
-        };
-    };
-}
-
-function WithStateAndToggle(Wrapper) {
-    return class extends _react.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                isOpen: false
-            };
-            this.toggle = this.toggle.bind(this);
-        }
-
-        toggle() {
-            this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-        }
-
-        render() {
-            return _react2.default.createElement(Wrapper, _extends({}, this.props, { state: this.state.isOpen, toggle: this.toggle }));
-        }
-    };
-}
-
-// render prop
-// the solution to dynamic component (HOC Wrapper) recieving specific props by the wrapper Component
-// use cases very dynamic and powerful - the perfect container
-// advanced example context api
-class RenderPropStateAndToggle extends _react.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false
-        };
-        this.toggle = this.toggle.bind(this);
-    }
-
-    toggle() {
-        this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-    }
-
-    render() {
-        const { render } = this.props;
-        return render({
-            isOpen: this.state.isOpen,
-            toggle: this.toggle
-        });
-    }
-}
-
-function FuHocWrapper(props) {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'h2',
-            null,
-            'Age is: ',
-            props.age
-        )
-    );
-}
-
-function FuRenderProps(props) {
-    const age = props.age || 18;
-    return props.render({ age });
-}
-
-class Container extends _react.Component {
-    render() {
-        const HocInRender = WithNothing(DumbComponent);
-        const WithStateAndToggleReady = WithStateAndToggle(StateAndToggle);
-        const FuHocC = fuHoc({ age: 21 })(FuHocWrapper);
-        return _react2.default.createElement(
-            _react.Fragment,
-            null,
-            _react2.default.createElement(
-                'h1',
-                null,
-                'hello from container'
-            ),
-            _react2.default.createElement(HocInRender, null),
-            _react2.default.createElement(WrapperOfSomeKind, { children: _react2.default.createElement(DumbComponent, null) }),
-            _react2.default.createElement(
-                WrapperOfSomeKind,
-                null,
-                _react2.default.createElement(DumbComponent, null)
-            ),
-            _react2.default.createElement(
-                'h3',
-                null,
-                'Hoc of State And Toggle'
-            ),
-            _react2.default.createElement(WithStateAndToggleReady, null),
-            _react2.default.createElement(
-                'h3',
-                null,
-                'Render Prop State and Toggle'
-            ),
-            _react2.default.createElement(RenderPropStateAndToggle, { render: props => {
-                    return _react2.default.createElement(StateAndToggle, { state: props.isOpen, toggle: props.toggle });
-                }
-            }),
-            _react2.default.createElement(FuHocC, null),
-            _react2.default.createElement(FuRenderProps, { age: 12, render: props => {
-                    return _react2.default.createElement(FuHocWrapper, { age: props.age });
-                }
-            }),
-            _react2.default.createElement('img', { src: _IFPin2.default, alt: 'no imgag' })
-        );
-    }
-}
-
-exports.default = Container;
 
 /***/ }),
 
@@ -1565,20 +1322,13 @@ var _defaultButton2 = _interopRequireDefault(_defaultButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ThemesConsumer({ render, children }) {
-    // console.log('children', children);
-    // const Child = children;
+function ThemesConsumer({ render }) {
     return _react2.default.createElement(
         _context.Consumer,
         null,
         props => {
-            // const Child = React.createElement('div', props, children);
-            // console.log('Child', Child);
-
             if (typeof render === 'function') {
                 return render(props);
-            } else if (children) {
-                // return <Child />;
             }
             return _react2.default.createElement(_defaultButton2.default, props);
         }
@@ -1800,10 +1550,6 @@ var _Topics = __webpack_require__(/*! ./Topics */ "./components/Topics/index.jsx
 
 var _Topics2 = _interopRequireDefault(_Topics);
 
-var _container = __webpack_require__(/*! ./Examples/container */ "./components/Examples/container.jsx");
-
-var _container2 = _interopRequireDefault(_container);
-
 var _api = __webpack_require__(/*! ../api/users/api */ "./api/users/api.js");
 
 var _api2 = _interopRequireDefault(_api);
@@ -1864,10 +1610,6 @@ const routes = [{
     key: 'users',
     fetch: () => _api2.default.fetch(),
     providers: ['Users']
-}, {
-    path: '/examples',
-    component: _container2.default,
-    key: 'examples'
 }];
 
 exports.default = routes;
@@ -1945,14 +1687,6 @@ var _api = __webpack_require__(/*! ./api */ "./api/index.js");
 
 var _api2 = _interopRequireDefault(_api);
 
-var _db = __webpack_require__(/*! ./services/db */ "./services/db/index.js");
-
-var _db2 = _interopRequireDefault(_db);
-
-var _server2 = __webpack_require__(/*! ./services/socket/server */ "./services/socket/server.js");
-
-var _server3 = _interopRequireDefault(_server2);
-
 var _App = __webpack_require__(/*! ./components/App */ "./components/App/index.jsx");
 
 var _App2 = _interopRequireDefault(_App);
@@ -1965,13 +1699,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import stats from './react-loadable.json';
 
+// import db from './services/db';
+// import socket from './services/socket/server';
 const app = new _koa2.default();
 const assets = _path2.default.resolve(__dirname, 'assets');
 
 app.use((0, _koaStatic2.default)(assets));
 app.use((0, _koaRenderView2.default)(assets, { extension: 'ejs' }));
 app.use((0, _koaFavicon2.default)(_path2.default.resolve(assets, 'favicon.ico')));
-app.use((0, _db2.default)(_config.databaseUrl));
+// app.use(db(databaseUrl));
 app.use(_api2.default);
 
 app.use((ctx, next) => {
@@ -2010,7 +1746,7 @@ app.use((ctx, next) => {
 });
 
 _reactLoadable2.default.preloadAll().then(() => {
-    (0, _server3.default)(app).listen(_config.port, err => {
+    app.listen(_config.port, err => {
         if (err) {
             console.log('err', err); // eslint-disable-line no-console
         } else {
@@ -2018,140 +1754,6 @@ _reactLoadable2.default.preloadAll().then(() => {
         }
     });
 });
-
-/***/ }),
-
-/***/ "./services/db/index.js":
-/*!******************************!*\
-  !*** ./services/db/index.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = url => {
-    _mongoose2.default.connect(url);
-    const db = _mongoose2.default.connection;
-    _mongoose2.default.Promise = global.Promise;
-    db.on('error', console.error.bind(console, 'connection error:')); // eslint-disable-line no-console
-    db.on('connected', () => {
-        // console.log('connected:');
-    });
-    db.on('open', () => {
-        // we're connected!
-        // console.log('connected to a');
-    });
-    db.once('open', () => {
-        // we're connected!
-        // console.log('connected to b');
-    });
-    db.once('disconnected', () => {
-        // we're connected!
-        // console.log('disconnected');
-    });
-    return (ctx, next) => {
-        ctx.db = db;
-        return next();
-    };
-};
-
-/***/ }),
-
-/***/ "./services/socket/server.js":
-/*!***********************************!*\
-  !*** ./services/socket/server.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _http = __webpack_require__(/*! http */ "http");
-
-var _http2 = _interopRequireDefault(_http);
-
-var _socket = __webpack_require__(/*! socket.io */ "socket.io");
-
-var _socket2 = _interopRequireDefault(_socket);
-
-var _socket3 = __webpack_require__(/*! socket.io-logger */ "socket.io-logger");
-
-var _socket4 = _interopRequireDefault(_socket3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = app => {
-    const server = _http2.default.Server(app.callback());
-    const io = (0, _socket2.default)(server);
-    const users = {}; // list of messages locally saved in the server
-    io.use((0, _socket4.default)());
-    io.on('connection', socket => {
-        socket.on('newMessage', (message, next) => {
-            const { nickname, avatar } = socket;
-            // send nickname and avatar with the message taken from socket to all messages
-            io.emit('receiveMessage', { message, nickname, avatar });
-            next();
-        });
-
-        socket.on('newUser', (user, next) => {
-            if (Object.keys(users).includes(user.nickname)) {
-                next('Name already in use');
-            } else {
-                // set nickname and avatar on socket object to retrieve later
-                socket.nickname = user.nickname; // eslint-disable-line no-param-reassign
-                socket.avatar = user.avatar; // eslint-disable-line no-param-reassign
-                users[user.nickname] = user;
-                next(null);
-            }
-        });
-
-        socket.on('disconnect', reason => {
-            // eslint-disable-line no-unused-vars
-            delete users[socket.nickname];
-        });
-    });
-
-    return server;
-};
-
-/***/ }),
-
-/***/ "@material-ui/core/Button":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Button" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Button");
-
-/***/ }),
-
-/***/ "@material-ui/core/Checkbox":
-/*!*********************************************!*\
-  !*** external "@material-ui/core/Checkbox" ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Checkbox");
 
 /***/ }),
 
@@ -2163,17 +1765,6 @@ module.exports = require("@material-ui/core/Checkbox");
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
-
-/***/ }),
-
-/***/ "http":
-/*!***********************!*\
-  !*** external "http" ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("http");
 
 /***/ }),
 
@@ -2331,17 +1922,6 @@ module.exports = require("react-loadable");
 
 /***/ }),
 
-/***/ "react-redux":
-/*!******************************!*\
-  !*** external "react-redux" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-
 /***/ "react-router":
 /*!*******************************!*\
   !*** external "react-router" ***!
@@ -2361,28 +1941,6 @@ module.exports = require("react-router");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
-
-/***/ }),
-
-/***/ "socket.io":
-/*!****************************!*\
-  !*** external "socket.io" ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("socket.io");
-
-/***/ }),
-
-/***/ "socket.io-logger":
-/*!***********************************!*\
-  !*** external "socket.io-logger" ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("socket.io-logger");
 
 /***/ })
 

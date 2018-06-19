@@ -9,8 +9,8 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
 import { port, databaseUrl } from './config';
 import api from './api';
-import db from './services/db';
-import socket from './services/socket/server';
+// import db from './services/db';
+// import socket from './services/socket/server';
 import App from './components/App';
 import routes from './components/routes';
 // import stats from './react-loadable.json';
@@ -21,7 +21,7 @@ const assets = path.resolve(__dirname, 'assets');
 app.use(statics(assets));
 app.use(views(assets, { extension: 'ejs' }));
 app.use(favicon(path.resolve(assets, 'favicon.ico')));
-app.use(db(databaseUrl));
+// app.use(db(databaseUrl));
 app.use(api);
 
 app.use((ctx, next) => {
@@ -62,7 +62,7 @@ app.use((ctx, next) => {
 });
 
 Loadable.preloadAll().then(() => {
-    socket(app).listen(port, (err) => {
+    app.listen(port, (err) => {
         if (err) {
             console.log('err', err); // eslint-disable-line no-console
         } else {
