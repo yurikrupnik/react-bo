@@ -62,17 +62,32 @@
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -626,12 +641,6 @@ var _koaRouter2 = _interopRequireDefault(_koaRouter);
 
 var _config = __webpack_require__(/*! ./config */ "./api/users/config.js");
 
-var _model = __webpack_require__(/*! ./model */ "./api/users/model.js");
-
-var _model2 = _interopRequireDefault(_model);
-
-var _methods = __webpack_require__(/*! ../methods */ "./api/methods.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = new _koaRouter2.default();
@@ -662,65 +671,8 @@ router.get(_config.url, ctx => {
         email: 'sddsa@2.com',
         hashPassword: '123dasdasd'
     }];
-}); // array
-router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
-router.post(_config.url, (0, _methods.create)(_model2.default));
-
-router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, {
-    name: 'else',
-    email: '',
-    hashPassword: 'ta s'
-}) // eslint-disable-line no-underscore-dangle
-.then((0, _methods.response)(ctx)).catch((0, _methods.responseError)(ctx)));
-
-router.delete(`${_config.url}/:id`, (0, _methods.removeOne)(_model2.default)); // id
-
+});
 exports.default = router.routes();
-
-/***/ }),
-
-/***/ "./api/users/model.js":
-/*!****************************!*\
-  !*** ./api/users/model.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.UserSchema = undefined;
-
-var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-var _config = __webpack_require__(/*! ./config */ "./api/users/config.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const UserSchema = new _mongoose.Schema({
-    // id: {
-    //     type: String,
-    //     index: true
-    // },
-    email: { type: String, required: true },
-    name: String,
-    hashPassword: String
-});
-
-const Model = _mongoose2.default.model(_config.dbModel, UserSchema);
-// new Model({
-//     email: 'd@d.com',
-//     name: 'yu',
-//     hashPassword: 'sd'
-// }).save();
-
-exports.default = Model;
-exports.UserSchema = UserSchema;
 
 /***/ }),
 
@@ -1561,22 +1513,22 @@ var _api4 = _interopRequireDefault(_api3);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const DashboardLoadableComponent = (0, _Loadable2.default)({
-    loader: () => __webpack_require__.e(/*! import() | dashboard */ "dashboard").then(function() { var module = __webpack_require__(/*! ./Dashboard */ "./components/Dashboard/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+    loader: () => __webpack_require__.e(/*! import() | dashboard */ "dashboard").then(__webpack_require__.t.bind(null, /*! ./Dashboard */ "./components/Dashboard/index.jsx", 7))
 });
 
 const RegisterLoadableComponent = (0, _Loadable2.default)({
-    loader: () => __webpack_require__.e(/*! import() | register */ "register").then(function() { var module = __webpack_require__(/*! ./Register */ "./components/Register/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+    loader: () => __webpack_require__.e(/*! import() | register */ "register").then(__webpack_require__.t.bind(null, /*! ./Register */ "./components/Register/index.jsx", 7))
 });
 
 const ProjectsLoadableComponent = (0, _Loadable2.default)({
-    loader: () => __webpack_require__.e(/*! import() | projects */ "projects").then(function() { var module = __webpack_require__(/*! ./Projects */ "./components/Projects/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+    loader: () => __webpack_require__.e(/*! import() | projects */ "projects").then(__webpack_require__.t.bind(null, /*! ./Projects */ "./components/Projects/index.jsx", 7))
 });
 const UsersLoadableComponent = (0, _Loadable2.default)({
-    loader: () => __webpack_require__.e(/*! import() | users */ "users").then(function() { var module = __webpack_require__(/*! ./Users */ "./components/Users/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+    loader: () => __webpack_require__.e(/*! import() | users */ "users").then(__webpack_require__.t.bind(null, /*! ./Users */ "./components/Users/index.jsx", 7))
 });
 
 const AboutLoadableComponent = (0, _Loadable2.default)({
-    loader: () => __webpack_require__.e(/*! import() | about */ "about").then(function() { var module = __webpack_require__(/*! ./About */ "./components/About/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+    loader: () => __webpack_require__.e(/*! import() | about */ "about").then(__webpack_require__.t.bind(null, /*! ./About */ "./components/About/index.jsx", 7))
 });
 
 const routes = [{

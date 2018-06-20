@@ -311,20 +311,8 @@
       "publicPath": "server.js"
     },
     {
-      "id": "./api/users/model.js",
-      "name": "./api/users/model.js",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
       "id": "./api/projects/model.js",
       "name": "./api/projects/model.js",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "./api/users/model.js",
-      "name": "./api/users/model.js",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
