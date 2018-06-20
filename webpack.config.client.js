@@ -4,10 +4,13 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
+    context: path.resolve(__dirname, 'src'),
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
@@ -15,19 +18,15 @@ module.exports = {
                 parallel: true,
                 sourceMap: true // set to true if you want JS source maps
             }),
-            new OptimizeCSSAssetsPlugin({
-                analyzerMode: 'disabled',
-                statsFilename: 'stats.json',
-                generateStatsFile: true
-            })
+            new OptimizeCSSAssetsPlugin({})
         ]
     },
     target: 'web',
     resolve: {
-        extensions: ['.js', '.jsx', '.css', '.scss']
+        extensions: ['.json', '.js', '.jsx', '.css', '.scss']
     },
     devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
-    entry: './src/client.jsx',
+    entry: './client.jsx',
     output: {
         filename: '[name].js',
         chunkFilename: '[name].js',
@@ -48,14 +47,29 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'css-loader?modules=true', 'sass-loader'
                 ],
+            },
+            {
+                test: /\.ejs$/,
+                use: ['raw-loader']
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
             }
         ]
     },
     plugins: [
+        new CopyWebpackPlugin([
+            { from: 'assets' },
+        ]),
         new HtmlWebpackPlugin({
-            template: 'src/index.ejs',
+            template: 'index.ejs',
             filename: 'index.ejs',
-            title: 'omg',
             meta: {
                 charset: 'UTF-8',
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
@@ -64,7 +78,8 @@ module.exports = {
                 removeComments: true,
                 collapseWhitespace: true,
                 conservativeCollapse: true
-            }
+            },
+            hash: true
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -72,11 +87,12 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[name].css'
         }),
-        isDev ? new BundleAnalyzerPlugin({
-            // openAnalyzer: false,
-            // analyzerMode: 'static',
-            // generateStatsFile: true,
-            // statsFilename: 'some-stats.json'
-        }) : () => {}
+        // new CompressionPlugin(),
+        // new BundleAnalyzerPlugin({
+        //     // openAnalyzer: false,
+        //     // analyzerMode: 'static',
+        //     // generateStatsFile: true,
+        //     // statsFilename: 'clientBundleAnalyzer.json'
+        // })
     ]
 };

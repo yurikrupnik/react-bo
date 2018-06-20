@@ -3,7 +3,7 @@ const response = ctx => (res) => {
 };
 
 const responseId = ctx => (res) => {
-    ctx.body = res._id;
+    ctx.body = res._id; // eslint-disable-line no-underscore-dangle
 };
 
 const responseError = ctx => (err) => {

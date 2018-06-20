@@ -6,20 +6,20 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: false,
-        default: ''
-    },
-    context: {
-        type: Object,
-        required: true,
-        default: { settings: {}, profile: [], general: [] }
-    },
-    settings: {
-        type: Object,
-        required: true
-    },
+    // description: {
+    //     type: String,
+    //     required: false,
+    //     default: ''
+    // },
+    // context: {
+    //     type: Object,
+    //     required: true,
+    //     default: { settings: {}, profile: [], general: [] }
+    // },
+    // settings: {
+    //     type: Object,
+    //     required: true
+    // },
     date: {
         type: Date,
         default: Date.now,
@@ -29,9 +29,9 @@ const schema = new Schema({
 
 const Model = mongoose.model(dbModel, schema);
 // new Model({
-//     email: 'd@d.com',
-//     name: 'yu',
-//     hashPassword: 'sd'
+// //     email: 'd@d.com',
+//     name: 'project1',
+// //     hashPassword: 'sd'
 // }).save();
 
 export default Model;
