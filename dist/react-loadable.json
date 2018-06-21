@@ -1,174 +1,30 @@
 {
-  "./About": [
-    {
-      "id": "./components/About/index.jsx",
-      "name": "./components/About/index.jsx",
-      "file": "about.server.js",
-      "publicPath": "about.server.js"
-    },
-    {
-      "id": "./components/About/index.jsx",
-      "name": "./components/About/index.jsx",
-      "file": "about.server.js.map",
-      "publicPath": "about.server.js.map"
-    }
-  ],
   "../../../node_modules/css-loader/lib/css-base.js": [
     {
       "id": "../node_modules/css-loader/lib/css-base.js",
       "name": "../node_modules/css-loader/lib/css-base.js",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
+      "file": "server.js",
+      "publicPath": "server.js"
     },
     {
       "id": "../node_modules/css-loader/lib/css-base.js",
       "name": "../node_modules/css-loader/lib/css-base.js",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
     }
   ],
-  "../../api/projects/consumer": [
+  "../../api/dataProvider": [
     {
-      "id": "./api/projects/consumer.jsx",
-      "name": "./api/projects/consumer.jsx",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
+      "id": "./api/dataProvider.jsx",
+      "name": "./api/dataProvider.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
     },
     {
-      "id": "./api/projects/consumer.jsx",
-      "name": "./api/projects/consumer.jsx",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    },
-    {
-      "id": "./api/projects/consumer.jsx",
-      "name": "./api/projects/consumer.jsx",
-      "file": "projects.server.js",
-      "publicPath": "projects.server.js"
-    },
-    {
-      "id": "./api/projects/consumer.jsx",
-      "name": "./api/projects/consumer.jsx",
-      "file": "projects.server.js.map",
-      "publicPath": "projects.server.js.map"
-    }
-  ],
-  "../../api/users/consumer": [
-    {
-      "id": "./api/users/consumer.jsx",
-      "name": "./api/users/consumer.jsx",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./api/users/consumer.jsx",
-      "name": "./api/users/consumer.jsx",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    },
-    {
-      "id": "./api/users/consumer.jsx",
-      "name": "./api/users/consumer.jsx",
-      "file": "users.server.js",
-      "publicPath": "users.server.js"
-    },
-    {
-      "id": "./api/users/consumer.jsx",
-      "name": "./api/users/consumer.jsx",
-      "file": "users.server.js.map",
-      "publicPath": "users.server.js.map"
-    }
-  ],
-  "./Dashboard": [
-    {
-      "id": "./components/Dashboard/index.jsx",
-      "name": "./components/Dashboard/index.jsx",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./components/Dashboard/index.jsx",
-      "name": "./components/Dashboard/index.jsx",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    }
-  ],
-  "./styles.css": [
-    {
-      "id": "./components/Dashboard/styles.css",
-      "name": "./components/Dashboard/styles.css",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./components/Form/styles.css",
-      "name": "./components/Form/styles.css",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./components/Dashboard/styles.css",
-      "name": "./components/Dashboard/styles.css",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    },
-    {
-      "id": "./components/Form/styles.css",
-      "name": "./components/Form/styles.css",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    }
-  ],
-  "../Form": [
-    {
-      "id": "./components/Form/index.jsx",
-      "name": "./components/Form/index.jsx",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./components/Form/index.jsx",
-      "name": "./components/Form/index.jsx",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    }
-  ],
-  "../List": [
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "dashboard.server.js",
-      "publicPath": "dashboard.server.js"
-    },
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "dashboard.server.js.map",
-      "publicPath": "dashboard.server.js.map"
-    },
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "projects.server.js",
-      "publicPath": "projects.server.js"
-    },
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "projects.server.js.map",
-      "publicPath": "projects.server.js.map"
-    },
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "users.server.js",
-      "publicPath": "users.server.js"
-    },
-    {
-      "id": "./components/List/index.jsx",
-      "name": "./components/List/index.jsx",
-      "file": "users.server.js.map",
-      "publicPath": "users.server.js.map"
+      "id": "./api/dataProvider.jsx",
+      "name": "./api/dataProvider.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
     }
   ],
   "./api": [
@@ -179,8 +35,32 @@
       "publicPath": "server.js"
     },
     {
+      "id": "./api/projects/api.js",
+      "name": "./api/projects/api.js",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./api/users/api.js",
+      "name": "./api/users/api.js",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
       "id": "./api/index.js",
       "name": "./api/index.js",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
+      "id": "./api/projects/api.js",
+      "name": "./api/projects/api.js",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
+      "id": "./api/users/api.js",
+      "name": "./api/users/api.js",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -195,20 +75,6 @@
     {
       "id": "./api/methods.js",
       "name": "./api/methods.js",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    }
-  ],
-  "../api/projects/api": [
-    {
-      "id": "./api/projects/api.js",
-      "name": "./api/projects/api.js",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "./api/projects/api.js",
-      "name": "./api/projects/api.js",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -247,6 +113,20 @@
     {
       "id": "./config.js",
       "name": "./config.js",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "../../api/projects/consumer": [
+    {
+      "id": "./api/projects/consumer.jsx",
+      "name": "./api/projects/consumer.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./api/projects/consumer.jsx",
+      "name": "./api/projects/consumer.jsx",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -329,7 +209,7 @@
       "publicPath": "server.js.map"
     }
   ],
-  "../../api/projects/provider": [
+  "./projects/provider": [
     {
       "id": "./api/projects/provider.jsx",
       "name": "./api/projects/provider.jsx",
@@ -339,6 +219,20 @@
     {
       "id": "./api/projects/provider.jsx",
       "name": "./api/projects/provider.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./providers": [
+    {
+      "id": "./api/providers.js",
+      "name": "./api/providers.js",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./api/providers.js",
+      "name": "./api/providers.js",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -357,16 +251,16 @@
       "publicPath": "server.js.map"
     }
   ],
-  "../api/users/api": [
+  "../../api/users/consumer": [
     {
-      "id": "./api/users/api.js",
-      "name": "./api/users/api.js",
+      "id": "./api/users/consumer.jsx",
+      "name": "./api/users/consumer.jsx",
       "file": "server.js",
       "publicPath": "server.js"
     },
     {
-      "id": "./api/users/api.js",
-      "name": "./api/users/api.js",
+      "id": "./api/users/consumer.jsx",
+      "name": "./api/users/consumer.jsx",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -385,7 +279,7 @@
       "publicPath": "server.js.map"
     }
   ],
-  "../../api/users/provider": [
+  "./users/provider": [
     {
       "id": "./api/users/provider.jsx",
       "name": "./api/users/provider.jsx",
@@ -395,6 +289,20 @@
     {
       "id": "./api/users/provider.jsx",
       "name": "./api/users/provider.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./About": [
+    {
+      "id": "./components/About/index.jsx",
+      "name": "./components/About/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/About/index.jsx",
+      "name": "./components/About/index.jsx",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -427,16 +335,112 @@
       "publicPath": "server.js.map"
     }
   ],
-  "./Loadable": [
+  "./layout": [
     {
-      "id": "./components/Loadable/index.jsx",
-      "name": "./components/Loadable/index.jsx",
+      "id": "./components/App/layout.jsx",
+      "name": "./components/App/layout.jsx",
       "file": "server.js",
       "publicPath": "server.js"
     },
     {
-      "id": "./components/Loadable/index.jsx",
-      "name": "./components/Loadable/index.jsx",
+      "id": "./components/App/layout.jsx",
+      "name": "./components/App/layout.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./Dashboard": [
+    {
+      "id": "./components/Dashboard/index.jsx",
+      "name": "./components/Dashboard/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Dashboard/index.jsx",
+      "name": "./components/Dashboard/index.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./styles.css": [
+    {
+      "id": "./components/Dashboard/styles.css",
+      "name": "./components/Dashboard/styles.css",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Form/styles.css",
+      "name": "./components/Form/styles.css",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Dashboard/styles.css",
+      "name": "./components/Dashboard/styles.css",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    },
+    {
+      "id": "./components/Form/styles.css",
+      "name": "./components/Form/styles.css",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "../Form": [
+    {
+      "id": "./components/Form/index.jsx",
+      "name": "./components/Form/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Form/index.jsx",
+      "name": "./components/Form/index.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "../List": [
+    {
+      "id": "./components/List/index.jsx",
+      "name": "./components/List/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/List/index.jsx",
+      "name": "./components/List/index.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./Projects": [
+    {
+      "id": "./components/Projects/index.jsx",
+      "name": "./components/Projects/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Projects/index.jsx",
+      "name": "./components/Projects/index.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "./Register": [
+    {
+      "id": "./components/Register/index.jsx",
+      "name": "./components/Register/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Register/index.jsx",
+      "name": "./components/Register/index.jsx",
       "file": "server.js.map",
       "publicPath": "server.js.map"
     }
@@ -483,7 +487,21 @@
       "publicPath": "server.js.map"
     }
   ],
-  "./consumer": [
+  "./Users": [
+    {
+      "id": "./components/Users/index.jsx",
+      "name": "./components/Users/index.jsx",
+      "file": "server.js",
+      "publicPath": "server.js"
+    },
+    {
+      "id": "./components/Users/index.jsx",
+      "name": "./components/Users/index.jsx",
+      "file": "server.js.map",
+      "publicPath": "server.js.map"
+    }
+  ],
+  "../contexts/themes/consumer": [
     {
       "id": "./components/contexts/themes/consumer.jsx",
       "name": "./components/contexts/themes/consumer.jsx",
@@ -539,7 +557,7 @@
       "publicPath": "server.js.map"
     }
   ],
-  "../routes": [
+  "./components/routes": [
     {
       "id": "./components/routes.js",
       "name": "./components/routes.js",
@@ -687,18 +705,6 @@
       "publicPath": "server.js"
     },
     {
-      "id": "react-loadable",
-      "name": "react-loadable",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
-      "id": "react-router",
-      "name": "react-router",
-      "file": "server.js",
-      "publicPath": "server.js"
-    },
-    {
       "id": "react-router-dom",
       "name": "react-router-dom",
       "file": "server.js",
@@ -807,18 +813,6 @@
       "publicPath": "server.js.map"
     },
     {
-      "id": "react-loadable",
-      "name": "react-loadable",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
-      "id": "react-router",
-      "name": "react-router",
-      "file": "server.js.map",
-      "publicPath": "server.js.map"
-    },
-    {
       "id": "react-router-dom",
       "name": "react-router-dom",
       "file": "server.js.map",
@@ -835,48 +829,6 @@
       "name": "socket.io-logger",
       "file": "server.js.map",
       "publicPath": "server.js.map"
-    }
-  ],
-  "./Projects": [
-    {
-      "id": "./components/Projects/index.jsx",
-      "name": "./components/Projects/index.jsx",
-      "file": "projects.server.js",
-      "publicPath": "projects.server.js"
-    },
-    {
-      "id": "./components/Projects/index.jsx",
-      "name": "./components/Projects/index.jsx",
-      "file": "projects.server.js.map",
-      "publicPath": "projects.server.js.map"
-    }
-  ],
-  "./Register": [
-    {
-      "id": "./components/Register/index.jsx",
-      "name": "./components/Register/index.jsx",
-      "file": "register.server.js",
-      "publicPath": "register.server.js"
-    },
-    {
-      "id": "./components/Register/index.jsx",
-      "name": "./components/Register/index.jsx",
-      "file": "register.server.js.map",
-      "publicPath": "register.server.js.map"
-    }
-  ],
-  "./Users": [
-    {
-      "id": "./components/Users/index.jsx",
-      "name": "./components/Users/index.jsx",
-      "file": "users.server.js",
-      "publicPath": "users.server.js"
-    },
-    {
-      "id": "./components/Users/index.jsx",
-      "name": "./components/Users/index.jsx",
-      "file": "users.server.js.map",
-      "publicPath": "users.server.js.map"
     }
   ]
 }

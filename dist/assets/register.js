@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{136:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var s,d=t(1),r=(s=d)&&s.__esModule?s:{default:s};n.default=class extends d.Component{render(){return r.default.createElement("div",null,"registers")}}}}]);
-//# sourceMappingURL=register.js.map
