@@ -33,6 +33,10 @@ class ProjectsProvider extends Component {
         };
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return this.state.data !== nextState.data;
+    // }
+
     render() {
         const { loading, data, selected } = this.state;
         return (

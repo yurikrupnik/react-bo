@@ -42,7 +42,7 @@
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"about":"about","dashboard":"dashboard","projects":"projects","register":"register","users":"users"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + chunkId + ".server.js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -315,17 +315,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = new _koaRouter2.default();
 
-router.get(_config.url, ctx => {
-    ctx.body = [{
-        date: '2018-06-16T20:51:09.232Z',
-        _id: '5b25783da4fa073279237e5f',
-        name: 'project1'
-    }, {
-        date: '2018-04-16T20:51:09.232Z',
-        _id: '5b25713da4fa073279237e5f',
-        name: 'project2'
-    }];
-}); // array
+router.get(_config.url, (0, _methods.list)(_model2.default)); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
@@ -461,6 +451,10 @@ class ProjectsProvider extends _react.Component {
             });
         };
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return this.state.data !== nextState.data;
+    // }
 
     render() {
         const { loading, data, selected } = this.state;
@@ -636,33 +630,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = new _koaRouter2.default();
 
-router.get(_config.url, ctx => {
-    ctx.body = [{
-        _id: '5ad3c7f60e3028920225ab3f',
-        name: 'else',
-        hashPassword: 'ta s',
-        email: ''
-    }, {
-        id: '5aeb2d96f0fb7e0458ad5cc2',
-        name: 'ta',
-        hashPassword: 'sd',
-        email: 'de@d.com'
-    }, {
-        id: '5aeb2e168eee9b045d4f049a',
-        name: 'yosso',
-        email: 'yuri@yuri.com',
-        hashPassword: '123d'
-    }, {
-        id: '5aeb44c423c91d05fc13bc7d',
-        email: 'sddsa@2.com',
-        hashPassword: '123dasdasd'
-    }, {
-        id: '5aeb44ce23c91d05fc13bc7e',
-        name: 'mikey',
-        email: 'sddsa@2.com',
-        hashPassword: '123dasdasd'
-    }];
-}); // array
+router.get(_config.url, (0, _methods.list)(_model2.default)); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
@@ -783,6 +751,10 @@ class UsersProvider extends _react.Component {
             });
         };
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return this.state.data !== nextState.data;
+    // }
 
     render() {
         const { loading, data, selected } = this.state;
@@ -966,42 +938,92 @@ var _themes = __webpack_require__(/*! ../contexts/themes */ "./components/contex
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const Providers = [ThemesProvider, UsersProvider];
+const Providers = [_provider2.default, _provider4.default];
 
-class App extends _react.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            appData: global.window && global.window.appData || {}
-        };
-        if (global.window) {
-            delete global.window.appData;
-        }
+class DataProviders extends _react.Component {
+
+    constructor(props) {
+        super();
+        // this.prepare = this.prepare.bind(this);
+    }
+
+    prepare() {
+        return Providers.reduce((acc, C) => {
+            if (acc.props.children) {
+                const { children } = acc.props;
+                return (0, _react.cloneElement)(acc, {}, (0, _react.cloneElement)(children, {}, (0, _react.createElement)(C, {}, this.props.children)));
+            }
+            return (0, _react.cloneElement)(acc, {}, (0, _react.createElement)(C, {}, this.props.children));
+        }, _react2.default.createElement(_react.Fragment, null));
     }
 
     render() {
-        const { appData } = this.state;
+        console.log('this.props', this.props);
+
+        return Providers.reduce((acc, C) => {
+            if (acc.props.children) {
+                const { children } = acc.props;
+                return (0, _react.cloneElement)(acc, {}, (0, _react.cloneElement)(children, {}, (0, _react.createElement)(C, {}, this.props.children)));
+            }
+            return (0, _react.cloneElement)(acc, {}, (0, _react.createElement)(C, {}, this.props.children));
+        }, _react2.default.createElement(_react.Fragment, null));
+        // return this.prepare();
+        // console.log('s', s);
+
+        // console.log('S', S);
+
+        // return s/**/;
+        // return (
+        //     <Fragment>
+        //         <ProjectsProvider>
+        //             <UsersProvider>
+        //                 {this.props.children}
+        //             </UsersProvider>
+        //         </ProjectsProvider>
+        //     </Fragment>
+        // );
+    }
+}
+
+class ConfigProviders extends _react.Component {
+    render() {
         return _react2.default.createElement(
-            _provider4.default,
-            { data: appData.Projects },
+            _react.Fragment,
+            null,
             _react2.default.createElement(
-                _provider2.default,
-                { data: appData.Users },
-                _react2.default.createElement(
-                    _themes.Provider,
-                    null,
-                    _react2.default.createElement(
-                        _react.Fragment,
-                        null,
-                        _react2.default.createElement(_Nav2.default, null),
-                        _routes2.default.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route))),
-                        _react2.default.createElement(
-                            'div',
-                            null,
-                            'default footer'
-                        )
-                    )
-                )
+                _themes.Provider,
+                null,
+                this.props.children
+            )
+        );
+    }
+}
+
+class Layout extends _react.Component {
+    render() {
+        return _react2.default.createElement(
+            _react.Fragment,
+            null,
+            _react2.default.createElement(_Nav2.default, null),
+            _routes2.default.map(route => _react2.default.createElement(_reactRouterDom.Route, _extends({ key: route.key }, route))),
+            _react2.default.createElement(
+                'div',
+                null,
+                'default footer'
+            )
+        );
+    }
+}
+
+class App extends _react.Component {
+    render() {
+        return _react2.default.createElement(
+            DataProviders,
+            null,
+            _react2.default.createElement(
+                ConfigProviders,
+                null,
+                _react2.default.createElement(Layout, null)
             )
         );
     }
@@ -1521,7 +1543,7 @@ class ThemesProvider extends _react.Component {
 }
 
 ThemesProvider.propTypes = {
-    children: _propTypes2.default.element.isRequired
+    // children: PropTypes.element.isRequired
 };
 
 exports.default = ThemesProvider;
@@ -1687,66 +1709,46 @@ var _api = __webpack_require__(/*! ./api */ "./api/index.js");
 
 var _api2 = _interopRequireDefault(_api);
 
+var _db = __webpack_require__(/*! ./services/db */ "./services/db/index.js");
+
+var _db2 = _interopRequireDefault(_db);
+
+var _server2 = __webpack_require__(/*! ./services/socket/server */ "./services/socket/server.js");
+
+var _server3 = _interopRequireDefault(_server2);
+
 var _App = __webpack_require__(/*! ./components/App */ "./components/App/index.jsx");
 
 var _App2 = _interopRequireDefault(_App);
 
-var _routes = __webpack_require__(/*! ./components/routes */ "./components/routes.js");
-
-var _routes2 = _interopRequireDefault(_routes);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import stats from './react-loadable.json';
-
-// import db from './services/db';
-// import socket from './services/socket/server';
 const app = new _koa2.default();
 const assets = _path2.default.resolve(__dirname, 'assets');
 
 app.use((0, _koaStatic2.default)(assets));
 app.use((0, _koaRenderView2.default)(assets, { extension: 'ejs' }));
 app.use((0, _koaFavicon2.default)(_path2.default.resolve(assets, 'favicon.ico')));
-// app.use(db(databaseUrl));
+app.use((0, _db2.default)(_config.databaseUrl));
 app.use(_api2.default);
 
-app.use((ctx, next) => {
-    const activeRoute = _routes2.default.find(route => (0, _reactRouter.matchPath)(ctx.url, route)) || {};
-    const promise = activeRoute.fetch ? activeRoute.fetch() : Promise.resolve([]);
-
-    return promise.then(res => {
-        let appData = {};
-        if (res.length && Array.isArray(activeRoute.providers)) {
-            appData = activeRoute.providers.reduce((acc, nextProvider, i) => {
-                acc[nextProvider] = Array.isArray(res[0]) ? res[i] : res;
-                return acc;
-            }, appData);
-        }
-        const context = {};
-        const modules = {};
-        const title = 'my title';
-        const html = (0, _server.renderToString)(_react2.default.createElement(
-            _reactRouter.StaticRouter,
-            {
-                location: ctx.url,
-                context: context
-            },
-            _react2.default.createElement(
-                _reactLoadable2.default.Capture,
-                { report: moduleName => modules.push(moduleName) },
-                _react2.default.createElement(_App2.default, null)
-            )
-        ));
-        ctx.state = { title, html, appData };
-        return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
-    }).catch(err => {
-        console.log('err', err.stack); // eslint-disable-line no-console
-        return next(err);
-    });
+app.use(ctx => {
+    const context = {};
+    const title = 'my title';
+    const html = (0, _server.renderToString)(_react2.default.createElement(
+        _reactRouter.StaticRouter,
+        {
+            location: ctx.url,
+            context: context
+        },
+        _react2.default.createElement(_App2.default, null)
+    ));
+    ctx.state = { title, html };
+    return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
 });
 
 _reactLoadable2.default.preloadAll().then(() => {
-    app.listen(_config.port, err => {
+    (0, _server3.default)(app).listen(_config.port, err => {
         if (err) {
             console.log('err', err); // eslint-disable-line no-console
         } else {
@@ -1754,6 +1756,118 @@ _reactLoadable2.default.preloadAll().then(() => {
         }
     });
 });
+
+/***/ }),
+
+/***/ "./services/db/index.js":
+/*!******************************!*\
+  !*** ./services/db/index.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _mongoose = __webpack_require__(/*! mongoose */ "mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = url => {
+    _mongoose2.default.connect(url);
+    const db = _mongoose2.default.connection;
+    _mongoose2.default.Promise = global.Promise;
+    db.on('error', console.error.bind(console, 'connection error:')); // eslint-disable-line no-console
+    db.on('connected', () => {
+        // console.log('connected:');
+    });
+    db.on('open', () => {
+        // we're connected!
+        // console.log('connected to a');
+    });
+    db.once('open', () => {
+        // we're connected!
+        // console.log('connected to b');
+    });
+    db.once('disconnected', () => {
+        // we're connected!
+        // console.log('disconnected');
+    });
+    return (ctx, next) => {
+        ctx.db = db;
+        return next();
+    };
+};
+
+/***/ }),
+
+/***/ "./services/socket/server.js":
+/*!***********************************!*\
+  !*** ./services/socket/server.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _http = __webpack_require__(/*! http */ "http");
+
+var _http2 = _interopRequireDefault(_http);
+
+var _socket = __webpack_require__(/*! socket.io */ "socket.io");
+
+var _socket2 = _interopRequireDefault(_socket);
+
+var _socket3 = __webpack_require__(/*! socket.io-logger */ "socket.io-logger");
+
+var _socket4 = _interopRequireDefault(_socket3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = app => {
+    const server = _http2.default.Server(app.callback());
+    const io = (0, _socket2.default)(server);
+    const users = {}; // list of messages locally saved in the server
+    io.use((0, _socket4.default)());
+    io.on('connection', socket => {
+        socket.on('newMessage', (message, next) => {
+            const { nickname, avatar } = socket;
+            // send nickname and avatar with the message taken from socket to all messages
+            io.emit('receiveMessage', { message, nickname, avatar });
+            next();
+        });
+
+        socket.on('newUser', (user, next) => {
+            if (Object.keys(users).includes(user.nickname)) {
+                next('Name already in use');
+            } else {
+                // set nickname and avatar on socket object to retrieve later
+                socket.nickname = user.nickname; // eslint-disable-line no-param-reassign
+                socket.avatar = user.avatar; // eslint-disable-line no-param-reassign
+                users[user.nickname] = user;
+                next(null);
+            }
+        });
+
+        socket.on('disconnect', reason => {
+            // eslint-disable-line no-unused-vars
+            delete users[socket.nickname];
+        });
+    });
+
+    return server;
+};
 
 /***/ }),
 
@@ -1765,6 +1879,17 @@ _reactLoadable2.default.preloadAll().then(() => {
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
 
 /***/ }),
 
@@ -1941,6 +2066,28 @@ module.exports = require("react-router");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "socket.io":
+/*!****************************!*\
+  !*** external "socket.io" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io");
+
+/***/ }),
+
+/***/ "socket.io-logger":
+/*!***********************************!*\
+  !*** external "socket.io-logger" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io-logger");
 
 /***/ })
 

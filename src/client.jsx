@@ -1,20 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Loadable from 'react-loadable';
 import App from './components/App';
 import './services/socket/client';
 import './_styles.scss';
 
-const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
-const { appData } = global.window;
+const renderMethod = module.hot ? render : hydrate;
 
-Loadable.preloadReady().then(() => {
-    renderMethod(
-        <BrowserRouter>
-            <App appData={appData} />
-        </BrowserRouter>,
-        global.document.getElementById('root'),
-    );
-});
+renderMethod(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    global.document.getElementById('root'),
+);
 

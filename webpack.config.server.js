@@ -32,7 +32,7 @@ module.exports = {
     entry: './server.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        chunkFilename: '[name].js',
+        // chunkFilename: '[name].js',
         filename
     },
     mode: process.env.NODE_ENV,
