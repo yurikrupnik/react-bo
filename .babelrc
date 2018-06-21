@@ -7,5 +7,9 @@
     }],
     "react"
   ],
-  "plugins": ["transform-object-rest-spread", "syntax-dynamic-import", "react-loadable/babel"]
+  "plugins": [
+    "transform-object-rest-spread",
+    "syntax-dynamic-import",
+    "react-loadable/babel"
+  ]
 }

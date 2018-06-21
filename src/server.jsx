@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server';
 import { port, databaseUrl } from './config';
 import api from './api';
 import db from './services/db';
-import socket from './services/socket/server';
+import server from './services/socket/server';
 import App from './components/App';
 import routes from './components/routes';
 
@@ -29,7 +29,7 @@ app.use((ctx) => {
     return context.url ? ctx.redirect(301, context.url) : ctx.render('index');
 });
 
-socket(app).listen(port, (err) => {
+server(app).listen(port, (err) => {
     if (err) {
         console.log('err', err); // eslint-disable-line no-console
     } else {
