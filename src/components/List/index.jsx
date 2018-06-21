@@ -9,13 +9,11 @@ class List extends Component {
         const { data, loading } = this.props;
         return (
             <div>
-                {loading ? <div style={{ background: 'red' }}>loading...</div> : data.map((v) => {
-                    return (
-                        <div key={v._id}> { /* eslint-disable-line no-underscore-dangle */ }
-                            <div>name: {v.name}</div>
-                        </div>
-                    );
-                })}
+                {loading ? <div style={{ background: 'red' }}>loading...</div> : data.map(v => (
+                    <div key={v._id}> { /* eslint-disable-line no-underscore-dangle */ }
+                        <div>name: {v.name}</div>
+                    </div>
+                ))}
             </div>
         );
     }

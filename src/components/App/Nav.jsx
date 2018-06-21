@@ -7,7 +7,7 @@ class MainNav extends PureComponent {
         return (
             <header>
                 <div>
-                    {this.props.routes.map((route) => (
+                    {this.props.routes.map(route => (
                         <div key={route.key}>
                             <Link to={route.path}>{route.key}</Link>
                         </div>

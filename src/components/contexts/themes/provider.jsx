@@ -36,7 +36,7 @@ class ThemesProvider extends Component {
 }
 
 ThemesProvider.propTypes = {
-    // children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired
 };
 
 export default ThemesProvider;

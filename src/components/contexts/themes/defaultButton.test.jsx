@@ -18,27 +18,4 @@ describe('default button', () => {
         const wrapper = shallow(<DefaultButton theme={{ foreground: '#000000', background: '#eeeeee', color: 'red' }} toggleTheme={() => {}} />);
         expect(wrapper.length).toBe(1);
     });
-    // const props = {
-    //     theme: { background: 'red' },
-    //     toggleTheme: () => {}
-    // };
-    // const renderer = new ShallowRenderer();
-    // renderer.render(<DefaultButton {...props} />);
-    // const result = renderer.getRenderOutput();
-    // expect(result).toBeTruthy();
-    // expect(result.type).toBe('div');
-    // expect(result.props.children.type).toBe('button');
-    // });
-
-    // it('should simulate click', () => {
-    //     // const props = {
-    //     //     theme: { background: 'red' },
-    //     // };
-    //     // const onButtonClick = sinon.spy();
-    //     // const wrapper = shallow(<DefaultButton {...props} toggleTheme={onButtonClick} />);
-    //     // wrapper.find('button').simulate('click');
-    //     // expect(onButtonClick).toBeCalled();
-    //     expect(1).toBe(1);
-    // });
-
 });

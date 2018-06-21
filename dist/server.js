@@ -1557,7 +1557,7 @@ class ThemesProvider extends _react.Component {
 }
 
 ThemesProvider.propTypes = {
-    // children: PropTypes.element.isRequired
+    children: _propTypes2.default.element.isRequired
 };
 
 exports.default = ThemesProvider;

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import { connect } from 'react-redux';
-import { mapToProps as sessionMapToProps, dispatchActions as sessionActions } from '../../store/config/session/selector';
+import { Card, CardHeader, CardText } from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
 
 import socket from '../../services/socket/client';
 
@@ -112,17 +110,4 @@ ChatRoom.propTypes = {
     actions: PropTypes.shape({}).isRequired
 };
 
-const combinedMapTpProps = state => (
-    {
-        session: sessionMapToProps(state),
-        v: 'asd'
-    }
-);
-
-const combinedDispatchActions = dispatch => ({
-    actions: {
-        session: sessionActions(dispatch),
-    }
-});
-
-export default connect(combinedMapTpProps, combinedDispatchActions)(ChatRoom);
+export default ChatRoom;
