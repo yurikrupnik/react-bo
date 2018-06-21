@@ -2,6 +2,12 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -26,6 +32,26 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// require() chunk loading for javascript
+/******/
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] !== 0) {
+/******/ 			var chunk = require("./" + chunkId + ".server.js");
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -64,99 +90,19 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// uncaught error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using import().catch()
+/******/ 		});
+/******/ 	};
+/******/
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "./server.jsx");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "../node_modules/css-loader/lib/css-base.js":
-/*!**************************************************!*\
-  !*** ../node_modules/css-loader/lib/css-base.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-/***/ }),
 
 /***/ "./api/dataProvider.jsx":
 /*!******************************!*\
@@ -344,59 +290,6 @@ exports.url = url;
 exports.Provider = Provider;
 exports.dbModel = dbModel;
 exports.selector = selector;
-
-/***/ }),
-
-/***/ "./api/projects/consumer.jsx":
-/*!***********************************!*\
-  !*** ./api/projects/consumer.jsx ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _context = __webpack_require__(/*! ./context */ "./api/projects/context.js");
-
-var _List = __webpack_require__(/*! ../../components/List */ "./components/List/index.jsx");
-
-var _List2 = _interopRequireDefault(_List);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const ProjectsConsumer = ({ render }) => _react2.default.createElement(
-    _context.Consumer,
-    null,
-    props => {
-        if (typeof render === 'function') {
-            return render(props);
-        }
-        return _react2.default.createElement(_List2.default, props);
-    }
-);
-
-ProjectsConsumer.defaultProps = {
-    render: null
-};
-
-ProjectsConsumer.propTypes = {
-    render: _propTypes2.default.func
-};
-
-exports.default = ProjectsConsumer;
 
 /***/ }),
 
@@ -743,59 +636,6 @@ exports.selector = selector;
 
 /***/ }),
 
-/***/ "./api/users/consumer.jsx":
-/*!********************************!*\
-  !*** ./api/users/consumer.jsx ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _context = __webpack_require__(/*! ./context */ "./api/users/context.jsx");
-
-var _List = __webpack_require__(/*! ../../components/List */ "./components/List/index.jsx");
-
-var _List2 = _interopRequireDefault(_List);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const UsersConsumer = ({ render }) => _react2.default.createElement(
-    _context.Consumer,
-    null,
-    props => {
-        if (typeof render === 'function') {
-            return render(props);
-        }
-        return _react2.default.createElement(_List2.default, props);
-    }
-);
-
-UsersConsumer.defaultProps = {
-    render: null
-};
-
-UsersConsumer.propTypes = {
-    render: _propTypes2.default.func
-};
-
-exports.default = UsersConsumer;
-
-/***/ }),
-
 /***/ "./api/users/context.jsx":
 /*!*******************************!*\
   !*** ./api/users/context.jsx ***!
@@ -1010,40 +850,6 @@ exports.default = UsersProvider;
 
 /***/ }),
 
-/***/ "./components/About/index.jsx":
-/*!************************************!*\
-  !*** ./components/About/index.jsx ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const About = () => _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-        'h2',
-        null,
-        'About'
-    )
-);
-
-exports.default = About;
-
-/***/ }),
-
 /***/ "./components/App/Nav.jsx":
 /*!********************************!*\
   !*** ./components/App/Nav.jsx ***!
@@ -1231,10 +1037,10 @@ exports.default = Layout;
 
 /***/ }),
 
-/***/ "./components/Dashboard/index.jsx":
-/*!****************************************!*\
-  !*** ./components/Dashboard/index.jsx ***!
-  \****************************************/
+/***/ "./components/Loadable/index.jsx":
+/*!***************************************!*\
+  !*** ./components/Loadable/index.jsx ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1245,217 +1051,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-__webpack_require__(/*! ./styles.css */ "./components/Dashboard/styles.css");
-
-var _consumer = __webpack_require__(/*! ../contexts/themes/consumer */ "./components/contexts/themes/consumer.jsx");
-
-var _consumer2 = _interopRequireDefault(_consumer);
-
-var _consumer3 = __webpack_require__(/*! ../../api/users/consumer */ "./api/users/consumer.jsx");
-
-var _consumer4 = _interopRequireDefault(_consumer3);
-
-var _consumer5 = __webpack_require__(/*! ../../api/projects/consumer */ "./api/projects/consumer.jsx");
-
-var _consumer6 = _interopRequireDefault(_consumer5);
-
-var _Form = __webpack_require__(/*! ../Form */ "./components/Form/index.jsx");
-
-var _Form2 = _interopRequireDefault(_Form);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Dashboard() {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'h2',
-            null,
-            'Dashboard'
-        ),
-        _react2.default.createElement(_consumer4.default, null),
-        _react2.default.createElement(_consumer6.default, null),
-        _react2.default.createElement(_consumer2.default, null),
-        _react2.default.createElement(_consumer2.default, { render: () => _react2.default.createElement(
-                'div',
-                null,
-                'nuuuu'
-            ) }),
-        _react2.default.createElement(_Form2.default, null)
-    );
-}
-
-exports.default = Dashboard;
-
-/***/ }),
-
-/***/ "./components/Dashboard/styles.css":
-/*!*****************************************!*\
-  !*** ./components/Dashboard/styles.css ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".base {\n  color: red; }\n\n.inProgress {\n  color: blue; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./components/Form/index.jsx":
-/*!***********************************!*\
-  !*** ./components/Form/index.jsx ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactForm = __webpack_require__(/*! react-form */ "react-form");
-
-var _styles = __webpack_require__(/*! ./styles.css */ "./components/Form/styles.css");
-
-var _styles2 = _interopRequireDefault(_styles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class FormWithArrays extends _react.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onSubmit(submittedValues) {
-        console.log('submittedValues', submittedValues);
-        // this.setState({ submittedValues });
-    }
-
-    render() {
-        return _react2.default.createElement(
-            'div',
-            { className: 'container' },
-            _react2.default.createElement(
-                'div',
-                { className: 'row' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'col-xs-7' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: _styles2.default.root },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'root' },
-                            'stam'
-                        ),
-                        _react2.default.createElement(
-                            _reactForm.Form,
-                            { onSubmit: this.onSubmit },
-                            formApi => _react2.default.createElement(
-                                'form',
-                                { onSubmit: formApi.submitForm, id: 'form3' },
-                                _react2.default.createElement(
-                                    'label',
-                                    { htmlFor: 'firstName2' },
-                                    'First name'
-                                ),
-                                _react2.default.createElement(_reactForm.Text, { field: 'firstName', id: 'firstName2' }),
-                                _react2.default.createElement(
-                                    'label',
-                                    { htmlFor: 'friend1' },
-                                    'Friend1'
-                                ),
-                                _react2.default.createElement(_reactForm.Text, { field: ['friends', 0], id: 'friend1' }),
-                                _react2.default.createElement(
-                                    'label',
-                                    { htmlFor: 'friend2' },
-                                    'Friend2'
-                                ),
-                                _react2.default.createElement(_reactForm.Text, { field: ['friends', 1], id: 'friend2' }),
-                                _react2.default.createElement(
-                                    'label',
-                                    { htmlFor: 'friend3' },
-                                    'Friend3'
-                                ),
-                                _react2.default.createElement(_reactForm.Text, { field: ['friends', 2], id: 'friend3' }),
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'submit', className: 'mb-4 btn btn-primary' },
-                                    'Submit'
-                                )
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'col-xs-5' },
-                    'right side'
-                )
-            )
-        );
-    }
-}
-
-exports.default = FormWithArrays;
-
-/***/ }),
-
-/***/ "./components/Form/styles.css":
-/*!************************************!*\
-  !*** ./components/Form/styles.css ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "../node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "._1hqoS_K_I6MH9GBwnLUovw {\n  color: orange; }\n\n._1hqoS_K_I6MH9GBwnLUovw:hover {\n  color: green; }\n\n.blue {\n  color: blue; }\n", ""]);
-
-// exports
-exports.locals = {
-	"root": "_1hqoS_K_I6MH9GBwnLUovw"
+exports.default = function (opts) {
+    return (0, _reactLoadable2.default)(Object.assign({
+        loading: Loading
+        // delay: 200,
+        // timeout: 10,
+    }, opts));
 };
-
-/***/ }),
-
-/***/ "./components/List/index.jsx":
-/*!***********************************!*\
-  !*** ./components/List/index.jsx ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
 var _react = __webpack_require__(/*! react */ "react");
 
@@ -1465,212 +1067,58 @@ var _propTypes = __webpack_require__(/*! prop-types */ "prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _reactLoadable = __webpack_require__(/*! react-loadable */ "react-loadable");
 
-class List extends _react.Component {
-    componentDidMount() {
-        this.props.fetch();
-    }
-    render() {
-        const { data, loading } = this.props;
-        return _react2.default.createElement(
-            'div',
-            null,
-            loading ? _react2.default.createElement(
-                'div',
-                { style: { background: 'red' } },
-                'loading...'
-            ) : data.map(v => {
-                return _react2.default.createElement(
-                    'div',
-                    { key: v._id },
-                    ' ',
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        'name: ',
-                        v.name
-                    )
-                );
-            })
-        );
-    }
-}
-
-List.defaultProps = {
-    fetch: () => {},
-    loading: false,
-    data: []
-};
-
-List.propTypes = {
-    fetch: _propTypes2.default.func,
-    loading: _propTypes2.default.bool,
-    data: _propTypes2.default.arrayOf(_propTypes2.default.shape({}))
-};
-
-exports.default = List;
-
-/***/ }),
-
-/***/ "./components/Projects/index.jsx":
-/*!***************************************!*\
-  !*** ./components/Projects/index.jsx ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _consumer = __webpack_require__(/*! ../../api/projects/consumer */ "./api/projects/consumer.jsx");
-
-var _consumer2 = _interopRequireDefault(_consumer);
+var _reactLoadable2 = _interopRequireDefault(_reactLoadable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Container extends _react.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
+const Loading = props => {
+    if (props.error) {
         return _react2.default.createElement(
             'div',
             null,
+            'Error! ',
             _react2.default.createElement(
-                'h2',
-                null,
-                'Projects'
-            ),
-            _react2.default.createElement(_consumer2.default, null)
+                'button',
+                { onClick: props.retry },
+                'Retry'
+            )
         );
-    }
-}
-
-exports.default = Container;
-
-/***/ }),
-
-/***/ "./components/Register/index.jsx":
-/*!***************************************!*\
-  !*** ./components/Register/index.jsx ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import PropTypes from 'prop-types';
-// import TextField from 'material-ui/TextField';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import faker from 'faker';
-
-// import {
-// mapToProps as sessionMapToProps,
-// dispatchActions as sessionActions
-// } from '../store/config/session/selectors';
-// import socket from '../../services/socket/client';
-
-class Register extends _react.Component {
-    // TODO set propTypes and tests - break into smaller parts
-    // constructor(props) {
-    //     super(props);
-    //     this.socket = socket;
-    //     this.state = {
-    //         form: [
-    //             {
-    //                 label: '',
-    //                 type: 'text',
-    //                 name: 'nickname',
-    //                 value: '',
-    //                 validate: function () {
-    //                     return this.value.length;
-    //                 },
-    //                 errorText: '',
-    //                 onChange: this.onChange.bind(this)
-    //
-    //             }
-    //         ]
-    //     };
-    //
-    //     this.onRegister = this.onRegister.bind(this);
-    // }
-    //
-    // onChange(event) {
-    //     const { target } = event;
-    //     const { name, value } = target;
-    //     this.setState(prevState => {
-    //         return {
-    //             form: prevState.form.map(field => {
-    //                 if (field.name === name) {
-    //                     field.value = value;
-    //                 }
-    //                 return field;
-    //             })
-    //         };
-    //     });
-    // }
-    //
-    // onRegister(event) {
-    //     event.preventDefault();
-    //     const { actions, history } = this.props;
-    //     const { session } = actions;
-    //     const { setSession } = session;
-    //     const { form } = this.state;
-    //     const nickname = form[0].value;
-    //     const avatar = faker.image.avatar();
-    //     const newSession = { nickname, avatar };
-    //     this.socket.emit('newUser', newSession, (err) => {
-    //         if (!err) {
-    //             setSession(newSession);
-    //             history.push('/chat');
-    //         } else {
-    //             this.setState(prevState => {
-    //                 return {
-    //                     form: prevState.form.map(field => {
-    //                         field.errorText = err; // eslint-disable-line no-param-reassign
-    //                         field.value = ''; // eslint-disable-line no-param-reassign
-    //                         return field;
-    //                     })
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
-
-    render() {
-        // const { form } = this.state;
-        // const hasName = form[0].value;
+    } else if (props.timedOut) {
         return _react2.default.createElement(
             'div',
             null,
-            'registers'
+            'Taking a long time... ',
+            _react2.default.createElement(
+                'button',
+                { onClick: props.retry },
+                'Retry'
+            )
+        );
+    } else if (props.pastDelay) {
+        return _react2.default.createElement(
+            'div',
+            null,
+            'Loading...'
         );
     }
-}
+    return null;
+};
 
-exports.default = Register;
+Loading.defaultProps = {
+    error: '',
+    pastDelay: '',
+    timedOut: '',
+    retry: () => {}
+};
+
+Loading.propTypes = {
+    error: _propTypes2.default.shape({}),
+    pastDelay: _propTypes2.default.bool,
+    timedOut: _propTypes2.default.bool,
+    retry: _propTypes2.default.func
+};
 
 /***/ }),
 
@@ -1867,58 +1315,6 @@ const routes = [{
 }];
 
 exports.default = routes;
-
-/***/ }),
-
-/***/ "./components/Users/index.jsx":
-/*!************************************!*\
-  !*** ./components/Users/index.jsx ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _consumer = __webpack_require__(/*! ../../api/users/consumer */ "./api/users/consumer.jsx");
-
-var _consumer2 = _interopRequireDefault(_consumer);
-
-var _List = __webpack_require__(/*! ../List */ "./components/List/index.jsx");
-
-var _List2 = _interopRequireDefault(_List);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class Container extends _react.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                'h2',
-                null,
-                'Users'
-            ),
-            _react2.default.createElement(_consumer2.default, { render: props => _react2.default.createElement(_List2.default, props) })
-        );
-    }
-}
-
-exports.default = Container;
 
 /***/ }),
 
@@ -2172,86 +1568,68 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Topics = __webpack_require__(/*! ./Topics */ "./components/Topics/index.jsx");
+var _Loadable = __webpack_require__(/*! ./Loadable */ "./components/Loadable/index.jsx");
 
-var _Topics2 = _interopRequireDefault(_Topics);
+var _Loadable2 = _interopRequireDefault(_Loadable);
 
-var _Dashboard = __webpack_require__(/*! ./Dashboard */ "./components/Dashboard/index.jsx");
+var _index = __webpack_require__(/*! ./Topics/index */ "./components/Topics/index.jsx");
 
-var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-var _Register = __webpack_require__(/*! ./Register */ "./components/Register/index.jsx");
-
-var _Register2 = _interopRequireDefault(_Register);
-
-var _Projects = __webpack_require__(/*! ./Projects */ "./components/Projects/index.jsx");
-
-var _Projects2 = _interopRequireDefault(_Projects);
-
-var _Users = __webpack_require__(/*! ./Users */ "./components/Users/index.jsx");
-
-var _Users2 = _interopRequireDefault(_Users);
-
-var _About = __webpack_require__(/*! ./About */ "./components/About/index.jsx");
-
-var _About2 = _interopRequireDefault(_About);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const DashboardLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "dashboard" */ './Dashboard'),
-// });
-//
-// const RegisterLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "register" */ './Register'),
-// });
-//
-// const ProjectsLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "projects" */ './Projects'),
-// });
-// const UsersLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "users" */ './Users'),
-// });
-//
-// const AboutLoadableComponent = Loadable({
-//     loader: () => import(/* webpackChunkName: "about" */ './About'),
-// });
+const DashboardLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | dashboard */ "dashboard").then(function() { var module = __webpack_require__(/*! ./Dashboard */ "./components/Dashboard/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
 
-// import Loadable from './Loadable';
+const RegisterLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | register */ "register").then(function() { var module = __webpack_require__(/*! ./Register */ "./components/Register/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const ProjectsLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | projects */ "projects").then(function() { var module = __webpack_require__(/*! ./Projects */ "./components/Projects/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+const UsersLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | users */ "users").then(function() { var module = __webpack_require__(/*! ./Users */ "./components/Users/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
+const AboutLoadableComponent = (0, _Loadable2.default)({
+    loader: () => __webpack_require__.e(/*! import() | about */ "about").then(function() { var module = __webpack_require__(/*! ./About */ "./components/About/index.jsx"); return typeof module === "object" && module && module.__esModule ? module : Object.assign({/* fake namespace object */}, typeof module === "object" && module, { "default": module }); })
+});
+
 const routes = [{
     path: '/',
-    component: _Dashboard2.default,
+    component: DashboardLoadableComponent,
     exact: true,
     key: 'dashboard'
     // fetch: () => Promise.all([projectsApi.fetch(), usersApi.fetch()]),
     // providers: ['Projects', 'Users']
 }, {
     path: '/register',
-    component: _Register2.default,
+    component: RegisterLoadableComponent,
     key: 'register'
 }, {
     path: '/about',
-    component: _About2.default,
+    component: AboutLoadableComponent,
     key: 'about'
 }, {
     path: '/topics',
-    component: _Topics2.default,
+    component: _index2.default,
     key: 'topics'
 }, {
     path: '/projects',
-    component: _Projects2.default,
+    component: ProjectsLoadableComponent,
     key: 'projects'
     // fetch: () => projectsApi.fetch(),
     // providers: ['Projects']
 }, {
     path: '/users',
-    component: _Users2.default,
+    component: UsersLoadableComponent,
     key: 'users'
     // fetch: () => usersApi.fetch(),
     // providers: ['Users']
 }];
-// import usersApi from '../api/users/api';
-// import projectsApi from '../api/projects/api';
+
 exports.default = routes;
 
 /***/ }),
@@ -2640,6 +2018,17 @@ module.exports = require("react-dom/server");
 /***/ (function(module, exports) {
 
 module.exports = require("react-form");
+
+/***/ }),
+
+/***/ "react-loadable":
+/*!*********************************!*\
+  !*** external "react-loadable" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-loadable");
 
 /***/ }),
 

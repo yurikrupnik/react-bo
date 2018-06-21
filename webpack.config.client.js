@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { ReactLoadablePlugin } = require('react-loadable/webpack');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -88,11 +87,11 @@ module.exports = {
             chunkFilename: '[name].css'
         }),
         // new CompressionPlugin(),
-        // new BundleAnalyzerPlugin({
+        new BundleAnalyzerPlugin({
         //     // openAnalyzer: false,
         //     // analyzerMode: 'static',
         //     // generateStatsFile: true,
         //     // statsFilename: 'clientBundleAnalyzer.json'
-        // })
+        })
     ]
 };
