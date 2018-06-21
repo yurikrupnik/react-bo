@@ -355,7 +355,7 @@ router.get(_config.url, (0, _methods.list)(_model2.default)); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
-router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, {
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { // eslint-disable-line no-underscore-dangle
     name: 'else',
     email: '',
     hashPassword: 'tas'
@@ -476,11 +476,16 @@ class ProjectsProvider extends _react.Component {
         };
 
         this.fetch = (params, cb) => {
+            console.log('params', params); // eslint-disable-line no-console
             return this.setState(prevState => {
+                console.log('prevState', prevState); // eslint-disable-line no-console
                 return { loading: !prevState.loading };
-            }, () => {
+            }, a => {
+                console.log('a', a); // eslint-disable-line no-console
                 return _api2.default.fetch(params).then(data => {
+                    console.log('data', data); // eslint-disable-line no-console
                     return this.setState(prevState => {
+                        console.log('prevState', prevState); // eslint-disable-line no-console
                         return { data, loading: !prevState.loading };
                     }, cb);
                 });
@@ -698,7 +703,7 @@ router.get(_config.url, (0, _methods.list)(_model2.default)); // array
 router.get(`${_config.url}/:id`, (0, _methods.find)(_model2.default)); // object
 router.post(_config.url, (0, _methods.create)(_model2.default));
 
-router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, {
+router.put(_config.url, ctx => _model2.default.findOneAndUpdate({ _id: ctx.request.body._id }, { // eslint-disable-line no-underscore-dangle
     name: 'else',
     email: '',
     hashPassword: 'ta s'
@@ -804,11 +809,16 @@ class UsersProvider extends _react.Component {
         };
 
         this.fetch = (params, cb) => {
+            console.log('params', params); // eslint-disable-line no-console
             return this.setState(prevState => {
+                console.log('prevState', prevState); // eslint-disable-line no-console
                 return { loading: !prevState.loading };
-            }, () => {
+            }, a => {
+                console.log('a', a); // eslint-disable-line no-console
                 return _api2.default.fetch(params).then(data => {
+                    console.log('data', data); // eslint-disable-line no-console
                     return this.setState(prevState => {
+                        console.log('prevState', prevState); // eslint-disable-line no-console
                         return { data, loading: !prevState.loading };
                     }, cb);
                 });
@@ -1867,6 +1877,17 @@ module.exports = require("axios");
 
 /***/ }),
 
+/***/ "faker":
+/*!************************!*\
+  !*** external "faker" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("faker");
+
+/***/ }),
+
 /***/ "http":
 /*!***********************!*\
   !*** external "http" ***!
@@ -2051,6 +2072,17 @@ module.exports = require("react-router-dom");
 /***/ (function(module, exports) {
 
 module.exports = require("socket.io");
+
+/***/ }),
+
+/***/ "socket.io-client":
+/*!***********************************!*\
+  !*** external "socket.io-client" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("socket.io-client");
 
 /***/ }),
 

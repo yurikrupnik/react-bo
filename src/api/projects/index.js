@@ -9,11 +9,12 @@ router.get(url, list(Model)); // array
 router.get(`${url}/:id`, find(Model)); // object
 router.post(url, create(Model));
 
-router.put(url, ctx => Model.findOneAndUpdate({ _id: ctx.request.body._id }, {
-    name: 'else',
-    email: '',
-    hashPassword: 'tas'
-})
+router.put(url, ctx => Model
+    .findOneAndUpdate({ _id: ctx.request.body._id }, { // eslint-disable-line no-underscore-dangle
+        name: 'else',
+        email: '',
+        hashPassword: 'tas'
+    })
     .then(response(ctx))
     .catch(responseError(ctx)));
 

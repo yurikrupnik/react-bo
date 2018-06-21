@@ -21,11 +21,16 @@ class UsersProvider extends Component {
         };
 
         this.fetch = (params, cb) => {
+            console.log('params', params); // eslint-disable-line no-console
             return this.setState((prevState) => {
+                console.log('prevState', prevState); // eslint-disable-line no-console
                 return { loading: !prevState.loading };
-            }, () => {
+            }, (a) => {
+                console.log('a', a); // eslint-disable-line no-console
                 return usersApi.fetch(params).then((data) => {
+                    console.log('data', data); // eslint-disable-line no-console
                     return this.setState((prevState) => {
+                        console.log('prevState', prevState); // eslint-disable-line no-console
                         return { data, loading: !prevState.loading };
                     }, cb);
                 });
